@@ -21,7 +21,7 @@ pbcopy < .ssh/id_rsa.pub
 ### 3. Clone this repo
 
 ```sh
-git clone git@github.com:okwasniewski/dotfiles.git
+git clone git@github.com:okwasniewski/dotfiles.git ~/.dotfile
 ```
 
 ### 4. Install apps
