@@ -1,0 +1,17 @@
+[user]
+  name = Oskar Kwaśniewski
+  email = oskarkwasniewski@icloud.com
+[color]
+  ui = true
+[push]
+	default = current
+  followTags = true
+[help]
+  autocorrect = 1
+[status]
+  showUntrackedFiles = all
+[core]
+	fileMode = false
+	editor = code --wait
+[pull]
+	rebase = false
