@@ -2,8 +2,8 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.color_scheme = "Rosé Pine (Gogh)"
-config.font_size = 14.0
+config.color_scheme = "catppuccin-mocha"
+config.font_size = 14.5
 
 config.enable_tab_bar = false
 config.enable_scroll_bar = false
