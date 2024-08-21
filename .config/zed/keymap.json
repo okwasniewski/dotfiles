@@ -10,11 +10,11 @@
     }
   },
   {
-    "context": "Editor",
+    "context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting",
     "bindings": {
-      "ctrl-w space": "file_finder::Toggle",
-      "ctrl-w space g": "workspace::NewSearch",
-      "ctrl-w e": "workspace::ToggleLeftDock"
+      "space space": "file_finder::Toggle",
+      "space s g": "workspace::NewSearch",
+      "space e": "workspace::ToggleLeftDock"
     }
   }
 ]
