@@ -1,0 +1,20 @@
+[
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+      // ... or other keybindings
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-w space": "file_finder::Toggle",
+      "ctrl-w space g": "workspace::NewSearch",
+      "ctrl-w e": "workspace::ToggleLeftDock"
+    }
+  }
+]

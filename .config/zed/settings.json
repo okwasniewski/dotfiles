@@ -1,0 +1,34 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "assistant": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-20240620"
+    },
+    "version": "2"
+  },
+  "theme": "Catppuccin Mocha",
+  "vim_mode": true,
+  "ui_font_size": 15,
+  "buffer_font_size": 14,
+  "tabs": {
+    "show": false
+  },
+  "vim": {
+    "use_system_clipboard": "always",
+    "cursor_blink": false,
+    "relative_line_numbers": true,
+    "scrollbar": { "show": "never" },
+    "vertical_scroll_margin": 0
+  },
+  "terminal": {
+    "font_family": "JetBrainsMono Nerd Font"
+  }
+}
