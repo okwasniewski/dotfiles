@@ -34,8 +34,11 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Load zsh secrets
+[ -f "$HOME/.zsh_secrets" ] && source "$HOME/.zsh_secrets"
 
 export LANG=en_US.UTF-8
+export REACT_EDITOR="nvim"
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -84,8 +87,8 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
+
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
 
 
-export REACT_EDITOR="nvim"
