@@ -21,6 +21,7 @@
 	autoSetupRemote = true
 [core]
     pager = delta
+    editor = nvim
 
 [interactive]
     diffFilter = delta --color-only
