@@ -38,7 +38,9 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [ -f "$HOME/.zsh_secrets" ] && source "$HOME/.zsh_secrets"
 
 export LANG=en_US.UTF-8
-export REACT_EDITOR="nvim"
+export REACT_EDITOR=nvim
+export EDITOR=nvim
+export VISUAL=nvim
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -89,6 +91,14 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 source <(fzf --zsh)
 
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
