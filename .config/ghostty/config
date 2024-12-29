@@ -1,0 +1,6 @@
+theme = catppuccin-mocha
+macos-titlebar-style = hidden
+window-colorspace = display-p3
+font-size = 16
+background-opacity = 0.95
+background-blur-radius = 20
