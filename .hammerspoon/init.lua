@@ -38,10 +38,19 @@ local keyMap = {
     [singleKey("m", "minimize")] = function()
       hs.window.focusedWindow():minimize()
     end,
-    [singleKey("f", "maximize")] = function()
+    [singleKey("return", "maximize")] = function()
       hs.window.focusedWindow():maximize(0)
+    end,
+    [singleKey("h", "left")] = function()
+      hs.window.focusedWindow():moveToUnit(hs.layout.left50)
+    end,
+    [singleKey("l", "right")] = function()
+      hs.window.focusedWindow():moveToUnit(hs.layout.right50)
+    end,
+    [singleKey("q", "quit")] = function()
+      hs.window.focusedWindow():close()
     end,
   },
 }
 
-hs.hotkey.bind({ "ctrl", "shift" }, "s", spoon.RecursiveBinder.recursiveBind(keyMap))
+hs.hotkey.bind({ "control", "shift" }, "s", spoon.RecursiveBinder.recursiveBind(keyMap))
