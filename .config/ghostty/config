@@ -1,4 +1,4 @@
-theme = dark:catppuccin-mocha,light:catppuccin-latte
+theme = catppuccin-mocha
 macos-titlebar-style = hidden
 window-colorspace = display-p3
 font-size = 16
