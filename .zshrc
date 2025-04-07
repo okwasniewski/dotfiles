@@ -24,11 +24,6 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-source ~/.rvm/scripts/rvm
-
 # #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -41,6 +36,7 @@ export LANG=en_US.UTF-8
 export REACT_EDITOR=nvim
 export EDITOR=nvim
 export VISUAL=nvim
+set -o vi
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -104,3 +100,4 @@ eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
 
 
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
