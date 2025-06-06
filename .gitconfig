@@ -1,50 +1,56 @@
 [alias]
-    co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
-    st = status
-    s = switch
-    cp = cherry-pick
-    cpc = cherry-pick --continue
-    cps = cherry-pick --skip
-    cpa = cherry-pick --abort
-    rbc = rebase --continue
-    rbs = rebase --skip
-    rba = rebase --abort
-    ras = restore . --staged
-    rsh = reset --hard
-    puh = push -u origin head
-    wip = commit -am WIP --no-verify
-    amend = commit --amend --no-edit
+  co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
+  st = status
+  s = switch
+  cp = cherry-pick
+  cpc = cherry-pick --continue
+  cps = cherry-pick --skip
+  cpa = cherry-pick --abort
+  rbc = rebase --continue
+  rbs = rebase --skip
+  rba = rebase --abort
+  ras = restore . --staged
+  rsh = reset --hard
+  puh = push -u origin head
+  wip = commit -am WIP --no-verify
+  amend = commit --amend --no-edit
 [user]
-	name = Oskar Kwaśniewski
-	email = oskarkwasniewski@icloud.com
+  name = Oskar Kwaśniewski
+  email = oskarkwasniewski@icloud.com
 [push]
-	autoSetupRemote = true
+  autoSetupRemote = true
 [core]
-    pager = delta
-    editor = nvim
+  pager = delta
+  editor = nvim
 
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [add.interactive]
-    useBuiltin = false # required for git 2.37.0
+  useBuiltin = false # required for git 2.37.0
 
 [delta]
-    navigate = true    # use n and N to move between diff sections
-    side-by-side = true
-    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  navigate = true    # use n and N to move between diff sections
+  side-by-side = true
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [merge]
-    conflictstyle = diff3
+  tool = nvim
+[mergetool "nvim"]
+  cmd = nvim -c "DiffviewOpen"
+[mergetool]
+  prompt = false
 
 [diff]
-    colorMoved = default
+  colorMoved = default
+
 [alias]
-	lo = log --oneline
-	tree = log --oneline --graph --decorate --all
+  lo = log --oneline
+  tree = log --oneline --graph --decorate --all
+
 [gpg]
-	program = /opt/homebrew/bin/gpg
+  program = /opt/homebrew/bin/gpg
 [rerere]
-	enabled = true
-	autoUpdate = true
+  enabled = true
+  autoUpdate = true
 [help]
 	autocorrect = 1
