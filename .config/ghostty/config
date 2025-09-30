@@ -1,4 +1,4 @@
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 macos-titlebar-style = hidden
 window-colorspace = display-p3
 font-size = 16

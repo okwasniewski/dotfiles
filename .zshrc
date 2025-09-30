@@ -11,6 +11,7 @@ alias cat="bat"
 alias lg="lazygit"
 alias compress-video="sh $HOME/scripts/compress-video.sh"
 alias :q="exit"
+alias clear="clear && tmux clear-history"
 
 ## React Native Aliases
 alias pod-install-new="bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install"
