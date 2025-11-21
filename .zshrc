@@ -1,9 +1,10 @@
 export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:ANDROID_HOME/emulator
-export PATH=$PATH:ANDROID_HOME/platform-tools
-export PATH=$PATH:$(yarn global bin)
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=~/Library/Android/sdk/tools:$PATH
 export PATH=~/Library/Android/sdk/platform-tools:$PATH
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH=/opt/homebrew/bin:$PATH
 
 # Aliases
 alias ls="eza -a --no-user --no-time"
@@ -17,18 +18,6 @@ alias clear="clear && tmux clear-history"
 alias pod-install-new="bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install"
 alias pod-install-old="bundle install && bundle exec pod install"
 
-
-export PATH=/opt/homebrew/bin:$PATH
-
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-
-# #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Load zsh secrets
 [ -f "$HOME/.zsh_secrets" ] && source "$HOME/.zsh_secrets"
@@ -57,10 +46,6 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-# Add in snippets
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -86,20 +71,6 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-source <(fzf --zsh)
-
-function y() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-  yazi "$@" --cwd-file="$tmp"
-  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    builtin cd -- "$cwd"
-  fi
-  rm -f -- "$tmp"
-}
-
 eval "$(zoxide init --cmd cd zsh)"
+
 eval "$(starship init zsh)"
-
-
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="~/.local/bin:$PATH"
