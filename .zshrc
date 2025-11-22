@@ -18,6 +18,8 @@ alias clear="clear && tmux clear-history"
 alias pod-install-new="bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install"
 alias pod-install-old="bundle install && bundle exec pod install"
 
+## VPS
+alias mikrus="ssh root@adam120.mikrus.xyz -p 10120"
 
 # Load zsh secrets
 [ -f "$HOME/.zsh_secrets" ] && source "$HOME/.zsh_secrets"
