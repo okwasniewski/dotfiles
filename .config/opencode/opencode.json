@@ -10,5 +10,13 @@
       "type": "remote",
       "url": "https://mcp.grep.app"
     }
+  },
+  "command": {
+    "review": {
+      "template": "Review my changes on this branch diffing from the upstream branch it tracks. Provide concise feedback on code quality, style, and potential issues. Suggest improvements where necessary."
+    },
+    "commit": {
+      "template": "Commit my current changes with a concise and descriptive git commit message based on my current git diff. Follow conventional commit standards."
+    }
   }
 }
