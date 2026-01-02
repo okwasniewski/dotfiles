@@ -24,6 +24,7 @@
         lazygit
         neovim
         ninja
+        nmap
         nodejs
         ripgrep
         ruby
@@ -55,6 +56,7 @@
           "tmux"
           "xcode-build-server"
           "opencode"
+          "pnpm"
         ];
         casks = [
           "1password"
