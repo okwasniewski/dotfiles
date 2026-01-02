@@ -32,16 +32,24 @@
   navigate = true    # use n and N to move between diff sections
   side-by-side = true
   light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  syntax-theme = Dracula
 
 [merge]
   tool = nvim
 [mergetool "nvim"]
-  cmd = nvim -c "DiffviewOpen"
+  cmd = nvim -c "CodeDiff"
 [mergetool]
   prompt = false
 
 [diff]
+  tool = nvim
   colorMoved = default
+
+[difftool "nvim"]
+  cmd = nvim -c "CodeDiff file $LOCAL $REMOTE"
+
+[difftool]
+  prompt = false
 
 [alias]
   lo = log --oneline

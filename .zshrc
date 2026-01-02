@@ -18,6 +18,9 @@ alias clear="clear && tmux clear-history"
 alias pod-install-new="bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install"
 alias pod-install-old="bundle install && bundle exec pod install"
 
+# Setup aliases for nix
+alias nix-rebuild="sudo darwin-rebuild switch --flake $HOME/.nix#default"
+
 ## VPS
 alias mikrus="ssh root@adam120.mikrus.xyz -p 10120"
 
@@ -76,3 +79,10 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 eval "$(zoxide init --cmd cd zsh)"
 
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "/Users/okwasniewski/.bun/_bun" ] && source "/Users/okwasniewski/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
