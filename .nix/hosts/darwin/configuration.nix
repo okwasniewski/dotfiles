@@ -3,18 +3,20 @@
 {
   environment.systemPackages = with pkgs; [
     bat
+    btop
     cmake
     coreutils
     curl
+    delta
     direnv
     eza
     fd
-    btop
-    lazydocker
     ffmpeg
     fzf
+    gh
     git
-    delta
+    jq
+    lazydocker
     lazygit
     neovim
     ninja
@@ -28,8 +30,11 @@
     stow
     tree
     watchman
+    yt-dlp
     yarn
     zoxide
+    zsh-autosuggestions
+    zsh-syntax-highlighting
   ];
 
   homebrew = {
@@ -46,29 +51,47 @@
       "cocoapods"
       "folly"
       "nvm"
+      "opencode"
+      "pnpm"
       "python@3.9"
       "rbenv"
       "swiftlint"
       "tmux"
       "xcode-build-server"
-      "opencode"
-      "pnpm"
     ];
     casks = [
       "1password"
-      "balenaetcher"
       "android-platform-tools"
-      "google-chrome"
+      "balenaetcher"
       "cleanshot"
+      "daisydisk"
+      "home-assistant"
+      "iina"
       "font-fira-code-nerd-font"
       "fork"
       "ghostty"
+      "the-unarchiver"
+      "whatsapp"
+      "telegram"
+      "google-chrome"
       "minisim"
       "obsidian"
       "raycast"
       "spotify"
       "xcodes-app"
+      "private-internet-access"
     ];
+    masApps = {
+      "Infuse" = 1136220934;
+      "Keynote" = 409183694;
+      "Numbers" = 409203825;
+      "Pages" = 409201541;
+      "Slack" = 803453959;
+      "Things" = 904280696;
+      "Parcel" = 375589283;
+      "Spark" = 1176895641;
+      "DevCleaner" = 1388020431;
+    };
   };
 
   programs.zsh = {

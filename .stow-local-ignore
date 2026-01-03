@@ -1,0 +1,7 @@
+\.git
+\.gitignore
+README\.MD
+AGENTS\.MD
+CLAUDE\.MD
+\.editorconfig
+\.nix
