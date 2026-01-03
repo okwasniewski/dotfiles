@@ -1,42 +1,20 @@
-{ pkgs, self, ... }:
+{ self, pkgs, ... }:
 
+let
+  user = "okwasniewski";
+in
 {
-  environment.systemPackages = with pkgs; [
-    bat
-    btop
-    cmake
-    coreutils
-    curl
-    delta
-    direnv
-    eza
-    fd
-    ffmpeg
-    fzf
-    gh
-    git
-    jq
-    lazydocker
-    lazygit
-    neovim
-    ninja
-    nmap
-    nodejs
-    ripgrep
-    ruby
-    scrcpy
-    sesh
-    starship
-    stow
-    tree
-    watchman
-    yt-dlp
-    yarn
-    zoxide
-    xcbeautify
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+  imports = [
+    ../../common/nix.nix
+    ../../common/packages.nix
   ];
+
+  environment.systemPackages = with pkgs; [
+    xcbeautify
+    yt-dlp
+  ];
+
+  system.primaryUser = user;
 
   homebrew = {
     enable = true;
@@ -83,6 +61,7 @@
       "obsidian"
       "opencloud"
       "postman"
+      "logitech-options"
       "private-internet-access"
       "proxyman"
       "raycast"
@@ -114,8 +93,6 @@
     enableCompletion = true;
     enableBashCompletion = true;
   };
-
-  nix.settings.experimental-features = "nix-command flakes";
 
   security.pam.services.sudo_local = {
     touchIdAuth = true;
@@ -156,7 +133,6 @@
     WindowManager.EnableStandardClickToShowDesktop = false;
   };
 
-  system.primaryUser = "okwasniewski";
   system.configurationRevision = self.rev or self.dirtyRev or null;
   system.stateVersion = 6;
   nixpkgs.hostPlatform = "aarch64-darwin";

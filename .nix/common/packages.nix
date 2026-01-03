@@ -1,0 +1,39 @@
+{ pkgs, ... }:
+
+{
+  environment.systemPackages = with pkgs; [
+    bat
+    btop
+    cmake
+    coreutils
+    curl
+    delta
+    direnv
+    eza
+    fd
+    ffmpeg
+    fzf
+    gh
+    git
+    jq
+    lazydocker
+    lazygit
+    neovim
+    ninja
+    nixd
+    nmap
+    nodejs
+    ripgrep
+    ruby
+    scrcpy
+    sesh
+    starship
+    stow
+    tree
+    watchman
+    yarn
+    zoxide
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+  ];
+}
