@@ -10,6 +10,7 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
+    pam-reattach
     xcbeautify
     yt-dlp
   ];
@@ -34,6 +35,7 @@ in
       "python@3.9"
       "rbenv"
       "swiftlint"
+      "mole"
       "tmux"
       "xcode-build-server"
     ];
@@ -68,6 +70,7 @@ in
       "spotify"
       "tailscale-app"
       "telegram"
+      "private-internet-access"
       "the-unarchiver"
       "whatsapp"
       "xcodes-app"
@@ -96,6 +99,7 @@ in
 
   security.pam.services.sudo_local = {
     touchIdAuth = true;
+    reattach = true;
   };
 
   system.defaults = {
