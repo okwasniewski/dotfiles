@@ -62,7 +62,6 @@ in
       "opencloud"
       "postman"
       "logitech-options"
-      "private-internet-access"
       "proxyman"
       "raycast"
       "discord"
@@ -133,7 +132,41 @@ in
     NSGlobalDomain.InitialKeyRepeat = 15;
 
     WindowManager.EnableStandardClickToShowDesktop = false;
+
+    CustomUserPreferences = {
+      "com.apple.symbolichotkeys" = {
+        AppleSymbolicHotKeys = {
+          # Disable 'Cmd + Space' for Spotlight Search
+          "64" = {
+            enabled = false;
+          };
+          # Disable 'Cmd + Alt + Space' for Finder search window
+          "65" = {
+            # Set to false to disable
+            enabled = true;
+          };
+          # Disable 'Cmd + Shift + 3' for screenshots
+          "28" = {
+            enabled = false;
+          };
+          # Disable 'Cmd + Shift + 4' for screenshot selection
+          "30" = {
+            enabled = false;
+          };
+          # Disable 'Cmd + Shift + 5' for screenshots
+          "184" = {
+            enabled = false;
+          };
+        };
+      };
+    };
+
   };
+
+  system.activationScripts.postActivation.text = ''
+      # Activate system settings without logout
+      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+      '';
 
   system.configurationRevision = self.rev or self.dirtyRev or null;
   system.stateVersion = 6;
