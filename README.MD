@@ -21,3 +21,9 @@ nix build ./.nix#darwinConfigurations.default.system --extra-experimental-featur
 ```
 
 4. Run `stow .` to symlink dotfiles
+
+5. Fix SSH config permissions
+
+```sh
+chmod 600 ~/.ssh/config
+```

@@ -1,10 +1,22 @@
+# PATH
+export PATH=/opt/homebrew/bin:$PATH
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+# Android
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=~/Library/Android/sdk/tools:$PATH
-export PATH=~/Library/Android/sdk/platform-tools:$PATH
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH=/opt/homebrew/bin:$PATH
+export PATH=$PATH:$ANDROID_HOME/tools
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Environment
+export LANG=en_US.UTF-8
+export REACT_EDITOR=nvim
+export EDITOR=nvim
+export VISUAL=nvim
 
 # Aliases
 alias ls="eza -a --no-user --no-time"
@@ -21,16 +33,9 @@ alias pod-install-old="bundle install && bundle exec pod install"
 # Setup aliases for nix
 alias nix-rebuild="sudo darwin-rebuild switch --flake $HOME/.nix#default"
 
-## VPS
-alias mikrus="ssh root@adam120.mikrus.xyz -p 10120"
-
 # Load zsh secrets
 [ -f "$HOME/.zsh_secrets" ] && source "$HOME/.zsh_secrets"
 
-export LANG=en_US.UTF-8
-export REACT_EDITOR=nvim
-export EDITOR=nvim
-export VISUAL=nvim
 set -o vi
 
 # Set the directory we want to store zinit and plugins
@@ -80,9 +85,5 @@ eval "$(zoxide init --cmd cd zsh)"
 
 eval "$(starship init zsh)"
 
-# bun completions
-[ -s "/Users/okwasniewski/.bun/_bun" ] && source "/Users/okwasniewski/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# Bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"

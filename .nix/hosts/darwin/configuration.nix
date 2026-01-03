@@ -8,6 +8,7 @@
     curl
     direnv
     eza
+    fd
     btop
     lazydocker
     ffmpeg
@@ -22,7 +23,9 @@
     ripgrep
     ruby
     scrcpy
+    sesh
     starship
+    stow
     tree
     watchman
     yarn
