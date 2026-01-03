@@ -51,7 +51,6 @@
       "ccache"
       "cocoapods"
       "folly"
-      "nvm"
       "opencode"
       "pnpm"
       "python@3.9"
@@ -65,6 +64,7 @@
       "android-platform-tools"
       "android-studio"
       "balenaetcher"
+      "busycal"
       "claude"
       "cleanshot"
       "daisydisk"
@@ -77,6 +77,7 @@
       "home-assistant"
       "iina"
       "karabiner-elements"
+      "screen-studio"
       "minisim"
       "obsidian"
       "opencloud"
@@ -92,6 +93,7 @@
       "xcodes-app"
       "zed"
       "zoom"
+      "zulu"
     ];
     masApps = {
       "Infuse" = 1136220934;
