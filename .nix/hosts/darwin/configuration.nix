@@ -103,6 +103,7 @@ in
     dock.magnification = true;
     dock.largesize = 60;
     dock.show-process-indicators = true;
+    dock.show-recents = false;
     dock.mru-spaces = false;
     dock.autohide = true;
     dock.persistent-apps = [
