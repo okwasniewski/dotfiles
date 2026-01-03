@@ -33,6 +33,7 @@
     yt-dlp
     yarn
     zoxide
+    xcbeautify
     zsh-autosuggestions
     zsh-syntax-highlighting
   ];
@@ -62,24 +63,35 @@
     casks = [
       "1password"
       "android-platform-tools"
+      "android-studio"
       "balenaetcher"
+      "claude"
       "cleanshot"
       "daisydisk"
-      "home-assistant"
-      "iina"
+      "docker"
+      "firefox"
       "font-fira-code-nerd-font"
       "fork"
       "ghostty"
-      "the-unarchiver"
-      "whatsapp"
-      "telegram"
       "google-chrome"
+      "home-assistant"
+      "iina"
+      "karabiner-elements"
       "minisim"
       "obsidian"
+      "opencloud"
+      "postman"
+      "private-internet-access"
+      "proxyman"
       "raycast"
       "spotify"
+      "tailscale-app"
+      "telegram"
+      "the-unarchiver"
+      "whatsapp"
       "xcodes-app"
-      "private-internet-access"
+      "zed"
+      "zoom"
     ];
     masApps = {
       "Infuse" = 1136220934;
