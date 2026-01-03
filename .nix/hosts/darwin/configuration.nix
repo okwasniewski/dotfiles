@@ -67,6 +67,7 @@
       "busycal"
       "claude"
       "cleanshot"
+      "ghostty"
       "daisydisk"
       "docker"
       "firefox"
@@ -116,18 +117,36 @@
 
   nix.settings.experimental-features = "nix-command flakes";
 
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+  };
+
   system.defaults = {
-    dock.tilesize = 30;
+    dock.tilesize = 35;
     dock.magnification = true;
     dock.largesize = 60;
     dock.show-process-indicators = true;
     dock.mru-spaces = false;
     dock.autohide = true;
+    dock.persistent-apps = [
+      { app = "/Applications/Spark.app"; }
+      { app = "/Applications/Google Chrome.app"; }
+      { app = "/Applications/BusyCal.app"; }
+      { app = "/Applications/Obsidian.app"; }
+      { app = "/Applications/Things3.app"; }
+      { app = "/Applications/Ghostty.app"; }
+      { app = "/Applications/Spotify.app"; }
+      { app = "/Applications/Discord.app"; }
+    ];
 
     finder.AppleShowAllExtensions = true;
     finder.FXEnableExtensionChangeWarning = false;
     finder.FXPreferredViewStyle = "Nlsv";
     finder.ShowPathbar = true;
+    finder.FXDefaultSearchScope = "SCcf";
+    finder.FXRemoveOldTrashItems = true;
+
+    screencapture.location = "~/Downloads";
 
     NSGlobalDomain.AppleScrollerPagingBehavior = true;
     NSGlobalDomain.NSTableViewDefaultSizeMode = 2;
