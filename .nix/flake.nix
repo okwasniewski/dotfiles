@@ -91,6 +91,27 @@
 
       nix.settings.experimental-features = "nix-command flakes";
 
+      system.defaults = {
+        dock.tilesize = 30;
+        dock.magnification = true;
+        dock.largesize = 60;
+        dock.show-process-indicators = true;
+        dock.mru-spaces = false;
+        dock.autohide = true;
+
+        finder.AppleShowAllExtensions = true;
+        finder.FXEnableExtensionChangeWarning = false;
+        finder.FXPreferredViewStyle = "Nlsv";
+        finder.ShowPathbar = true;
+
+        NSGlobalDomain.AppleScrollerPagingBehavior = true;
+        NSGlobalDomain.NSTableViewDefaultSizeMode = 2;
+        NSGlobalDomain.KeyRepeat = 2;
+        NSGlobalDomain.InitialKeyRepeat = 15;
+
+        WindowManager.EnableStandardClickToShowDesktop = false;
+      };
+
       system.primaryUser = "okwasniewski";
       system.configurationRevision = self.rev or self.dirtyRev or null;
       system.stateVersion = 6;
