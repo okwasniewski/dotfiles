@@ -74,14 +74,6 @@
     enableBashCompletion = true;
   };
 
-  environment.variables = {
-    ANDROID_HOME = "$HOME/Library/Android/sdk";
-    LANG = "en_US.UTF-8";
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-    REACT_EDITOR = "nvim";
-  };
-
   nix.settings.experimental-features = "nix-command flakes";
 
   system.defaults = {
