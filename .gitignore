@@ -1,2 +1,8 @@
 .zsh_secrets
 .DS_Store
+.config/raycast
+.config/github-copilot
+.config/nvim
+result
+
+.ssh/*

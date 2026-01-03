@@ -65,6 +65,7 @@ in
       "private-internet-access"
       "proxyman"
       "raycast"
+      "discord"
       "spotify"
       "tailscale-app"
       "telegram"
