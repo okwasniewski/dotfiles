@@ -17,6 +17,7 @@ export LANG=en_US.UTF-8
 export REACT_EDITOR=nvim
 export EDITOR=nvim
 export VISUAL=nvim
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Aliases
 alias ls="eza -a --no-user --no-time"

@@ -1,0 +1,41 @@
+gui:
+  nerdFontsVersion: "3"
+  showCommandLog: false
+  showBottomLine: true
+  showRandomTip: false
+  sidePanelWidth: 0.3333
+  expandFocusedSidePanel: false
+  mainPanelSplitMode: flexible
+  commitLength:
+    show: true
+  showFileTree: true
+  splitDiff: auto
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  autoFetch: true
+  autoRefresh: true
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
+  log:
+    order: topo-order
+    showGraph: always
+    showWholeGraph: false
+
+os:
+  editPreset: "nvim-remote"
+
+disableStartupPopups: true
+notARepository: skip
+promptToReturnFromSubprocess: true
+
+customCommands:
+  - key: "b"
+    command: "gh browse"
+    context: "files"
+    description: "Open repo in browser"
+  - key: "b"
+    command: 'gh browse "{{.SelectedLocalCommit.Sha}}"'
+    context: "commits"
+    description: "Open commit in browser"
