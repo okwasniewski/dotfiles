@@ -25,14 +25,15 @@ git diff --stat
 ### Step 2: Branch check
 
 If on `main` or `master`:
-- Ask for branch name or derive from changes
+- Derive branch name from changes automatically
 - Create and checkout `oskar/<topic>` branch
+- Do NOT ask for confirmation
 
 ### Step 3: Stage if needed
 
 If nothing staged but changes exist:
-- Show unstaged files
-- Ask: stage all or select specific files?
+- Stage all changes automatically
+- Do NOT ask for confirmation
 
 ### Step 4: Analyze diff
 
@@ -69,11 +70,13 @@ If splitting recommended → suggest breakdown and help stage separately.
 
 ### Step 6: Commit
 
-Show proposed message, confirm, then:
+Show proposed message and commit immediately:
 
 ```bash
 git commit -m "<message>"
 ```
+
+Do NOT ask for confirmation before committing.
 
 ## Examples
 
