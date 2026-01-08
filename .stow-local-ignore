@@ -5,3 +5,5 @@ AGENTS\.MD
 CLAUDE\.MD
 result
 \.editorconfig
+.config/opencode/node_modules
+

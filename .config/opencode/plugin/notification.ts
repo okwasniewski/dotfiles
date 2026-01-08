@@ -1,12 +1,6 @@
 import type { Plugin } from "@opencode-ai/plugin";
 
-export const NotificationPlugin: Plugin = async ({
-  project,
-  client,
-  $,
-  directory,
-  worktree,
-}) => {
+export const NotificationPlugin: Plugin = async ({ $ }) => {
   const isTerminalFocused = async (): Promise<boolean> => {
     const result =
       await $`osascript -e 'tell application "System Events" to get name of first application process whose frontmost is true'`.text();
