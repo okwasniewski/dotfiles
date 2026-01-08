@@ -17,3 +17,4 @@ When creating branches, prefix them with `oskar/` to indicate they came from me.
 - If you implement new function or method, add a JSDoc comment above it.
 - Never add comments in code unless absolutely necessary. Focus on following already established patterns.
 - Always use kebab-case for JSX component filenames (my-component.tsx).
+- Always clone temporary repositories to /tmp.

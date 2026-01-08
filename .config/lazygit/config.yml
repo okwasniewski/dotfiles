@@ -10,11 +10,10 @@ gui:
     show: true
   showFileTree: true
   splitDiff: auto
-
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
   autoFetch: true
   autoRefresh: true
   branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
@@ -22,14 +21,11 @@ git:
     order: topo-order
     showGraph: always
     showWholeGraph: false
-
 os:
   editPreset: "nvim-remote"
-
 disableStartupPopups: true
 notARepository: skip
 promptToReturnFromSubprocess: true
-
 customCommands:
   - key: "b"
     command: "gh browse"
