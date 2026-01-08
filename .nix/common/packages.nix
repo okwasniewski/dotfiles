@@ -33,6 +33,7 @@
     watchman
     yarn
     zoxide
+    yazi
     zsh-autosuggestions
     zsh-syntax-highlighting
   ];
