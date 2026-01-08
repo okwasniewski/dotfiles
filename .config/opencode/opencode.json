@@ -10,15 +10,6 @@
     "gh_grep": {
       "type": "remote",
       "url": "https://mcp.grep.app"
-    },
-    "obsidian": {
-      "type": "local",
-      "command": [
-        "npx",
-        "@mauricio.wolff/mcp-obsidian@latest",
-        "/Users/okwasniewski/Personal"
-      ],
-      "enabled": true
     }
   },
   "permission": {
