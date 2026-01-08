@@ -1,0 +1,20 @@
+# Catppuccin Mocha theme for Yazi
+[mgr]
+cwd = { fg = "#7DB6FF" }
+hovered = { bg = "#313244", bold = true }
+preview_hovered = { bg = "#313244" }
+
+[status]
+sep_open = ""
+sep_close = ""
+sep_style = { fg = "#181826", bg = "#181826" }
+
+mode_normal = { fg = "#181826", bg = "#7DB6FF", bold = true }
+mode_select = { fg = "#181826", bg = "#a6e3a1", bold = true }
+mode_unset = { fg = "#181826", bg = "#f38ba8", bold = true }
+
+[selection]
+hovered = { fg = "#181826", bg = "#7DB6FF", bold = true }
+
+[input]
+border = { fg = "#7DB6FF" }

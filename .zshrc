@@ -25,6 +25,16 @@ alias cat="bat"
 alias lg="lazygit"
 alias compress-video="sh $HOME/scripts/compress-video.sh"
 alias :q="exit"
+alias vim="nvim"
+
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
 alias clear="clear && tmux clear-history"
 
 ## React Native Aliases
