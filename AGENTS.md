@@ -18,3 +18,16 @@ When creating branches, prefix them with `oskar/` to indicate they came from me.
 - Never add comments in code unless absolutely necessary. Focus on following already established patterns.
 - Always use kebab-case for JSX component filenames (my-component.tsx).
 - Always clone temporary repositories to /tmp.
+
+### Fetching Additional Source Code
+
+To fetch source code for a package or repository you need to understand, run:
+
+```bash
+npx opensrc <package>           # npm package (e.g., npx opensrc zod)
+npx opensrc pypi:<package>      # Python package (e.g., npx opensrc pypi:requests)
+npx opensrc crates:<package>    # Rust crate (e.g., npx opensrc crates:serde)
+npx opensrc <owner>/<repo>      # GitHub repo (e.g., npx opensrc vercel/ai)
+```
+
+Always run this in `/tmp` to avoid cluttering your working directory.
