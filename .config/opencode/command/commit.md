@@ -4,9 +4,13 @@ description: Smart commit with conventional format
 
 Create well-formatted commit(s) from current changes.
 
+## Arguments
+
+- `$1` - If set to `main`, skip branch safety check and commit directly to main/master
+
 ## Rules
 
-1. **Branch safety** - if on main/master, create `oskar/<topic>` branch first
+1. **Branch safety** - if on main/master and `$1` is NOT `main`, create `oskar/<topic>` branch first
 2. **Atomic commits** - suggest splitting if changes touch multiple concerns
 3. **Conventional format** - `type(scope): description` under 72 chars
 4. **Imperative mood** - "add feature" not "added feature"
@@ -24,7 +28,10 @@ git diff --stat
 
 ### Step 2: Branch check
 
-If on `main` or `master`:
+If `$1` is `main`:
+- Skip branch check entirely, commit directly to current branch
+
+Otherwise, if on `main` or `master`:
 - Derive branch name from changes automatically
 - Create and checkout `oskar/<topic>` branch
 - Do NOT ask for confirmation
