@@ -55,7 +55,11 @@ gh pr create --title "<title>" --body "<body>"
 
 ### Step 5: Output
 
-Show PR URL when done.
+Output PR URL in this format:
+
+```
+:pr: [PR Title](PR_URL)
+```
 
 ## Examples
 
