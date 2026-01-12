@@ -66,6 +66,7 @@ in
       "logitech-options"
       "proxyman"
       "raycast"
+      "handy"
       "discord"
       "spotify"
       "tailscale-app"
