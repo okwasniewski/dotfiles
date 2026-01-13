@@ -45,7 +45,7 @@ in
       "android-studio"
       "balenaetcher"
       "busycal"
-      "claude"
+      "claude-code"
       "cleanshot"
       "ghostty"
       "daisydisk"
