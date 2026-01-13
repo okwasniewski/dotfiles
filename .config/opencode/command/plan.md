@@ -116,11 +116,21 @@ Read the plan. Check:
 
 If status is `draft`, ask: "Plan is still draft. Mark as ready and execute?"
 
-#### Step 2: Update status
+#### Step 2: Verify branch
+
+Before executing, ensure you're on a feature branch (not `main` or `master`):
+
+```bash
+git branch --show-current
+```
+
+If on `main`/`master`, create and switch to a new branch.
+
+#### Step 3: Update status
 
 If first execution, update status to `executing` in file.
 
-#### Step 3: Execute tasks
+#### Step 4: Execute tasks
 
 For each incomplete task (lines matching `- [ ]`):
 
@@ -145,7 +155,7 @@ Implement this task and commit when done.
 
 5. **Continue** - Move to next task immediately
 
-#### Step 4: Completion
+#### Step 5: Completion
 
 When all tasks done:
 - Update status to `done`
