@@ -1,5 +1,6 @@
 ---
 description: Create, refine, or execute implementation plans
+agent: plan
 ---
 
 Manage plans in `.agent/plans/`. Plans focus on approach and decisions, not code.
@@ -29,6 +30,7 @@ mkdir -p .agent/plans
 ```
 
 If `.agent/plans/$1-plan.md` exists:
+
 - Read it
 - Summarize: status, goal, completed tasks, open questions
 - Ask: "What do you want to refine or discuss?"
@@ -86,6 +88,7 @@ Guide the plan to completion through conversation:
 5. **Surface questions** - Note open questions that need answers
 
 **Rules:**
+
 - One question at a time
 - Write to file incrementally (user can see progress)
 - Focus on APPROACH and DECISIONS, not implementation details
@@ -93,6 +96,7 @@ Guide the plan to completion through conversation:
 - Tasks should be actionable but high-level ("Add auth middleware" not "Create file at src/middleware/auth.ts with function...")
 
 **Exit when:**
+
 - User says "looks good" / "done" / "let's execute"
 - Natural end of conversation
 
@@ -111,6 +115,7 @@ ls -t .agent/plans/*.md | head -1
 ```
 
 Read the plan. Check:
+
 - Status is `ready` or `executing`
 - Has at least one incomplete task (`- [ ]`)
 
@@ -158,6 +163,7 @@ Implement this task and commit when done.
 #### Step 5: Completion
 
 When all tasks done:
+
 - Update status to `done`
 - Summarize what was accomplished
 - Offer: "Create PR?" (run /pr command)
