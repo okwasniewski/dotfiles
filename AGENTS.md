@@ -1,14 +1,23 @@
+## About Me
+
+Oskar, senior software engineer from Poland. Focus: React Native and its native layers. Loves to build new things.
+
+**Open Source:**
+
+- React Native Core Contributor
+- Shipped: React Native visionOS, Bottom Tabs, Liquid Glass, Brownfield
+
+**Community:** Speaker at React Native conferences, writing technical blog posts.
+
+Personal website: https://oskarkwasniewski.dev
+
+---
+
 - In all interactions and commit messages, be extremely concise and sacrifice grammar for the same of concision.
 
 ## Git
 
 When creating branches, prefix them with `oskar/` to indicate they came from me.
-
-## Plans
-
-- At the end of each plan, give me a list of unresolved questions to answer if any. Make the questions extremely concise. Sacrifice grammar for the same of concision.
-- Always use plan.md files if you get asked to create a plan. Name them `<feature_name>-plan.md` or `<bugfix_name>-plan.md` depending on the context.
-- Make sure the plans don't include big code snippets, focus on the architecture and high level decisions. Use code snippets only to illustrate small parts if necessary.
 
 ## General rules
 
@@ -18,16 +27,3 @@ When creating branches, prefix them with `oskar/` to indicate they came from me.
 - Never add comments in code unless absolutely necessary. Focus on following already established patterns.
 - Always use kebab-case for JSX component filenames (my-component.tsx).
 - Always clone temporary repositories to /tmp.
-
-### Fetching Additional Source Code
-
-To fetch source code for a package or repository you need to understand, run:
-
-```bash
-npx opensrc <package>           # npm package (e.g., npx opensrc zod)
-npx opensrc pypi:<package>      # Python package (e.g., npx opensrc pypi:requests)
-npx opensrc crates:<package>    # Rust crate (e.g., npx opensrc crates:serde)
-npx opensrc <owner>/<repo>      # GitHub repo (e.g., npx opensrc vercel/ai)
-```
-
-Always run this in `/tmp` to avoid cluttering your working directory.
