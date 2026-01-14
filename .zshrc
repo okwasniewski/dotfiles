@@ -49,6 +49,7 @@ alias nix-rebuild="sudo darwin-rebuild switch --flake $HOME/.nix#default"
 [ -f "$HOME/.zsh_secrets" ] && source "$HOME/.zsh_secrets"
 
 set -o vi
+source <(fzf --zsh)
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
