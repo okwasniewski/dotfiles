@@ -2,15 +2,16 @@
 description: Review branch changes with auto-fix
 ---
 
-Review changes on current branch against upstream using the `code-review` skill.
+Review changes on current branch against main/master using the `code-review` skill.
 
 ## Workflow
 
-1. Get diff scope:
+1. Get diff scope (compare against main/master, not upstream):
 
    ```bash
-   git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "origin/main"
-   git diff $(git merge-base HEAD @{u})..HEAD --name-only
+   # Detect default branch
+   DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "main")
+   git diff origin/$DEFAULT_BRANCH...HEAD --name-only
    ```
 
 2. Review each changed file using the code-review skill
