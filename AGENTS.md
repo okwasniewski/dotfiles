@@ -27,3 +27,11 @@ When creating branches, prefix them with `oskar/` to indicate they came from me.
 - Never add comments in code unless absolutely necessary. Focus on following already established patterns.
 - Always use kebab-case for JSX component filenames (my-component.tsx).
 - Always clone temporary repositories to /tmp.
+
+- Always lookup the latest version of an NPM package before adding it as a dependency.
+
+```
+npm view <package-name> version
+```
+
+- Before running any package manager command always check if there is a lockfile present. If there is, use the corresponding package manager.
