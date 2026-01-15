@@ -6,14 +6,14 @@ Create commit(s) from current changes using the `conventional-commit` skill.
 
 ## Arguments
 
-- `$1` - If set to `main`, skip branch safety check and commit directly to main/master
+- First argument: `$1` - If set to `main`, skip branch safety check and commit directly to main/master
 
 ## Workflow
 
 1. Check state: `git status --porcelain && git diff --cached --stat`
 
-2. **Branch check** (skip if `$1` is `main`):
-   - If on `main`/`master` → create `oskar/<topic>` branch automatically
+2. **Branch check** (skip if first argument is `main`):
+   - If on `main`/`master` → create topic branch automatically
 
 3. **Stage** if nothing staged but changes exist
 
