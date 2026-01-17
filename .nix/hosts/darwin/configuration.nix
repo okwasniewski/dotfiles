@@ -24,6 +24,7 @@ in
       cleanup = "zap";
     };
     taps = [
+      "max-sixty/worktrunk"
       "xcodesorg/made"
     ];
     brews = [
@@ -37,6 +38,7 @@ in
       "swiftlint"
       "mole"
       "tmux"
+      "max-sixty/worktrunk/wt"
       "xcode-build-server"
     ];
     casks = [
