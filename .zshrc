@@ -45,6 +45,10 @@ alias pod-install-old="bundle install && bundle exec pod install"
 # Setup aliases for nix
 alias nix-rebuild="sudo darwin-rebuild switch --flake $HOME/.nix#default"
 
+# Worktrunk
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+alias wso='wt switch --create --execute=opencode'
+
 # Load zsh secrets
 [ -f "$HOME/.zsh_secrets" ] && source "$HOME/.zsh_secrets"
 
@@ -100,3 +104,4 @@ eval "$(starship init zsh)"
 
 # Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+

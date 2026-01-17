@@ -1,0 +1,2 @@
+[post-create]
+copy = "wt step copy-ignored"
