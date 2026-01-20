@@ -35,3 +35,16 @@ npm view <package-name> version
 ```
 
 - Before running any package manager command always check if there is a lockfile present. If there is, use the corresponding package manager.
+
+## Voice Output
+
+You can speak to the user using: `npx @okw/stt "Your message"`
+
+Use for:
+
+- Questions you have for the user (clarifications, decisions needed)
+- Task completion announcements
+- Critical errors
+- When user explicitly asks for voice output
+
+Keep messages to 1-2 sentences. Speak the question itself, don't read full context or output.

@@ -36,8 +36,10 @@ in
       "python@3.9"
       "rbenv"
       "swiftlint"
+      "swiftformat"
       "mole"
       "tmux"
+      "mpv"
       "max-sixty/worktrunk/wt"
       "xcode-build-server"
     ];
