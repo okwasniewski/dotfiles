@@ -24,14 +24,18 @@ in
       cleanup = "zap";
     };
     taps = [
+      "cameroncooke/axe"
       "max-sixty/worktrunk"
+      "steipete/tap"
       "xcodesorg/made"
     ];
     brews = [
+      "axe"
       "ccache"
       "cocoapods"
       "folly"
       "opencode"
+      "peekaboo"
       "pnpm"
       "python@3.9"
       "rbenv"
