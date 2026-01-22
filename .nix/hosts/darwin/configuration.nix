@@ -143,6 +143,9 @@ in
     NSGlobalDomain.NSTableViewDefaultSizeMode = 2;
     NSGlobalDomain.KeyRepeat = 2;
     NSGlobalDomain.InitialKeyRepeat = 15;
+    NSGlobalDomain.AppleIconAppearanceTheme = "ClearDark";
+    NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
+    NSGlobalDomain.AppleShowAllFiles = true;
 
     WindowManager.EnableStandardClickToShowDesktop = false;
 
