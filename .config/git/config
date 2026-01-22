@@ -16,7 +16,7 @@
   amend = commit --amend --no-edit
 [user]
   name = Oskar Kwaśniewski
-  email = oskarkwasniewski@icloud.com
+  email = oskar@okwasniewski.com
 [push]
   autoSetupRemote = true
 [core]
