@@ -1,0 +1,6 @@
+{
+  "autoUpdatesChannel": "latest",
+  "env": {
+    "DISABLE_ZOXIDE": "1"
+  }
+}
