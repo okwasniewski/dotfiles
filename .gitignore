@@ -3,6 +3,7 @@
 .config/raycast
 .config/github-copilot
 .config/nvim
+.config/gh
 result
 
 .ssh/*
