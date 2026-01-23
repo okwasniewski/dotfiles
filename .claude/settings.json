@@ -2,5 +2,14 @@
   "autoUpdatesChannel": "latest",
   "env": {
     "DISABLE_ZOXIDE": "1"
+  },
+  "permissions": {
+    "ask": [
+      "Bash(git push*)"
+    ]
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
   }
 }
