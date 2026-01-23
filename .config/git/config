@@ -17,6 +17,8 @@
 [user]
   name = Oskar Kwaśniewski
   email = oskar@okwasniewski.com
+
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKqrK1yGDIOmwlEDVDll8zIA4/kWJUIxmjhANBdYFbZP
 [push]
   autoSetupRemote = true
 [core]
@@ -57,8 +59,13 @@
 
 [gpg]
   program = /opt/homebrew/bin/gpg
+	format = ssh
 [rerere]
   enabled = true
   autoUpdate = true
 [help]
 	autocorrect = 1
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
