@@ -1,5 +1,6 @@
 {
   "autoUpdatesChannel": "latest",
+  "plansDirectory": ".agent/plans",
   "env": {
     "DISABLE_ZOXIDE": "1"
   },
