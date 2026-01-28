@@ -64,3 +64,9 @@ Use for:
 
 Keep messages to 1-2 sentences. Speak the question itself, don't read full
 context or output.
+
+## Skills Discovery
+
+When user asks "how do I do X", "find a skill for X", or wants to extend
+capabilities, use the `find-skills` skill to search the open agent skills
+ecosystem via `npx skills find [query]`.
