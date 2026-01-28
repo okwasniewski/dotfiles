@@ -12,5 +12,18 @@
   "attribution": {
     "commit": "",
     "pr": ""
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/.claude/hooks/notification.sh"
+          }
+        ]
+      }
+    ]
   }
 }
