@@ -4,6 +4,9 @@
 .config/github-copilot
 .config/nvim
 .config/gh
+.config/cagent
+.config/swiftpm
+.config/zed/prompts
 result
 
 .ssh/*
