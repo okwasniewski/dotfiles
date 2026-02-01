@@ -26,6 +26,7 @@ in
     taps = [
       "cameroncooke/axe"
       "max-sixty/worktrunk"
+      "oven-sh/bun"
       "steipete/tap"
       "xcodesorg/made"
     ];
@@ -38,12 +39,14 @@ in
       "peekaboo"
       "pnpm"
       "python@3.9"
+      "ruby@3.4"
       "rbenv"
       "swiftlint"
       "swiftformat"
       "mole"
       "tmux"
       "mpv"
+      "oven-sh/bun/bun"
       "max-sixty/worktrunk/wt"
       "xcode-build-server"
     ];
