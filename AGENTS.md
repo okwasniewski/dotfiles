@@ -33,6 +33,19 @@ patterns you establish will be copied. The corners you cut will be cut again.
 
 Fight entropy. Leave the codebase better than you found it.
 
+## Close the Loop
+
+Implementation without verification is incomplete. After building a feature,
+test it. Use available tools to interact with your implementation and verify it
+works as expected.
+
+1. Build the feature
+2. Run/deploy it
+3. Interact with your implementation
+4. Verify the result
+
+Never consider a task done until you've seen it work.
+
 ## General rules
 
 - Never add comments in JSX saying what this component renders.
