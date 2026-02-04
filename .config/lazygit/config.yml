@@ -41,7 +41,10 @@ customCommands:
     loadingText: "Pushing..."
     description: "Push with --no-verify"
   - key: "c"
-    command: "git commit --no-verify"
+    command: "git commit --no-verify -m '{{ .Form.Msg }}'"
     context: "files"
     description: "Commit with --no-verify"
-    output: terminal
+    prompts:
+      - type: "input"
+        title: "Commit message:"
+        key: "Msg"
