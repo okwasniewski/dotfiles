@@ -35,3 +35,13 @@ customCommands:
     command: 'gh browse "{{.SelectedLocalCommit.Sha}}"'
     context: "commits"
     description: "Open commit in browser"
+  - key: "P"
+    command: "git push --no-verify"
+    context: "global"
+    loadingText: "Pushing..."
+    description: "Push with --no-verify"
+  - key: "c"
+    command: "git commit --no-verify"
+    context: "files"
+    description: "Commit with --no-verify"
+    output: terminal

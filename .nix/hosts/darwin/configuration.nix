@@ -36,7 +36,7 @@ in
       "cocoapods"
       "folly"
       "opencode"
-      "peekaboo"
+      "steipete/tap/peekaboo"
       "pnpm"
       "python@3.9"
       "ruby@3.4"
@@ -49,6 +49,7 @@ in
       "oven-sh/bun/bun"
       "max-sixty/worktrunk/wt"
       "xcode-build-server"
+      "postgresql@16"
     ];
     casks = [
       "1password"
