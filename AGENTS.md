@@ -22,6 +22,9 @@ Personal website: https://oskarkwasniewski.dev
 
 When creating branches, prefix them with `oskar/` to indicate they came from me.
 
+Before running git commands, use `GIT_EDITOR=true` so agents do not get stuck
+in neovim.
+
 ## Philosophy
 
 Codebase we are working in will outlive you. Every shortcut you take becomes
