@@ -26,7 +26,7 @@ alias lg="lazygit"
 alias compress-video="sh $HOME/scripts/compress-video.sh"
 alias :q="exit"
 alias vim="nvim"
-alias oc="opencode"
+alias oc="OPENCODE_EXPERIMENTAL_PLAN_MODE=1 opencode"
 
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
