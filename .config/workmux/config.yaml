@@ -1,0 +1,12 @@
+agent: opencode
+nerdfont: true
+
+files:
+  copy:
+    - apps/website/.env
+
+panes:
+  - command: OPENCODE_EXPERIMENTAL_PLAN_MODE=1 OPENCODE_PERMISSION='"allow"' opencode
+    focus: true
+  - split: vertical
+    size: 12

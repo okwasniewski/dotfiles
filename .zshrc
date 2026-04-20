@@ -26,7 +26,7 @@ alias lg="lazygit"
 alias compress-video="sh $HOME/scripts/compress-video.sh"
 alias :q="exit"
 alias vim="nvim"
-alias oc="OPENCODE_EXPERIMENTAL_PLAN_MODE=1 opencode"
+alias oc="OPENCODE_EXPERIMENTAL_PLAN_MODE=1 OPENCODE_PERMISSION='\"allow\"' opencode"
 
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -45,9 +45,17 @@ alias pod-install-old="bundle install && bundle exec pod install"
 # Setup aliases for nix
 alias nix-rebuild="sudo darwin-rebuild switch --flake $HOME/.nix#default"
 
-# Worktrunk
-if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
-alias wso='wt switch --create --execute=opencode'
+# Workmux
+function ws() {
+  case "$1" in
+    ""|help|--help|-h|add|list|open|close|remove|merge|path|sidebar|sync-files|dashboard|last-done|last-agent|docs|init|update|sandbox|completions)
+      command workmux "$@"
+      ;;
+    *)
+      command workmux add -o "$@"
+      ;;
+  esac
+}
 
 # Load zsh secrets
 [ -f "$HOME/.zsh_secrets" ] && source "$HOME/.zsh_secrets"
@@ -101,6 +109,8 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 [ -z "$DISABLE_ZOXIDE" ] && eval "$(zoxide init --cmd cd zsh)"
 
 eval "$(starship init zsh)"
+
+if command -v workmux >/dev/null 2>&1; then eval "$(workmux completions zsh)"; fi
 
 # Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"

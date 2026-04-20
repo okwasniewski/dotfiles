@@ -25,18 +25,20 @@ in
     };
     taps = [
       "cameroncooke/axe"
-      "max-sixty/worktrunk"
       "oven-sh/bun"
+      "raine/workmux"
       "steipete/tap"
       "xcodesorg/made"
     ];
     brews = [
       "axe"
       "ccache"
+      "cloudflared"
       "cocoapods"
       "folly"
       "opencode"
       "steipete/tap/peekaboo"
+      "stripe-cli"
       "pnpm"
       "python@3.9"
       "ruby@3.4"
@@ -45,9 +47,9 @@ in
       "swiftformat"
       "mole"
       "tmux"
+      "raine/workmux/workmux"
       "mpv"
       "oven-sh/bun/bun"
-      "max-sixty/worktrunk/wt"
       "xcode-build-server"
       "postgresql@16"
     ];
@@ -56,7 +58,6 @@ in
       "android-platform-tools"
       "android-studio"
       "balenaetcher"
-      "busycal"
       "claude-code"
       "cleanshot"
       "ghostty"
@@ -126,7 +127,6 @@ in
     dock.persistent-apps = [
       { app = "/Applications/Spark.app"; }
       { app = "/Applications/Google Chrome.app"; }
-      { app = "/Applications/BusyCal.app"; }
       { app = "/Applications/Obsidian.app"; }
       { app = "/Applications/Things3.app"; }
       { app = "/Applications/Ghostty.app"; }
