@@ -58,7 +58,11 @@ function ws() {
 }
 
 # Load zsh secrets
-[ -f "$HOME/.zsh_secrets" ] && source "$HOME/.zsh_secrets"
+if [ -f "$HOME/.zsh_secrets" ]; then
+  set -a
+  source "$HOME/.zsh_secrets"
+  set +a
+fi
 
 set -o vi
 source <(fzf --zsh)

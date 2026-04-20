@@ -206,3 +206,11 @@ oc='OPENCODE_EXPERIMENTAL_PLAN_MODE=1 OPENCODE_PERMISSION='"'"'"allow"'"'"' open
 - project-specific dev server commands can move into per-project `.workmux.yaml` later
 - global workmux file copy currently includes `apps/website/.env` for your common monorepo case
 - if that repo needs more custom behavior, add a nested `.workmux.yaml` in `apps/website/`
+
+## Lazygit
+
+- in the `files` panel, `C` generates a commit message with OpenAI, then opens the commit editor
+- requires `OPENAI_API_KEY`
+- optional overrides:
+  - `OPENAI_MODEL` default: `gpt-5.4-mini`
+  - `OPENAI_API_BASE` default: `https://api.openai.com/v1`
