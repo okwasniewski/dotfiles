@@ -7,6 +7,8 @@
 .config/cagent
 .config/swiftpm
 .config/zed/prompts
+.config/trigger
+.config/testerarmy
 result
 
 .ssh/*

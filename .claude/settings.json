@@ -1,18 +1,17 @@
 {
-  "autoUpdatesChannel": "latest",
-  "plansDirectory": ".agent/plans",
   "env": {
     "DISABLE_ZOXIDE": "1"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
   },
   "permissions": {
     "ask": [
       "Bash(git push*)"
     ]
   },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
+  "model": "claude-opus-4-7",
   "hooks": {
     "Notification": [
       {
@@ -25,5 +24,11 @@
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "figma@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "autoUpdatesChannel": "latest",
+  "plansDirectory": ".agent/plans"
 }

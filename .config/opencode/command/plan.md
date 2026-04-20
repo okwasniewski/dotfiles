@@ -19,11 +19,14 @@ List all plans in `.agent/plans/`.
 
 Load or create `.agent/plans/<name>-plan.md`.
 
-**If exists:** Summarize status, goal, completed tasks, open questions. Ask what to refine.
+**If exists:** Summarize status, goal, completed tasks, open questions. Ask what
+to refine.
 
-**If new:** Create from template (see planning skill), then start refinement loop.
+**If new:** Create from template (see planning skill), then start refinement
+loop.
 
 **Refinement loop:**
+
 1. Understand the goal
 2. Explore approaches (2-3 options, recommend one)
 3. Capture decisions incrementally
