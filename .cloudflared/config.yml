@@ -1,0 +1,8 @@
+tunnel: ta-dev-local
+credentials-file: ~/.cloudflared/803a1439-dfb1-4d97-b722-02996303b057.json
+
+ingress:
+    - hostname: testerarmy.okwasniewski.net 
+      service: http://localhost:3000
+    - service: http_status:404
+
