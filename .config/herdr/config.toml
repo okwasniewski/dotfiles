@@ -1,0 +1,48 @@
+onboarding = false
+
+[theme]
+name = "catppuccin"
+
+[theme.custom]
+panel_bg = "#181826"
+accent = "#7DB6FF"
+
+[keys]
+# tmux muscle memory: prefix was ctrl+s
+prefix = "ctrl+s"
+
+# tmux: bind h split -h (right), bind v split -v (down)
+split_vertical = ["prefix+h"]
+split_horizontal = ["prefix+v", "prefix+minus"]
+
+# tmux raw C-h/j/k/l nav -> alt chords (ctrl+alt owned by Raycast,
+# raw ctrl chords would break backspace/enter/clear and nvim)
+focus_pane_left = ["alt+h"]
+focus_pane_down = ["alt+j"]
+focus_pane_up = ["alt+k"]
+focus_pane_right = ["alt+l"]
+
+# tmux: M-h / M-l window switching -> alt+[ / alt+]
+previous_tab = ["prefix+p", "alt+["]
+next_tab = ["prefix+n", "alt+]"]
+
+# goto picker on prefix+k (old sesh binding); frees prefix+g for lazygit
+goto = "prefix+k"
+
+# tmux popups -> temporary panes
+[[keys.command]]
+key = "prefix+g"
+type = "pane"
+command = "lazygit"
+
+[[keys.command]]
+key = "prefix+alt+e"
+type = "pane"
+command = "nvim"
+
+[ui]
+show_agent_labels_on_pane_borders = false
+agent_panel_sort = "spaces"
+
+[ui.toast]
+delivery = "terminal"
