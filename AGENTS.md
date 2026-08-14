@@ -18,6 +18,10 @@ Personal website: https://oskarkwasniewski.dev
 - In all interactions and commit messages, be extremely concise and sacrifice
   grammar for the same of concision.
 
+- Never use em dashes (—) or en dashes (–). Use a plain hyphen (-) instead.
+  Applies everywhere: chat replies, code comments, commit messages, docs,
+  product copy. Leave existing dashes in code you did not write alone.
+
 ## Git
 
 When creating branches, prefix them with `oskar/` to indicate they came from me.

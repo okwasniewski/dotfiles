@@ -15,3 +15,5 @@ result
 node_modules/
 .config/herdr/*
 !.config/herdr/config.toml
+!.config/herdr/projects.conf
+!.config/herdr/ws.conf

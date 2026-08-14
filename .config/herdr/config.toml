@@ -7,11 +7,19 @@ name = "catppuccin"
 panel_bg = "#181826"
 accent = "#7DB6FF"
 
+[terminal]
+# Login shells so /usr/libexec/path_helper and Homebrew PATH setup run in
+# every new pane, matching what tmux gave us.
+shell_mode = "login"
+
+[worktrees]
+directory = "~/.herdr/worktrees"
+
 [keys]
 # tmux muscle memory: prefix was ctrl+s
 prefix = "ctrl+s"
 
-# tmux: bind h split -h (right), bind v split -v (down)
+# tmux: bind h split -h (pane to the right), bind v split -v (pane below)
 split_vertical = ["prefix+h"]
 split_horizontal = ["prefix+v", "prefix+minus"]
 
@@ -26,23 +34,62 @@ focus_pane_right = ["alt+l"]
 previous_tab = ["prefix+p", "alt+["]
 next_tab = ["prefix+n", "alt+]"]
 
-# goto picker on prefix+k (old sesh binding); frees prefix+g for lazygit
-goto = "prefix+k"
+# Workspaces replace tmux sessions, so give them cheap sequential access too.
+# alt+hjkl = panes, alt+[/] = tabs, alt+shift+j/k = spaces (stacked in sidebar).
+previous_workspace = ["alt+shift+k"]
+next_workspace = ["alt+shift+j"]
+switch_workspace = "prefix+shift+1..9"
 
-# tmux popups -> temporary panes
+# prefix+k is the old sesh binding and now opens hproj, so goto moves aside.
+goto = "prefix+space"
+
+# prefix+e was the tmux nvim popup; scrollback editing shifts up a key.
+edit_scrollback = "prefix+shift+e"
+
+# tmux popups -> herdr popups (session-modal, layout untouched).
+# Command bindings run through `/bin/sh -c`, which does not pick up the PATH a
+# login shell builds, so each one goes through `zsh -lc`. That matters when the
+# server is started by launchd rather than from an interactive shell.
 [[keys.command]]
 key = "prefix+g"
-type = "pane"
-command = "lazygit"
+type = "popup"
+command = "zsh -lc lazygit"
+width = "90%"
+height = "85%"
 
 [[keys.command]]
-key = "prefix+alt+e"
-type = "pane"
-command = "nvim"
+key = "prefix+e"
+type = "popup"
+command = "zsh -lc nvim"
+width = "90%"
+height = "85%"
+
+# sesh picker -> hproj
+[[keys.command]]
+key = "prefix+k"
+type = "popup"
+command = "zsh -lc hproj"
+width = "70%"
+height = "60%"
 
 [ui]
 show_agent_labels_on_pane_borders = false
 agent_panel_sort = "spaces"
 
+# The tmux status line is gone; put branch and dirty state on the space rows.
+[ui.sidebar.spaces]
+rows = [["state_icon", "workspace"], ["branch", "git_status"]]
+
 [ui.toast]
 delivery = "terminal"
+
+[ui.sound]
+enabled = true
+
+[session]
+resume_agents_on_restore = true
+
+[experimental]
+# Keep pane scrollback across server restarts; valuable when the mac mini
+# server outlives the client that was attached to it.
+pane_history = true
