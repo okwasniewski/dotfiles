@@ -26,7 +26,6 @@ in
     taps = [
       "cameroncooke/axe"
       "oven-sh/bun"
-      "raine/workmux"
       "steipete/tap"
       "xcodesorg/made"
     ];
@@ -47,7 +46,6 @@ in
       "swiftformat"
       "mole"
       "tmux"
-      "raine/workmux/workmux"
       "mpv"
       "oven-sh/bun/bun"
       "xcode-build-server"

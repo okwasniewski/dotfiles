@@ -18,6 +18,7 @@
     jq
     lazydocker
     lazygit
+    mosh
     neovim
     ninja
     nixd
