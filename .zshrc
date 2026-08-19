@@ -1,23 +1,5 @@
-# PATH
-export PATH=/opt/homebrew/bin:$PATH
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-
-# Android
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/tools
-
-# Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Environment
-export LANG=en_US.UTF-8
-export REACT_EDITOR=nvim
-export EDITOR=nvim
-export VISUAL=nvim
-export XDG_CONFIG_HOME="$HOME/.config"
+# Interactive shell config. PATH and exported environment live in .zprofile
+# so non-interactive login shells (herdr command bindings) get them too.
 
 # Aliases
 alias ls="eza -a --no-user --no-time"
@@ -28,6 +10,10 @@ alias :q="exit"
 alias vim="nvim"
 alias oc="OPENCODE_EXPERIMENTAL_PLAN_MODE=1 opencode"
 
+# Agents skip permission prompts (interactive shells only, scripts unaffected)
+alias claude="claude --dangerously-skip-permissions"
+alias codex="codex --dangerously-bypass-approvals-and-sandbox"
+
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
   yazi "$@" --cwd-file="$tmp"
@@ -36,7 +22,6 @@ function y() {
   fi
   rm -f -- "$tmp"
 }
-alias clear="clear && tmux clear-history"
 
 ## React Native Aliases
 alias pod-install-new="bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install"
@@ -44,25 +29,6 @@ alias pod-install-old="bundle install && bundle exec pod install"
 
 # Setup aliases for nix
 alias nix-rebuild="sudo darwin-rebuild switch --flake $HOME/.nix#default"
-
-# Workmux
-function ws() {
-  case "$1" in
-    ""|help|--help|-h|add|list|open|close|remove|merge|path|sidebar|sync-files|dashboard|last-done|last-agent|docs|init|update|sandbox|completions)
-      command workmux "$@"
-      ;;
-    *)
-      command workmux add -o "$@"
-      ;;
-  esac
-}
-
-# Load zsh secrets
-if [ -f "$HOME/.zsh_secrets" ]; then
-  set -a
-  source "$HOME/.zsh_secrets"
-  set +a
-fi
 
 set -o vi
 source <(fzf --zsh)
@@ -114,8 +80,14 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 eval "$(starship init zsh)"
 
-if command -v workmux >/dev/null 2>&1; then eval "$(workmux completions zsh)"; fi
-
 # Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
+if command -v herdr >/dev/null 2>&1; then eval "$(herdr completion zsh)"; fi
+
+source /Users/okwasniewski/.daytona.completion_script.zsh
+
+# >>> grok installer >>> (PATH moved to .zprofile)
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
