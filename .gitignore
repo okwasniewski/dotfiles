@@ -15,5 +15,18 @@ result
 node_modules/
 .config/herdr/*
 !.config/herdr/config.toml
-!.config/herdr/projects.conf
-!.config/herdr/ws.conf
+
+# Tool state, caches, credentials - not config
+.config/.android/
+.config/1Password/
+.config/amp/
+.config/btop/
+.config/homebrew/
+.config/hunk/
+.config/neonctl/
+.config/raycast-x/
+.config/stripe/
+.config/uv/
+.config/workmux/
+.config/opencode/service.json
+.agents/skills/terminal-browser
