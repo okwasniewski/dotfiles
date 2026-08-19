@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Keeps a herdr server running on a headless box (the mac mini) so agents
+  survive reboots and logouts are not needed to reach them.
+
+  Install:
+    ln -sfn ~/dotfiles/launchd/dev.herdr.server.plist \
+      ~/Library/LaunchAgents/dev.herdr.server.plist
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.herdr.server.plist
+
+  launchd gives an agent almost no PATH, so the server is started through a
+  login shell to pick up ~/.zprofile. Pane shells do the same, which is why
+  agents and popup commands resolve correctly here.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>dev.herdr.server</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>-lc</string>
+    <string>exec herdr server</string>
+  </array>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>ProcessType</key>
+  <string>Interactive</string>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/herdr-server.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/tmp/herdr-server.err.log</string>
+</dict>
+</plist>
