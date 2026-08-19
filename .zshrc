@@ -5,7 +5,6 @@
 alias ls="eza -a --no-user --no-time"
 alias cat="bat"
 alias lg="lazygit"
-alias compress-video="sh $HOME/scripts/compress-video.sh"
 alias :q="exit"
 alias vim="nvim"
 alias oc="OPENCODE_EXPERIMENTAL_PLAN_MODE=1 opencode"
@@ -31,7 +30,7 @@ alias pod-install-old="bundle install && bundle exec pod install"
 alias nix-rebuild="sudo darwin-rebuild switch --flake $HOME/.nix#default"
 
 set -o vi
-source <(fzf --zsh)
+command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -51,8 +50,14 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-# Load completions
-autoload -Uz compinit && compinit
+# Load completions, full compinit only when the dump is older than 24h
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
 zinit cdreplay -q
 
@@ -83,11 +88,14 @@ eval "$(starship init zsh)"
 # Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-if command -v herdr >/dev/null 2>&1; then eval "$(herdr completion zsh)"; fi
+# Herdr completion, cached until the binary changes
+if command -v herdr >/dev/null 2>&1; then
+  _herdr_comp="${XDG_CACHE_HOME:-$HOME/.cache}/herdr-completion.zsh"
+  if [ ! -f "$_herdr_comp" ] || [ "$(command -v herdr)" -nt "$_herdr_comp" ]; then
+    mkdir -p "${_herdr_comp:h}" && herdr completion zsh > "$_herdr_comp"
+  fi
+  source "$_herdr_comp"
+  unset _herdr_comp
+fi
 
-source /Users/okwasniewski/.daytona.completion_script.zsh
-
-# >>> grok installer >>> (PATH moved to .zprofile)
-fpath=(~/.grok/completions/zsh $fpath)
-autoload -Uz compinit && compinit -C
-# <<< grok installer <<<
+[ -f "$HOME/.daytona.completion_script.zsh" ] && source "$HOME/.daytona.completion_script.zsh"
