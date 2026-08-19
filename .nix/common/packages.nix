@@ -25,7 +25,6 @@
     nmap
     nodejs
     ripgrep
-    ruby
     scrcpy
     sesh
     starship
@@ -35,7 +34,5 @@
     yarn
     zoxide
     yazi
-    zsh-autosuggestions
-    zsh-syntax-highlighting
   ];
 }
