@@ -1,0 +1,14 @@
+{
+  "theme": {
+    "name": "catppuccin"
+  },
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "hide",
+    "scrollbar": false,
+    "thinking": "show"
+  },
+  "animations": true
+}
