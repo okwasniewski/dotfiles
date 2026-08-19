@@ -14,6 +14,8 @@
   puh = push -u origin head
   wip = commit -am WIP --no-verify
   amend = commit --amend --no-edit
+  lo = log --oneline
+  tree = log --oneline --graph --decorate --all
 [user]
   name = Oskar Kwaśniewski
   email = oskar@okwasniewski.com
@@ -27,8 +29,6 @@
 
 [interactive]
   diffFilter = delta --color-only
-[add.interactive]
-  useBuiltin = false # required for git 2.37.0
 
 [delta]
   navigate = true    # use n and N to move between diff sections
@@ -52,10 +52,6 @@
 
 [difftool]
   prompt = false
-
-[alias]
-  lo = log --oneline
-  tree = log --oneline --graph --decorate --all
 
 [gpg]
   program = /opt/homebrew/bin/gpg
