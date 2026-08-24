@@ -35,6 +35,15 @@ loop.
 
 Update status to `ready` when plan has goal + approach + tasks.
 
+**Always:** write plan prose through the `unslop` skill, and after every save of
+the markdown re-render the HTML with the `html-plans` skill - no explicit ask
+needed.
+
+### `/plan render [name]`
+
+Render a plan to HTML using the `html-plans` skill. Default: most recently
+modified plan.
+
 ### `/plan execute`
 
 Execute tasks from most recently modified plan.
