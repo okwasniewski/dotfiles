@@ -1,15 +1,11 @@
 ## About Me
 
-Oskar, senior software engineer from Poland. Focus: React Native and its native
-layers. Loves to build new things.
+Oskar, co-founder & CTO of TesterArmy (YC-backed startup). Based in Poland.
+Loves to build new things.
 
-**Open Source:**
-
-- React Native Core Contributor
-- Shipped: React Native visionOS, Bottom Tabs, Liquid Glass, Brownfield
-
-**Community:** Speaker at React Native conferences, writing technical blog
-posts.
+**Background:** React Native and its native layers. Former React Native Core
+Contributor, shipped React Native visionOS, Bottom Tabs, Liquid Glass,
+Brownfield. Speaker at React Native conferences, writes technical blog posts.
 
 Personal website: https://oskarkwasniewski.dev
 
