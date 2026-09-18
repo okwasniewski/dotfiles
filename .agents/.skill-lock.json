@@ -18,6 +18,15 @@
       "skillFolderHash": "4ca6cac445a6aa45eb3b8462f66cd595d0c01364",
       "installedAt": "2026-07-12T08:29:28.643Z",
       "updatedAt": "2026-07-12T08:29:28.643Z"
+    },
+    "diffs": {
+      "source": "pierrecomputer/pierre",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pierrecomputer/pierre.git",
+      "skillPath": "skills/diffs/SKILL.md",
+      "skillFolderHash": "5d955c74d22931704ed95c9f88f9f2273ee0080f",
+      "installedAt": "2026-08-26T14:05:59.751Z",
+      "updatedAt": "2026-08-26T14:05:59.751Z"
     }
   },
   "dismissed": {
