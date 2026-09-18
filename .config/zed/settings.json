@@ -36,9 +36,9 @@
   },
   "proxy": "",
   "context_servers": {
-    "testerarmy": {
+    "executor": {
       "enabled": true,
-      "url": "https://tester.army/mcp"
+      "url": "https://executor.oskar.homes/mcp"
     }
   },
   "project_panel": {

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "executor": {
+      "type": "http",
+      "url": "https://executor.oskar.homes/mcp",
+      "tools": [
+        "*"
+      ]
+    }
+  }
+}
