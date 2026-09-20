@@ -57,9 +57,14 @@ Official Fastmail MCP via executor: `fastmail_mcp.user.personalFastmailMcp` (rea
 - Dedup by message `id` in `fastmail_processed` in the state file.
 - Calendar context: `list_calendars` + `search_events({ after, before })`. Use events as planning context when scheduling Things tasks (avoid days with travel, galas, all-day blocks like "[No Work Time]"). Calendar events are never tasks by themselves.
 
-### Google (TesterArmy mail + calendar)
+### Superhuman (TesterArmy mail + calendar)
 
-Official Google MCPs via executor: `gmail_mcp` and `google_calendar_mcp` (pending OAuth setup; skip this source until a connection exists). Same rules as Fastmail: flagged/starred mail to Things, calendar as planning context.
+Superhuman MCP via executor: `superhuman_mail.user.oskarSuperhuman` (account oskar@tester.army, sits on top of Google Workspace).
+
+- Mail input: starred/flagged threads and threads with label `INBOX` where someone waits on Oskar (receipts required, client asks). Route to Things with subject, sender, and thread link in notes. Dedup by `thread_id` in `superhuman_processed`.
+- Calendar context: `query_email_and_calendar` / `get_availability` for the work calendar when scheduling Things tasks.
+- Send/draft/trash tools exist: never send, trash, or unsubscribe during sync. Drafting only when the user asks.
+- `gmail_mcp` and `google_calendar_mcp` integrations exist as a fallback (need GCP OAuth client, unfinished).
 
 ### inFakt (invoicing and taxes)
 
