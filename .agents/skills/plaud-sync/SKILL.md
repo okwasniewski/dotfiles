@@ -1,11 +1,22 @@
 ---
 name: plaud-sync
-description: Sync new Plaud recordings into Bear, Things, and Linear. Use for /plaud-sync or when the user asks to process, triage, or route Plaud voice notes.
+description: Sync new Plaud recordings into Bear, Things, Linear, and Notion. Use for /plaud-sync or when the user asks to process, triage, or route Plaud voice notes.
 ---
 
 # Plaud sync
 
-Pull new Plaud recordings, classify each transcript, route content to Bear, Things, or a Linear proposal. Report what went where.
+Pull new Plaud recordings, classify each transcript, route content to Bear, Things, Linear, or Notion. Report what went where.
+
+## Targets and defaults
+
+```
+things: create directly
+bear:   create directly
+linear: propose only (no default team set yet)
+notion: propose only (no default database or page set yet)
+```
+
+When the user sets a default (Linear team, Notion database), record it here in place of "propose only" and switch that target to direct creation.
 
 ## State
 
@@ -41,6 +52,7 @@ Read the whole transcript first. One recording can route to several targets: a b
 - Tasks: the speaker asks to save or remember something, plans the day, lists todos ("zapisz", "musze", "przypomnij", "kup"). Route to Things.
 - Book notes: the speaker says it is a note from a book, or the recording name has a `[BookTitle]` prefix. Route to a Bear book note.
 - Work items: bugs, features, TesterArmy or project work meant for a team. Route to a Linear proposal in the report.
+- Company documentation: meeting notes, decisions, process docs meant for the TesterArmy workspace. Route to a Notion proposal in the report.
 - Anything else with real content: Bear inbox note tagged `status/to-process`.
 - Garbage (test recordings, under 10 meaningful words): skip, mark processed with `routed: ["skipped"]`.
 - Unsure: Bear note tagged `status/to-review`, flag it in the report.
@@ -67,11 +79,15 @@ Load the `bearcli` skill first.
 
 ### Linear
 
-Never create issues automatically. Put a proposal in the report: suggested title, one-line body, which team. The user creates it or asks to.
+Never create issues automatically while set to "propose only". Put a proposal in the report: suggested title, one-line body, which team. The user creates it or asks to.
+
+### Notion
+
+Company Notion via executor MCP (`notion_com_openapi`). While set to "propose only", put a proposal in the report: suggested page title, one-paragraph body, suggested location. The user creates it or asks to.
 
 ## Report
 
-End with one line per recording: name, classification, destination. Then failures and Linear proposals. Keep it short.
+End with one line per recording: name, classification, destination. Then failures and Linear or Notion proposals. Keep it short.
 
 ## Voice conventions
 
@@ -80,3 +96,4 @@ Optional markers that make classification deterministic:
 - Recording name prefix `[BookTitle]` routes to that book's Bear note.
 - "zapisz task ..." routes to Things.
 - "do Lineara ..." routes to a Linear proposal.
+- "do Notion ..." routes to a Notion proposal.
