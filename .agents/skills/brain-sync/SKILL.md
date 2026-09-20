@@ -48,7 +48,7 @@ Run the cheap listing calls first, fetch details only for new items.
 1. Fetch via executor MCP `slack_com.<connection>.slack_search_public_and_private` with `query: "is:saved"`.
 2. Dedup by `message_ts` against `slack_processed`.
 3. Skip: empty bot messages, threads already resolved in context, pure-reference saves.
-4. After routing, add a white_check_mark reaction to the message (`slack_add_reaction`) as a "handled" marker. Unsaving is not possible via this integration, the user clears Later manually.
+4. When the user confirms an item is done, add a reaction: `slack_add_reaction({ channel_id, message_ts, emoji: "white_check_mark" })` (the parameter is `emoji`, not `emoji_name`). Routing alone does not get a reaction, done does. Unsaving is not possible via this integration, the user clears Later manually.
 
 ### GitHub
 
