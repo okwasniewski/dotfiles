@@ -49,6 +49,18 @@ Run the cheap listing calls first, fetch details only for new items.
 3. Skip: empty bot messages, threads already resolved in context, pure-reference saves.
 4. When the user confirms an item is done, add a reaction: `slack_add_reaction({ channel_id, message_ts, emoji: "white_check_mark" })` (the parameter is `emoji`, not `emoji_name`). Routing alone does not get a reaction, done does. Unsaving is not possible via this integration, the user clears Later manually.
 
+### Fastmail (personal mail + calendar)
+
+Official Fastmail MCP via executor: `fastmail_mcp.user.personalFastmailMcp` (read-only token).
+
+- Mail input: `search_email({ query: "in:inbox is:flagged" })` - flagged messages are the user's explicit "handle this" marker, route them to Things with subject, sender, and receivedAt in notes. Do not triage unread mail, too noisy.
+- Dedup by message `id` in `fastmail_processed` in the state file.
+- Calendar context: `list_calendars` + `search_events({ after, before })`. Use events as planning context when scheduling Things tasks (avoid days with travel, galas, all-day blocks like "[No Work Time]"). Calendar events are never tasks by themselves.
+
+### Google (TesterArmy mail + calendar)
+
+Official Google MCPs via executor: `gmail_mcp` and `google_calendar_mcp` (pending OAuth setup; skip this source until a connection exists). Same rules as Fastmail: flagged/starred mail to Things, calendar as planning context.
+
 ### Bear inbox
 
 1. `bearcli search '#status/to-process' --format json` (load the `bearcli` skill).
