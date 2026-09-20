@@ -1,6 +1,6 @@
 ---
 name: brain-sync
-description: Sync inputs (Plaud recordings, Slack saved messages, GitHub, Bear inbox, Linear) into the second brain - Things tasks and Bear notes. Use for /brain-sync or when the user asks to process, triage, or route notes, voice memos, or saved items.
+description: Sync inputs (Plaud recordings, Slack saved messages, Bear inbox, Linear) into the second brain - Things tasks and Bear notes. Use for /brain-sync or when the user asks to process, triage, or route notes, voice memos, or saved items.
 ---
 
 # Brain sync
@@ -27,8 +27,7 @@ State lives in `~/.local/state/brain-sync/state.json`. Create the directory on f
   "last_sync": "2026-09-20T12:00:00Z",
   "processed": { "<plaud_file_id>": { "name": "...", "at": "...", "routed": ["things", "bear:<note title>"] } },
   "failed": { "<plaud_file_id>": { "attempts": 1, "last_error": "404" } },
-  "slack_processed": { "<message_ts>": { "summary": "...", "routed": "things" } },
-  "github_processed": { "<notification_or_pr_id>": { "summary": "...", "routed": "things" } }
+  "slack_processed": { "<message_ts>": { "summary": "...", "routed": "things" } }
 }
 ```
 
@@ -49,12 +48,6 @@ Run the cheap listing calls first, fetch details only for new items.
 2. Dedup by `message_ts` against `slack_processed`.
 3. Skip: empty bot messages, threads already resolved in context, pure-reference saves.
 4. When the user confirms an item is done, add a reaction: `slack_add_reaction({ channel_id, message_ts, emoji: "white_check_mark" })` (the parameter is `emoji`, not `emoji_name`). Routing alone does not get a reaction, done does. Unsaving is not possible via this integration, the user clears Later manually.
-
-### GitHub
-
-1. `gh api notifications` plus `gh pr status` and review requests (`gh search prs --review-requested=@me --state=open`).
-2. Dedup by notification/PR id in `github_processed`.
-3. Route review requests and failing CI on own PRs to Things. Skip bot noise and already-merged threads.
 
 ### Bear inbox
 
