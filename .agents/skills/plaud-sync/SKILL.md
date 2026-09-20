@@ -89,6 +89,16 @@ Company Notion via executor MCP (`notion_com_openapi`). While set to "propose on
 
 End with one line per recording: name, classification, destination. Then failures and Linear or Notion proposals. Keep it short.
 
+## Slack saved messages
+
+Second source besides Plaud. Fetch via executor MCP: `slack_com.<connection>.slack_search_public_and_private` with `query: "is:saved"`.
+
+- Track handled messages in the state file under `slack_processed` keyed by `message_ts`.
+- Skip: empty bot messages, threads already resolved in context (someone replied with a fix), messages the user only saved as reference.
+- Actionable saved messages become Things tasks: verb-first Polish title, permalink plus one-line context in `--notes`, `--when` based on urgency (client-facing goes earliest).
+- When a saved message matches an existing task, append the permalink to that task with `things note --append` instead of creating a duplicate.
+- Unsure whether still relevant: list it in the report instead of creating a task.
+
 ## Voice conventions
 
 Optional markers that make classification deterministic:
