@@ -61,6 +61,14 @@ Official Fastmail MCP via executor: `fastmail_mcp.user.personalFastmailMcp` (rea
 
 Official Google MCPs via executor: `gmail_mcp` and `google_calendar_mcp` (pending OAuth setup; skip this source until a connection exists). Same rules as Fastmail: flagged/starred mail to Things, calendar as planning context.
 
+### inFakt (invoicing and taxes)
+
+Official inFakt MCP via executor: `infakt_mcp.user.oskarOkwasniewskiCom`. Tools take `{ params: {...} }`; invoice list requires `invoice_type` (e.g. "vat").
+
+- HARD RULE: never call any `*_create`, `*_mark_paid`, or corrective tools unless the user explicitly asks in the current conversation. Read-only during sync.
+- Input: upcoming tax and ZUS deadlines (`infakt_get_income_taxes_list`, `infakt_get_insurance_fees_list`, `infakt_get_vat_eu_taxes_list`) - unpaid entries with a due date become Things tasks with that deadline.
+- Dedup by entry id in `infakt_processed` in the state file.
+
 ### Bear inbox
 
 1. `bearcli search '#status/to-process' --format json` (load the `bearcli` skill).
