@@ -99,3 +99,5 @@ if command -v herdr >/dev/null 2>&1; then
 fi
 
 [ -f "$HOME/.daytona.completion_script.zsh" ] && source "$HOME/.daytona.completion_script.zsh"
+
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
