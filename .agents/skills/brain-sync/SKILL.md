@@ -5,7 +5,17 @@ description: Sync inputs (Plaud recordings, Slack saved messages, Bear inbox, Li
 
 # Brain sync
 
-Pull new items from every input, classify, route into the second brain (Things + Bear), propose Linear/Notion items. Report what went where.
+Pull new items from every input, classify, PROPOSE the routing, and apply only after the user approves. Never create or modify anything before approval.
+
+## Flow: propose, confirm, apply
+
+1. Gather and classify everything first (read-only calls only).
+2. Present the full plan as a compact table: source | item | action | destination. Include items classified as skip with a one-word reason, so the user sees what gets dropped.
+3. Wait for approval. The user can approve all, veto single rows ("bez 3 i 5"), or reclassify ("2 do Bear, nie Things").
+4. Apply only the approved rows. Update the state file for every row, including vetoed ones (mark them `routed: ["vetoed"]` so they never come back).
+5. Report what was actually done.
+
+The confirmation gate is the point of this skill: the user prefers reviewing over full automation to keep slop out of Things and Bear. Do not batch-create silently even when everything looks obvious.
 
 ## Targets and defaults
 
@@ -127,7 +137,7 @@ Company Notion via executor MCP (`notion_com_openapi`). While set to "propose on
 
 ## Report
 
-End with one line per item: source, name, classification, destination. Then failures and Linear or Notion proposals. Keep it short.
+After applying: one line per item: source, name, destination (or vetoed/failed). Keep it short. Linear and Notion items stay proposals inside the plan table; creating them needs its own explicit ask.
 
 ## Voice conventions
 
