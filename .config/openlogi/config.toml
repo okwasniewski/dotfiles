@@ -128,7 +128,7 @@ dpi_gestures = true
 Back = "BrowserBack"
 Forward = "BrowserForward"
 MiddleClick = "MiddleClick"
-DpiToggle = "ShowActionsRing"
+DpiToggle = "CycleDpiPresets"
 # Willow Voice dictation, hold to talk. Second Willow hotkey next to Fn.
 GestureButton = { HoldShortcut = "Ctrl+Option+Cmd+D" }
 
