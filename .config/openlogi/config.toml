@@ -125,11 +125,10 @@ dpi_gestures = true
 # Modifiers: cmd|command, ctrl|control, alt|option, shift. Keys: a-z 0-9 f1-f20
 # enter esc backspace tab space home end pageup pagedown left right up down
 # and punctuation - = [ ] \ ; ' ` , . /
-Back = { CustomShortcut = "Cmd+Shift+[" }
-Forward = { CustomShortcut = "Cmd+Shift+]" }
-MiddleClick = "ShowActionsRing"
-# Tap = screenshot to clipboard, hold 500ms = Mission Control.
-DpiToggle = { short = "CaptureRegion", long = "MissionControl" }
+Back = "BrowserBack"
+Forward = "BrowserForward"
+MiddleClick = "MiddleClick"
+DpiToggle = "ShowActionsRing"
 # Willow Voice dictation, hold to talk. Second Willow hotkey next to Fn.
 GestureButton = { HoldShortcut = "Ctrl+Option+Cmd+D" }
 
