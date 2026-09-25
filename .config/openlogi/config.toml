@@ -50,6 +50,9 @@ model_ids = [
 ]
 extended_model_id = 2
 
+[devices."serial:2538ap69vu58"]
+dpi_presets = [800, 1600, 3200]
+
 [devices."serial:2538ap69vu58".identity]
 display_name = "MX Master 4"
 codename = "MX Master 4"
