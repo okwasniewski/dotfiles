@@ -1,0 +1,164 @@
+schema_version = 7
+selected_device = "receiver:77fd2f54924b7037:slot:2"
+
+[app_settings]
+launch_at_login = true
+check_for_updates = true
+auto_install_updates = false
+update_prompt_seen = true
+show_in_menu_bar = false
+capture_mouse_events = true
+app_icon = "openlogi"
+auto_download_assets = true
+asset_source = "automatic"
+thumbwheel_sensitivity = 14
+appearance = "system"
+smooth_scroll = false
+vertical_scroll_sensitivity = 14
+ui_scale = "normal"
+device_view_mode = "grid"
+mouse_profile_target = "pointer"
+
+[devices]
+
+[devices."receiver:77fd2f54924b7037:slot:2"]
+thumbwheel_sensitivity = 7
+
+[devices."camera:046d:0942:serial:2428cfa142c8".camera_controls]
+power_line_frequency = 2
+low_light_compensation = 1
+
+[devices."receiver:77fd2f54924b7037:slot:2".identity]
+display_name = "MX Master 4"
+codename = "MX Master 4"
+kind = "mouse"
+
+[devices."camera:046d:0942:serial:2428cfa142c8"]
+
+[devices."receiver:77fd2f54924b7037:slot:2".identity.model_info]
+entity_count = 4
+unit_id = [
+    0,
+    0,
+    0,
+    0,
+]
+model_ids = [
+    45122,
+    0,
+    0,
+]
+extended_model_id = 2
+
+[devices."serial:2538ap69vu58".identity]
+display_name = "MX Master 4"
+codename = "MX Master 4"
+kind = "mouse"
+
+[devices."receiver:77fd2f54924b7037:slot:2".identity.model_info.transports]
+usb = false
+equad = false
+btle = true
+bluetooth = false
+
+[devices."serial:2538ap69vu58".identity.model_info]
+entity_count = 4
+unit_id = [
+    0,
+    0,
+    0,
+    0,
+]
+model_ids = [
+    45122,
+    0,
+    0,
+]
+extended_model_id = 2
+
+[devices."receiver:77fd2f54924b7037:slot:2".bindings]
+GestureButton = "MissionControl"
+
+[devices."serial:2538ap69vu58".identity.model_info.transports]
+usb = false
+equad = false
+btle = true
+bluetooth = false
+
+[devices."receiver:77fd2f54924b7037:slot:2".smartshift]
+mode = "ratchet"
+auto_disengage = 12
+tunable_torque = 75
+
+[devices."serial:2538ap69vu58".identity.capabilities]
+buttons = true
+pointer = true
+lighting = false
+scroll_inversion = true
+hires_wheel = true
+thumbwheel = true
+haptic_feedback = true
+haptic_panel = true
+dpi_gestures = true
+
+[devices."receiver:77fd2f54924b7037:slot:2".disabled_gestures.GestureButton]
+Up = "MissionControl"
+Down = "ShowDesktop"
+Left = "PrevTab"
+Right = "NextTab"
+Click = "AppExpose"
+
+[devices."serial:2538ap69vu58".links."direct:046d:b042".capabilities]
+buttons = true
+pointer = true
+lighting = false
+scroll_inversion = true
+hires_wheel = true
+thumbwheel = true
+haptic_feedback = true
+haptic_panel = true
+dpi_gestures = true
+
+[devices."serial:2538ap69vu58".bindings]
+# Any action may be a plain variant ("MissionControl") or a payload table.
+# CustomShortcut: instant key-down/up. HoldShortcut: held while button is down.
+# Modifiers: cmd|command, ctrl|control, alt|option, shift. Keys: a-z 0-9 f1-f20
+# enter esc backspace tab space home end pageup pagedown left right up down
+# and punctuation - = [ ] \ ; ' ` , . /
+Back = { CustomShortcut = "Cmd+Shift+[" }
+Forward = { CustomShortcut = "Cmd+Shift+]" }
+MiddleClick = "ShowActionsRing"
+# Tap = screenshot to clipboard, hold 500ms = Mission Control.
+DpiToggle = { short = "CaptureRegion", long = "MissionControl" }
+# Willow Voice dictation, hold to talk. Second Willow hotkey next to Fn.
+GestureButton = { HoldShortcut = "Ctrl+Option+Cmd+D" }
+
+[devices."serial:2538ap69vu58".action_ring]
+enabled = true
+haptics = true
+
+[devices."serial:2538ap69vu58".action_ring.default.slots]
+Top = { action = { OpenApplication = { path = "/Applications/Slack.app", display_name = "Slack" } }, icon = "Bell", label = "Slack" }
+Right = { action = { OpenApplication = { path = "/Applications/T3 Code (Nightly).app", display_name = "T3 Code" } }, icon = "Keyboard", label = "T3 Code" }
+Bottom = { action = { OpenApplication = { path = "/Applications/Ghostty.app", display_name = "Ghostty" } }, icon = "Terminal", label = "Terminal" }
+Left = { action = { OpenApplication = { path = "/Applications/Google Chrome.app", display_name = "Chrome" } }, icon = "Globe", label = "Browser" }
+
+[devices."serial:2538ap69vu58".disabled_gestures.GestureButton]
+Up = "MissionControl"
+Down = "ShowDesktop"
+Left = "PrevTab"
+Right = "NextTab"
+Click = "AppExpose"
+
+[keyboard]
+
+[devices."receiver:77fd2f54924b7037:slot:2".identity.capabilities]
+buttons = true
+pointer = true
+lighting = false
+scroll_inversion = true
+hires_wheel = true
+thumbwheel = true
+haptic_feedback = true
+haptic_panel = true
+dpi_gestures = false
