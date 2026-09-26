@@ -27,7 +27,8 @@ alias pod-install-new="bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod 
 alias pod-install-old="bundle install && bundle exec pod install"
 
 # Setup aliases for nix
-alias nix-rebuild="sudo darwin-rebuild switch --flake $HOME/.nix#default"
+# DARWIN_HOST picks the flake host, set it in ~/.zshrc.local on machines other than the laptop
+alias nix-rebuild='sudo darwin-rebuild switch --flake "$HOME/.nix#${DARWIN_HOST:-laptop}"'
 
 set -o vi
 command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)

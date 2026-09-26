@@ -176,48 +176,46 @@ agent is waiting on you instead of walking panes.
 Goal: agents run on the mini, you attach from the laptop and they keep working
 when you close the lid.
 
-### 1. Prepare the mini
-
-Enable Remote Login (System Settings > General > Sharing > Remote Login), then
-stop it sleeping:
+### 1. Bootstrap the mini
 
 ```sh
-sudo pmset -a sleep 0 disablesleep 1
+~/dotfiles/scripts/bootstrap-macmini.sh
 ```
 
-Reach it over Tailscale rather than port forwarding. Both machines already have
-the `tailscale-app` cask.
+Idempotent, re-run any time. It installs Lix, applies the `macmini` flake host,
+stows dotfiles, installs herdr, sets up a local SSH key and turns FileVault off
+so the box comes back unattended after a reboot. It prints the manual steps
+left at the end.
+
+The `macmini` host (`.nix/hosts/macmini`) owns the headless bits: never sleep,
+restart after power loss, Remote Login, Screen Sharing, and two launchd agents:
+
+- `dev.herdr.server`: keeps a herdr server up across reboots
+- `dev.oskar.dotfiles-pull`: `git pull --ff-only` daily at 09:00
+
+Reach it over Tailscale rather than port forwarding.
 
 ### 2. Same dotfiles on both machines
 
-Clone this repo on the mini and rebuild. This matters more than it looks: herdr
-does not send local custom command keybindings to a remote server, so
+herdr does not send local custom command keybindings to a remote server, so
 `Ctrl-s g/e/k` only work if the config, `ws` and `hproj` exist on the mini.
+After nix changes, rebuild on each machine:
 
 ```sh
 nix-rebuild
 ```
 
-### 3. Install herdr on the mini
+`nix-rebuild` targets `$DARWIN_HOST` (default `laptop`). The bootstrap script
+sets `DARWIN_HOST=macmini` in the mini's `~/.zshrc.local`.
+
+### 3. herdr server
+
+Both launchd agents start through `zsh -lc` so they inherit `~/.zprofile`.
+launchd gives agents almost no PATH otherwise.
 
 ```sh
-curl -fsSL https://herdr.dev/install.sh | sh
-```
-
-`herdr --remote` can install it for you, but doing it explicitly avoids the
-interactive prompt and the "`~/.local/bin` is not on PATH" warning.
-
-### 4. Keep the server up across reboots
-
-```sh
-ln -sfn ~/dotfiles/launchd/dev.herdr.server.plist \
-  ~/Library/LaunchAgents/dev.herdr.server.plist
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.herdr.server.plist
 herdr status server
 ```
-
-The agent starts the server through `zsh -lc` so it inherits `~/.zprofile`.
-launchd gives agents almost no PATH otherwise.
 
 To update herdr on the mini, take the agent down first, or `KeepAlive` will
 restart the old server before the installer can replace it:
@@ -228,17 +226,17 @@ herdr update
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.herdr.server.plist
 ```
 
-### 5. SSH config on the laptop
+### 4. SSH config on the laptop
 
 ```
 Host mini
-  HostName mini.your-tailnet.ts.net
-  User okwasniewski
+  HostName oskars-mac-mini
+  User bigmac
   ServerAliveInterval 30
   ServerAliveCountMax 6
 ```
 
-### 6. Attach
+### 5. Attach
 
 ```sh
 herdr --remote mini

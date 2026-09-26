@@ -32,3 +32,4 @@ node_modules/
 .config/workmux/
 .config/opencode/service.json
 .agents/skills/terminal-browser
+.config/git/local

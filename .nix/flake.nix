@@ -12,11 +12,28 @@
       nix-darwin,
       ...
     }:
+    let
+      mkDarwin =
+        { host, user }:
+        nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs self user; };
+          modules = [
+            ./common/darwin.nix
+            ./hosts/${host}/configuration.nix
+          ];
+        };
+    in
     {
-      darwinConfigurations.default = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = { inherit inputs self; };
-        modules = [ ./hosts/darwin/configuration.nix ];
+      darwinConfigurations = {
+        laptop = mkDarwin {
+          host = "laptop";
+          user = "okwasniewski";
+        };
+        macmini = mkDarwin {
+          host = "macmini";
+          user = "bigmac";
+        };
       };
     };
 }

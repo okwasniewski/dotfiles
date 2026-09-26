@@ -1,18 +1,19 @@
-{ self, pkgs, ... }:
+{
+  self,
+  pkgs,
+  user,
+  ...
+}:
 
-let
-  user = "okwasniewski";
-in
 {
   imports = [
-    ../../common/nix.nix
-    ../../common/packages.nix
+    ./nix.nix
+    ./packages.nix
   ];
 
   environment.systemPackages = with pkgs; [
     pam-reattach
     xcbeautify
-    yt-dlp
   ];
 
   system.primaryUser = user;
@@ -24,19 +25,15 @@ in
       cleanup = "zap";
     };
     taps = [
-      "cameroncooke/axe"
       "oven-sh/bun"
-      "steipete/tap"
       "xcodesorg/made"
     ];
     brews = [
-      "axe"
       "ccache"
       "cloudflared"
       "cocoapods"
       "folly"
       "opencode"
-      "steipete/tap/peekaboo"
       "stripe-cli"
       "pnpm"
       "python@3.13"
@@ -45,7 +42,6 @@ in
       "swiftformat"
       "mole"
       "tmux"
-      "mpv"
       "oven-sh/bun/bun"
       "xcode-build-server"
       "postgresql@16"
@@ -54,50 +50,21 @@ in
       "1password"
       "android-platform-tools"
       "android-studio"
-      "balenaetcher"
       "claude-code"
-      "cleanshot"
-      "daisydisk"
       "docker-desktop"
-      "firefox"
       "font-fira-code-nerd-font"
-      "fork"
       "ghostty"
       "google-chrome"
-      "home-assistant"
-      "iina"
-      "karabiner-elements"
-      "screen-studio"
-      "minisim"
-      "obsidian"
-      "opencloud"
-      "postman"
-      "logitech-options"
-      "proxyman"
       "raycast"
-      "handy"
-      "discord"
-      "spotify"
       "tailscale-app"
-      "telegram"
-      "private-internet-access"
-      "the-unarchiver"
-      "whatsapp"
       "xcodes-app"
-      "zed"
-      "zoom"
       "zulu"
     ];
     masApps = {
-      "Infuse" = 1136220934;
-      "Keynote" = 409183694;
-      "Numbers" = 409203825;
-      "Pages" = 409201541;
+      "Bear" = 1091189122;
+      "DevCleaner" = 1388020431;
       "Slack" = 803453959;
       "Things" = 904280696;
-      "Parcel" = 375589283;
-      "Spark" = 1176895641;
-      "DevCleaner" = 1388020431;
     };
   };
 
@@ -120,15 +87,6 @@ in
     dock.show-recents = false;
     dock.mru-spaces = false;
     dock.autohide = true;
-    dock.persistent-apps = [
-      { app = "/Applications/Spark.app"; }
-      { app = "/Applications/Google Chrome.app"; }
-      { app = "/Applications/Obsidian.app"; }
-      { app = "/Applications/Things3.app"; }
-      { app = "/Applications/Ghostty.app"; }
-      { app = "/Applications/Spotify.app"; }
-      { app = "/Applications/Discord.app"; }
-    ];
 
     finder.AppleShowAllExtensions = true;
     finder.FXEnableExtensionChangeWarning = false;
@@ -176,13 +134,12 @@ in
         };
       };
     };
-
   };
 
   system.activationScripts.postActivation.text = ''
-      # Activate system settings without logout
-      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-      '';
+    # Activate system settings without logout
+    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  '';
 
   system.configurationRevision = self.rev or self.dirtyRev or null;
   system.stateVersion = 6;
