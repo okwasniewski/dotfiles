@@ -1,5 +1,5 @@
 # Interactive shell config. PATH and exported environment live in .zprofile
-# so non-interactive login shells (herdr command bindings) get them too.
+# so non-interactive login shells (launchd agents, zsh -lc) get them too.
 
 # Aliases
 alias ls="eza -a --no-user --no-time"
@@ -88,16 +88,6 @@ eval "$(starship init zsh)"
 
 # Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# Herdr completion, cached until the binary changes
-if command -v herdr >/dev/null 2>&1; then
-  _herdr_comp="${XDG_CACHE_HOME:-$HOME/.cache}/herdr-completion.zsh"
-  if [ ! -f "$_herdr_comp" ] || [ "$(command -v herdr)" -nt "$_herdr_comp" ]; then
-    mkdir -p "${_herdr_comp:h}" && herdr completion zsh > "$_herdr_comp"
-  fi
-  source "$_herdr_comp"
-  unset _herdr_comp
-fi
 
 [ -f "$HOME/.daytona.completion_script.zsh" ] && source "$HOME/.daytona.completion_script.zsh"
 

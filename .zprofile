@@ -1,9 +1,8 @@
 # Environment and PATH for every login shell, interactive or not.
 #
 # This must not live in .zshrc: `zsh -lc ...` is a login but non-interactive
-# shell, so it never sources .zshrc. herdr runs custom command bindings that
-# way, and a launchd-started herdr server has no inherited PATH at all, so
-# anything a popup or agent pane needs has to be resolvable from here.
+# shell, so it never sources .zshrc. launchd agents run that way and get no
+# inherited PATH at all, so anything they need has to be resolvable from here.
 #
 # Sourced after /etc/zprofile, so these prepends stay ahead of the nix paths.
 

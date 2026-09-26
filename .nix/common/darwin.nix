@@ -56,6 +56,7 @@
       "ghostty"
       "google-chrome"
       "raycast"
+      "t3-code@nightly"
       "tailscale-app"
       "xcodes-app"
       "zulu"

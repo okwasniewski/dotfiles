@@ -50,9 +50,6 @@ if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
 fi
 ssh-keygen -F github.com >/dev/null 2>&1 || ssh-keyscan -t ed25519 github.com >>"$HOME/.ssh/known_hosts" 2>/dev/null
 
-step "herdr (self-updating, not managed by nix)"
-[ -x "$HOME/.local/bin/herdr" ] || command -v herdr >/dev/null 2>&1 || curl -fsSL https://herdr.dev/install.sh | sh
-
 step "nix-darwin ($HOST)"
 if [ ! -e /run/current-system ]; then
   for f in /etc/zshrc /etc/zprofile /etc/bashrc; do
@@ -91,5 +88,5 @@ cat <<'TODO'
 - Grant Automation consent: run
     osascript -e 'tell application "Things3" to get count of to dos of list "Inbox"'
   over SSH, then approve the prompt on screen (or via Screen Sharing)
-- Reboot once FileVault is off and auto-login is set, confirm SSH + herdr come back
+- Reboot once FileVault is off and auto-login is set, confirm SSH comes back
 TODO

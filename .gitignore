@@ -13,8 +13,6 @@ result
 
 .ssh/*
 node_modules/
-.config/herdr/*
-!.config/herdr/config.toml
 .config/openlogi/*
 !.config/openlogi/config.toml
 

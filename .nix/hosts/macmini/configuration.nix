@@ -9,22 +9,7 @@
 
   services.openssh.enable = true;
 
-  # Keeps agents running across reboots, see WORKFLOW.md "Remote dev on the mac mini".
-  # Started through a login shell so launchd agents pick up PATH from ~/.zprofile.
-  launchd.user.agents.herdr-server.serviceConfig = {
-    Label = "dev.herdr.server";
-    ProgramArguments = [
-      "/bin/zsh"
-      "-lc"
-      "exec herdr server"
-    ];
-    RunAtLoad = true;
-    KeepAlive = true;
-    ProcessType = "Interactive";
-    StandardOutPath = "/tmp/herdr-server.out.log";
-    StandardErrorPath = "/tmp/herdr-server.err.log";
-  };
-
+  # Started through a login shell so the agent picks up PATH from ~/.zprofile.
   launchd.user.agents.dotfiles-pull.serviceConfig = {
     Label = "dev.oskar.dotfiles-pull";
     ProgramArguments = [
