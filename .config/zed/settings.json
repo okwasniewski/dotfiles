@@ -1,89 +1,107 @@
 {
-  "ssh_connections": [
-    {
-      "host": "macmini.oskar.homes",
-      "args": [],
-      "projects": [
-        {
-          "paths": [
-            "/Users/okwasniewski/workspace/tester-army"
-          ]
-        }
-      ]
-    }
-  ],
-  "agent_ui_font_size": 16.0,
-  "buffer_line_height": "comfortable",
+  "theme": "Catppuccin Mocha",
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "auto_install_extensions": {
+    "catppuccin": true,
+    "colored-zed-icons-theme": true,
+    "swift": true,
+    "codebook": true,
+    "nix": true
+  },
+  "buffer_font_size": 14.0,
   "buffer_font_weight": 450.0,
-  "buffer_font_family": ".ZedMono",
-  "agent_servers": {
-    "opencode": {
-      "default_config_options": {
-        "model": "anthropic/claude-fable-5"
-      },
-      "type": "registry"
-    },
-    "codex-acp": {
-      "type": "registry"
-    },
-    "claude-acp": {
-      "default_config_options": {
-        "model": "claude-fable-5[1m]",
-        "mode": "bypassPermissions"
-      },
-      "type": "registry"
+  "agent_ui_font_size": 16.0,
+  "agent_buffer_font_size": 15.0,
+
+  "vim_mode": true,
+  "vim": {
+    "use_smartcase_find": true
+  },
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 300
+  },
+  "relative_line_numbers": "enabled",
+  "vertical_scroll_margin": 10,
+  "cursor_blink": false,
+  "show_whitespaces": "trailing",
+  "sticky_scroll": { "enabled": true },
+  "use_smartcase_search": true,
+  "search": { "center_on_match": true },
+  "diagnostics": { "inline": { "enabled": true } },
+  "git": {
+    "inline_blame": { "delay_ms": 500, "show_commit_summary": true }
+  },
+
+  "format_on_save": "on",
+  "languages": {
+    "JavaScript": { "code_actions_on_format": { "source.fixAll.eslint": true } },
+    "TypeScript": { "code_actions_on_format": { "source.fixAll.eslint": true } },
+    "TSX": { "code_actions_on_format": { "source.fixAll.eslint": true } }
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": { "preferences": { "importModuleSpecifier": "non-relative" } },
+        "javascript": { "preferences": { "importModuleSpecifier": "non-relative" } }
+      }
     }
   },
-  "proxy": "",
-  "context_servers": {
-    "executor": {
-      "enabled": true,
-      "url": "https://executor.oskar.homes/mcp"
-    }
+
+  "use_system_path_prompts": false,
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_user_picture": false,
+    "show_sign_in": false
   },
-  "project_panel": {
-    "dock": "right"
+  "toolbar": { "quick_actions": false },
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false
   },
-  "outline_panel": {
-    "dock": "right"
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+    "show_close_button": "hidden"
   },
-  "collaboration_panel": {
-    "dock": "right"
-  },
+  "project_panel": { "dock": "left", "hide_root": true },
+  "terminal": { "option_as_meta": true, "copy_on_select": true },
+
   "agent": {
+    "default_width": 760,
     "enable_feedback": false,
-    "tool_permissions": {
-      "default": "allow",
-      "tools": {}
-    },
-    "sandbox_permissions": {
-      "allow_unsandboxed": true
-    },
-    "sidebar_side": "left",
-    "terminal_init_command": "",
+    "tool_permissions": { "default": "allow" },
+    "sandbox_permissions": { "allow_unsandboxed": true },
     "play_sound_when_agent_done": "when_hidden",
     "default_model": {
       "provider": "anthropic",
       "model": "claude-fable-5",
       "enable_thinking": true,
       "effort": "high"
+    }
+  },
+  "agent_servers": {
+    "opencode": {
+      "type": "registry",
+      "default_config_options": { "model": "anthropic/claude-fable-5" }
     },
-    "dock": "left",
-    "favorite_models": [],
-    "model_parameters": []
+    "codex-acp": { "type": "registry" },
+    "claude-acp": {
+      "type": "registry",
+      "default_config_options": { "model": "opus", "mode": "bypassPermissions" }
+    }
   },
-  "git_panel": {
-    "dock": "right"
+  "context_servers": {
+    "executor": { "enabled": true, "url": "https://executor.oskar.homes/mcp" }
   },
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark"
-  },
-  "vim_mode": true,
-  "ui_font_size": 16.0,
-  "buffer_font_size": 14.0,
-  "vim": {
-    "use_system_clipboard": "always",
-  },
+  "ssh_connections": [
+    {
+      "host": "macmini.oskar.homes",
+      "projects": [{ "paths": ["/Users/okwasniewski/workspace/tester-army"] }]
+    },
+    {
+      "host": "bigmac",
+      "projects": [{ "paths": ["/Users/bigmac/.t3/worktrees/e2e/t3code-ac782615"] }]
+    }
+  ]
 }

@@ -1,20 +1,139 @@
 [
   {
-    "context": "Dock",
+    "context": "VimControl && !menu",
     "bindings": {
-      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
-      // ... or other keybindings
-    }
+      "space": null,
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-d": [
+        "action::Sequence",
+        ["vim::ScrollDown", "editor::ScrollCursorCenter"],
+      ],
+      "ctrl-u": [
+        "action::Sequence",
+        ["vim::ScrollUp", "editor::ScrollCursorCenter"],
+      ],
+      "ctrl-b": "tab_switcher::Toggle",
+      "ctrl-e": "pane::RevealInProjectPanel",
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+    },
   },
   {
-    "context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting",
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      "s": "vim::PushSneak",
+      "shift-s": "vim::PushSneakBackward",
+      "g r": "editor::FindAllReferences",
+      "g r n": null,
+      "g r r": null,
+      "g r i": null,
+      "g r a": null,
+
+      "space space": "file_finder::Toggle",
+      "space w": "workspace::Save",
+      "space e": "workspace::ToggleLeftDock",
+      "space q": "diagnostics::Deploy",
+      "space x x": "diagnostics::Deploy",
+      "space z": "workspace::ToggleZoom",
+      "space t": "terminal_panel::Toggle",
+      "space p": "projects::OpenRecent",
+      "space shift-d": "editor::GoToTypeDefinition",
+      "space shift-s": ["pane::DeploySearch", { "replace_enabled": true }],
+
+      "space s f": "file_finder::Toggle",
+      "space s g": "pane::DeploySearch",
+      "space s w": "pane::DeploySearch",
+      "space s r": ["pane::DeploySearch", { "replace_enabled": true }],
+      "space s l": "project_symbols::Toggle",
+      "space s d": "diagnostics::Deploy",
+      "space s k": "zed::OpenKeymap",
+      "space s n": "zed::OpenSettingsFile",
+
+      "space d s": "outline::Toggle",
+      "space r n": "editor::Rename",
+      "space c a": "editor::ToggleCodeActions",
+      "space c f": "editor::Format",
+      "space c p": "workspace::CopyPath",
+      "space c h": "editor::ToggleInlayHints",
+
+      "space b d": "pane::CloseActiveItem",
+      "space b o": "pane::CloseOtherItems",
+
+      "space g g": [
+        "task::Spawn",
+        { "task_name": "lazygit", "reveal_target": "center" },
+      ],
+      "space g s": "git_panel::ToggleFocus",
+      "space g d": "git::Diff",
+      "space g b": "editor::BlameHover",
+      "space g a": "git::Blame",
+      "space g f": "git::FileHistory",
+      "space g shift-b": "git::Branch",
+      "space g r": "git::Restore",
+      "space g shift-s": "git::ToggleStaged",
+      "space g y": "git::CopyFilePermalink",
+      "space g o": "git::OpenFilePermalink",
+
+      "space a o": "agent::ToggleFocus",
+      "space a n": "agent::NewThread",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == visual && !menu",
+    "bindings": {
+      ">": ["action::Sequence", ["vim::Indent", "vim::RestoreVisualSelection"]],
+      "<": [
+        "action::Sequence",
+        ["vim::Outdent", "vim::RestoreVisualSelection"],
+      ],
+      "shift-s": "vim::PushAddSurrounds",
+      "space a a": "agent::AddSelectionToThread",
+      "space c a": "editor::ToggleCodeActions",
+      "space g r": "git::Restore",
+      "space g shift-s": "git::ToggleStaged",
+    },
+  },
+  {
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "bindings": {
+      "q": "vim::MiniQuotes",
+      "b": "vim::MiniBrackets",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "shift-a": "project_panel::NewDirectory",
+      "y": "workspace::CopyPath",
+      "q": "workspace::ToggleLeftDock",
+      "ctrl-e": "workspace::ToggleLeftDock",
+      "ctrl-l": "workspace::ActivatePaneRight",
+    },
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+    },
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
     "bindings": {
       "space space": "file_finder::Toggle",
-      "space s g": "workspace::NewSearch",
-      "space e": "workspace::ToggleLeftDock"
-    }
-  }
+      "space s g": "pane::DeploySearch",
+      "space e": "workspace::ToggleLeftDock",
+      "space p": "projects::OpenRecent",
+      "space g g": [
+        "task::Spawn",
+        { "task_name": "lazygit", "reveal_target": "center" },
+      ],
+    },
+  },
 ]
