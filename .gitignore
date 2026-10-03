@@ -18,6 +18,7 @@ node_modules/
 
 # Tool state, caches, credentials - not config
 .config/.android/
+.config/.wrangler/
 .config/1Password/
 .config/amp/
 .config/btop/
@@ -29,5 +30,8 @@ node_modules/
 .config/uv/
 .config/workmux/
 .config/opencode/service.json
+.config/e2e/
+.config/mintlify/
+.config/testerarmy-admin/
 .agents/skills/terminal-browser
 .config/git/local
