@@ -35,9 +35,14 @@ export PATH="$HOME/.grok/bin:$PATH"
 
 # Environment
 export LANG=en_US.UTF-8
-export REACT_EDITOR=nvim
-export EDITOR=nvim
-export VISUAL=nvim
+if command -v zed >/dev/null 2>&1 && [ -z "$SSH_CONNECTION" ]; then
+  export EDITOR="zed --wait"
+  export REACT_EDITOR=zed
+else
+  export EDITOR=nvim
+  export REACT_EDITOR=nvim
+fi
+export VISUAL="$EDITOR"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Secrets, exported here so non-interactive tools (lazygit's commit message
