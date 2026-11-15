@@ -22,6 +22,9 @@ sudo ./result/sw/bin/darwin-rebuild switch --flake ./.nix#laptop
 
 Mac mini: run `scripts/bootstrap-macmini.sh` instead, see `WORKFLOW.md`.
 
+Moving from another Mac: run `scripts/mac-inventory.sh > inventory.txt` on the
+old one first and diff its apps, Dock and casks against the nix host.
+
 4. Run `stow .` to symlink dotfiles
 
 5. Fix SSH config permissions
