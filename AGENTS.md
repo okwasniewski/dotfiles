@@ -72,3 +72,6 @@ npm view <package-name> version
 When user asks "how do I do X", "find a skill for X", or wants to extend
 capabilities, use the `find-skills` skill to search the open agent skills
 ecosystem via `npx skills find [query]`.
+
+Before following a pstack skill (`how`, `why`, `recall`, `blast-radius`,
+`arena`, `technical-writing`, `unslop`), read `~/.agents/pstack-adapter.md`.
