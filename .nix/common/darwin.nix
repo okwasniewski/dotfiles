@@ -26,13 +26,11 @@
     };
     taps = [
       "oven-sh/bun"
-      "xcodesorg/made"
     ];
     brews = [
       "ccache"
       "cloudflared"
       "cocoapods"
-      "folly"
       "opencode"
       "stripe-cli"
       "pnpm"
@@ -50,7 +48,6 @@
       "1password"
       "android-platform-tools"
       "android-studio"
-      "claude-code"
       "docker-desktop"
       "font-fira-code-nerd-font"
       "ghostty"
