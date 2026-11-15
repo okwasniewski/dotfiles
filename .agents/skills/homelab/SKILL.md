@@ -1,6 +1,6 @@
 ---
 name: homelab
-description: Inventory and SSH access for Oskar's tailnet devices (dev box Mac mini, zima selfhost box, nas). Use when asked to jump on a box, update, check, or manage anything on the homelab / tailnet / dev box / nas / zima.
+description: Inventory and SSH access for Oskar's tailnet devices (dev box Mac mini, previous Mac mini, zima selfhost box, nas). Use when asked to jump on a box, update, check, or manage anything on the homelab / tailnet / dev box / nas / zima.
 ---
 
 # Homelab
@@ -11,8 +11,10 @@ passwords needed, just `ssh <host> '<cmd>'`.
 
 ## Devices
 
-- `oskars-macmini` - dev box (macOS, Apple Silicon). New Mac mini replacing it
-  ~2026-10, update this file when it lands.
+- `oskars-mac-mini` - dev box (Mac mini, macOS, Apple Silicon, user `bigmac`,
+  nix host `macmini`). Agents run here, see `WORKFLOW.md` in the dotfiles.
+- `oskars-macmini` - previous Mac mini (user `okwasniewski`), still on the
+  tailnet.
 - `zima` - selfhosting box (ZimaBoard, Ubuntu). Everything runs in Docker.
 - `nas` - backups, photos, self-hosted cloud (Ubuntu, RAID1 storage on
   `/mnt/storage`). Services run in Docker.

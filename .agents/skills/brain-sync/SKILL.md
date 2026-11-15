@@ -59,7 +59,7 @@ Resolve executor connections at runtime with `tools.executor.coreTools.connectio
 
 - `search_email` with `in:inbox is:flagged` only. Route to Things with subject, sender, receivedAt in notes. Never triage unread.
 
-### Superhuman (TesterArmy)
+### Superhuman (e2e)
 
 - `query_email_and_calendar` cannot filter starred. Ask in natural language for inbox threads since `last_sync` where a person waits on Oskar.
 - Silent skip: cold outreach, invoices and receipts, automated notifications.
