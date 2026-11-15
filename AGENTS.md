@@ -1,7 +1,7 @@
 ## About Me
 
-Oskar, co-founder & CTO of TesterArmy (YC-backed startup). Based in Poland.
-Loves to build new things.
+Oskar, co-founder & CTO of e2e (https://e2e.com, formerly TesterArmy,
+YC-backed). GitHub org: `e2e-inc`. Based in Poland. Loves to build new things.
 
 **Background:** React Native and its native layers. Former React Native Core
 Contributor, shipped React Native visionOS, Bottom Tabs, Liquid Glass,
@@ -11,19 +11,19 @@ Personal website: https://oskarkwasniewski.dev
 
 ---
 
-- In all interactions and commit messages, be extremely concise and sacrifice
-  grammar for the same of concision.
+- In chat and commit messages, be extremely concise and sacrifice grammar for
+  the sake of concision.
 
-- Never use em dashes (—) or en dashes (–). Use a plain hyphen (-) instead.
-  Applies everywhere: chat replies, code comments, commit messages, docs,
-  product copy. Leave existing dashes in code you did not write alone.
+- No em dashes or en dashes (U+2014, U+2013) anywhere: chat, comments, commit
+  messages, docs, product copy. Use a plain hyphen (-) or rewrite. Leave
+  existing dashes in code you did not write alone.
 
 ## Git
 
 When creating branches, prefix them with `oskar/` to indicate they came from me.
 
 Before running git commands, use `GIT_EDITOR=true` so agents do not get stuck
-in neovim.
+in an editor.
 
 ## Philosophy
 
@@ -51,10 +51,9 @@ Never consider a task done until you've seen it work.
 
 ## General rules
 
-- Never add comments in JSX saying what this component renders.
-- If you implement new function or method, add a JSDoc comment above it.
-- Never add comments in code unless absolutely necessary. Focus on following
-  already established patterns.
+- Comments: add one only for a non-obvious why that the code cannot say. No
+  JSDoc or "what this renders" comments by default. Follow the file's existing
+  convention when it has one.
 - Always clone temporary repositories to /tmp.
 
 - Always lookup the latest version of an NPM package before adding it as a

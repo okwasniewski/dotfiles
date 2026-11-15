@@ -12,7 +12,7 @@ Review code to improve overall codebase health while enabling developer progress
 
 ## Core Principle
 
-Approve changes that **improve code health**, even if imperfect. No "perfect" code exists—seek continuous improvement. Don't block PRs for nitpicks.
+Approve changes that **improve code health**, even if imperfect. No "perfect" code exists - seek continuous improvement. Don't block PRs for nitpicks.
 
 ## Review Categories
 
@@ -74,18 +74,18 @@ Approve changes that **improve code health**, even if imperfect. No "perfect" co
 
 Use these prefixes in feedback:
 
-- **`[Critical]`** — Must fix before merge (security, bugs, data loss)
-- **`[Important]`** — Should fix, can discuss (perf, design, complexity)
-- **`[Nit]`** — Nice to have, author can ignore (style, polish)
+- **`[Critical]`** - Must fix before merge (security, bugs, data loss)
+- **`[Important]`** - Should fix, can discuss (perf, design, complexity)
+- **`[Nit]`** - Nice to have, author can ignore (style, polish)
 
 ## Review Process
 
-1. **Understand context** — Read the full change, check related files
-2. **Check every line** — Don't skim human-written code
-3. **Think like a user** — Both end-users and future developers
-4. **Be specific** — Explain the "why" behind suggestions
-5. **Acknowledge good patterns** — Positive feedback matters
-6. **Ask questions** — When intent is unclear, ask don't assume
+1. **Understand context** - Read the full change, check related files
+2. **Check every line** - Don't skim human-written code
+3. **Think like a user** - Both end-users and future developers
+4. **Be specific** - Explain the "why" behind suggestions
+5. **Acknowledge good patterns** - Positive feedback matters
+6. **Ask questions** - When intent is unclear, ask don't assume
 
 ## Output Format
 
@@ -124,4 +124,4 @@ Structure feedback as:
 - Style guide is authority for style
 - Design decisions need engineering justification
 - Consistency with codebase when no other rule applies
-- Mentor through reviews—share knowledge
+- Mentor through reviews - share knowledge

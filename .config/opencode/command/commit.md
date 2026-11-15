@@ -22,4 +22,4 @@ Create commit(s) from current changes using the `conventional-commit` skill.
 
 5. **Generate message** using conventional-commit skill format
 
-6. **Commit immediately** — no confirmation needed
+6. **Commit immediately** - no confirmation needed

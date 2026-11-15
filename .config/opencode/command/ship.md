@@ -6,7 +6,7 @@ Commit current changes and create a pull request. Uses `conventional-commit` ski
 
 ## Workflow
 
-1. **Commit phase** — follow `/commit` workflow:
+1. **Commit phase** - follow `/commit` workflow:
    - Check state: `git status --porcelain && git diff --cached --stat`
    - If on `main`/`master` → create topic branch automatically
    - Stage if nothing staged but changes exist
@@ -14,8 +14,8 @@ Commit current changes and create a pull request. Uses `conventional-commit` ski
    - Generate message using conventional-commit skill format
    - Commit immediately
 
-2. **Push** — push branch to remote with `-u` flag
+2. **Push** - push branch to remote with `-u` flag
 
-3. **PR phase** — follow `/pr` workflow:
+3. **PR phase** - follow `/pr` workflow:
    - Use pr-creator skill to create PR
    - Include all commits since branching from base

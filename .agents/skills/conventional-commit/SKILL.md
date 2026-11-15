@@ -17,7 +17,7 @@ type(scope): description
 ```
 
 - **Under 72 characters**
-- **Imperative mood** — "add feature" not "added feature"
+- **Imperative mood** - "add feature" not "added feature"
 - **Focus on "why"** not "what"
 
 ## Types
