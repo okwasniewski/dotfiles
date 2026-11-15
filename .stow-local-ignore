@@ -7,3 +7,4 @@ result
 .config/opencode/node_modules
 
 \.gitattributes
+\.github

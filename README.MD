@@ -56,3 +56,20 @@ Claude Code `PreToolUse` hooks in `.claude/hooks`, registered in
 
 Test them with `scripts/test-hooks.sh`. Skip a git hook once with
 `--no-verify`.
+
+## Agent config
+
+`.agents/` is the single source for every agent tool:
+
+- `.agents/skills/`: skills. `.claude/skills` and `.config/opencode/skills`
+  are symlinks to it.
+- `.agents/commands/`: slash commands, symlinked as `.claude/commands` and
+  `.config/opencode/command`. Write them for both tools: `description`
+  frontmatter and `$ARGUMENTS`.
+- `.agents/mcp.json`: MCP servers. `scripts/sync-agent-config.mjs` writes them
+  into opencode, Zed and `.config/mcp-config.json`. Claude Code keeps user MCP
+  servers in `~/.claude.json`, which is machine state, so add new ones there
+  with `claude mcp add --scope user --transport http <name> <url>`.
+
+After editing `.agents/`, run `scripts/sync-agent-config.mjs`. CI runs it with
+`--check` and fails on drift, together with `scripts/test-hooks.sh`.
