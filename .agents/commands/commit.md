@@ -1,3 +1,7 @@
+---
+description: Smart commit with conventional format
+---
+
 Create commit(s) from current changes using the `conventional-commit` skill.
 
 ## Arguments

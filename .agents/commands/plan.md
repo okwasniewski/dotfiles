@@ -1,13 +1,12 @@
 ---
 description: Create, refine, or execute implementation plans
-agent: plan
 ---
 
 Manage plans in `.agent/plans/` using the `planning` skill.
 
 ## Arguments
 
-- `$1` - Plan name OR "execute" OR "list"
+- `$ARGUMENTS` - Plan name OR "execute" OR "list"
 
 ## Commands
 
@@ -35,9 +34,8 @@ loop.
 
 Update status to `ready` when plan has goal + approach + tasks.
 
-**Always:** write plan prose through the `unslop` skill, and after every save of
-the markdown re-render the HTML with the `html-plans` skill - no explicit ask
-needed.
+Write plan prose through the `unslop` skill. After each save, re-render the
+HTML with the `html-plans` skill.
 
 ### `/plan render [name]`
 
@@ -53,7 +51,8 @@ Execute tasks from most recently modified plan.
 3. **Branch check:** If on main/master, create feature branch
 4. **Update status** to `executing`
 5. **For each task:**
-   - Invoke `@implementer` with task + context from plan
+   - Implement the task with context from the plan. In opencode, delegate it
+     to the `implementer` subagent
    - Mark task complete (`- [x]`)
    - Continue to next
 6. **On completion:** Update status to `done`, offer to create PR

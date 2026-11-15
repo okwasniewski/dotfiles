@@ -1,10 +1,10 @@
 ---
-description: OpenCode review loop until actionable findings are resolved
+description: Review loop until no actionable findings remain
 ---
 
 # Review Loop
 
-Run an OpenCode-native code review closeout. Use the `code-review` skill to review the current local work, branch, or PR branch, then fix accepted findings and repeat until no actionable findings remain.
+Run a code review closeout. Use the `code-review` skill to review the current local work, branch, or PR branch, then fix accepted findings and repeat until no actionable findings remain.
 
 Use when:
 
@@ -14,7 +14,7 @@ Use when:
 
 ## Contract
 
-- Treat review output as advisory. Never blindly apply it.
+- Treat review output as advisory. Verify before applying.
 - Verify every finding by reading the real code path and adjacent files.
 - Read dependency docs/source/types when the finding depends on external behavior.
 - Reject unrealistic edge cases, speculative risks, broad rewrites, and fixes that over-complicate the codebase.
