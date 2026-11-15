@@ -89,5 +89,5 @@ must be resolvable from `.zprofile`.
   the commit editor
 - requires `OPENAI_API_KEY`, exported from `.zprofile` so lazygit sees it
 - optional overrides:
-  - `OPENAI_MODEL` default: `gpt-5.4-mini`
+  - `OPENAI_MODEL` default: `gpt-6-luna`
   - `OPENAI_API_BASE` default: `https://api.openai.com/v1`

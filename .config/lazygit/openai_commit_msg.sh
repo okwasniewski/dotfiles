@@ -44,7 +44,7 @@ if [ "${#DIFF}" -gt "$MAX_DIFF_CHARS" ]; then
 [diff truncated]"
 fi
 
-MODEL=${OPENAI_MODEL:-gpt-5.4-mini}
+MODEL=${OPENAI_MODEL:-gpt-6-luna}
 API_BASE=${OPENAI_API_BASE:-https://api.openai.com/v1}
 
 PROMPT=$(cat <<EOF
@@ -77,6 +77,7 @@ PAYLOAD=$(jq -n \
   --arg prompt "$PROMPT" \
   '{
     model: $model,
+    reasoning_effort: "none",
     temperature: 0.2,
     messages: [
       {
