@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Global pre-commit hook: reject em/en dashes on added lines. Files marked
+# linguist-vendored or linguist-generated in .gitattributes are skipped.
+set -euo pipefail
+
+git_dir=$(git rev-parse --git-dir)
+in_progress=false
+for f in MERGE_HEAD CHERRY_PICK_HEAD REVERT_HEAD rebase-merge rebase-apply; do
+  [ -e "$git_dir/$f" ] && in_progress=true
+done
+
+if [ "$in_progress" = false ]; then
+  found=""
+  while IFS= read -r -d '' file; do
+    attrs=$(git check-attr linguist-vendored linguist-generated -- "$file")
+    printf '%s\n' "$attrs" | grep -Eq ': (set|true)$' && continue
+    hits=$(git diff --cached -U0 --no-color --no-ext-diff -- "$file" |
+      grep '^+' | grep -v '^+++' | grep -e $'\xe2\x80\x94' -e $'\xe2\x80\x93' || true)
+    [ -n "$hits" ] && found+="$file:"$'\n'"$hits"$'\n'
+  done < <(git diff --cached --name-only -z --diff-filter=ACMR)
+
+  if [ -n "$found" ]; then
+    printf 'pre-commit: em or en dash on added lines, use a hyphen or rewrite:\n%s' "$found" >&2
+    exit 1
+  fi
+fi
+
+local_hook="$(git rev-parse --git-common-dir)/hooks/pre-commit"
+if [ -x "$local_hook" ]; then exec "$local_hook" "$@"; fi
