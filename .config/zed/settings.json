@@ -80,7 +80,7 @@
     "play_sound_when_agent_done": "when_hidden",
     "default_model": {
       "provider": "anthropic",
-      "model": "claude-fable-5",
+      "model": "claude-fable-5-2",
       "enable_thinking": true,
       "effort": "high"
     }
@@ -88,7 +88,7 @@
   "agent_servers": {
     "opencode": {
       "type": "registry",
-      "default_config_options": { "model": "anthropic/claude-fable-5" }
+      "default_config_options": { "model": "anthropic/claude-fable-5-2" }
     },
     "codex-acp": { "type": "registry" },
     "claude-acp": {

@@ -11,7 +11,7 @@
       "Bash(git push*)"
     ]
   },
-  "model": "claude-fable-5[1m]",
+  "model": "fable",
   "hooks": {
     "Notification": [
       {
