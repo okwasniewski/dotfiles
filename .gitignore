@@ -7,6 +7,8 @@
 .config/cagent
 .config/swiftpm
 .config/zed/prompts
+.config/trigger
+.config/testerarmy
 result
 
 .ssh/*
@@ -21,13 +23,19 @@ node_modules/
 .config/amp/
 .config/btop/
 .config/homebrew/
+.config/hunk/
 .config/neonctl/
 .config/raycast-x/
 .config/stripe/
 .config/uv/
+.config/workmux/
 .config/opencode/service.json
 .config/e2e/
 .config/mintlify/
+.config/testerarmy-admin/
+.config/configstore/
+.config/devin/
+.agents/skills/terminal-browser
 # Skills installed by other tools as symlinks into ~/.agents/skills
 .agents/skills/cua-driver
 .config/git/local
