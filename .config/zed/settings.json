@@ -70,7 +70,12 @@
   "agent": {
     "default_width": 760,
     "enable_feedback": false,
-    "tool_permissions": { "default": "allow" },
+    "tool_permissions": {
+      "default": "allow",
+      "tools": {
+        "terminal": { "always_confirm": [{ "pattern": "git\\s+push" }] }
+      }
+    },
     "sandbox_permissions": { "allow_unsandboxed": true },
     "play_sound_when_agent_done": "when_hidden",
     "default_model": {
