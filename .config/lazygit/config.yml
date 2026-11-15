@@ -31,12 +31,6 @@ customCommands:
     command: "gh browse"
     context: "files"
     description: "Open repo in browser"
-  - key: "C"
-    command: "zsh -ic 'msg=\"$($HOME/.config/lazygit/openai_commit_msg.sh)\" && git commit -m \"$msg\" -e'"
-    context: "files"
-    loadingText: "Generating commit message..."
-    description: "Generate commit message with OpenAI"
-    output: terminal
   - key: "b"
     command: 'gh browse "{{.SelectedLocalCommit.Sha}}"'
     context: "commits"
