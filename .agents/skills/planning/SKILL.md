@@ -91,4 +91,4 @@ A plan is **ready** when it has:
 - **Decisions over details** — Capture why, not exact how
 - **Living document** — Update as understanding evolves
 - **Unslopped prose** — write all plan text through the `unslop` skill
-- **Always render HTML** — after creating or updating a plan, re-render it with the `html-plans` skill in the same turn, without being asked
+- **Rendered HTML** - re-render with the `html-plans` skill after each update

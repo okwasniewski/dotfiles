@@ -22,7 +22,7 @@ You are implementing a single task from a plan.
 
 ## Rules
 
-- Do ONE task only - don't expand scope
+- Do one task only, without expanding scope
 - Follow existing patterns in the codebase
 - Commit atomic changes
 - No TODOs or incomplete work
