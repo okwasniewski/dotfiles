@@ -82,12 +82,3 @@ This split is required, not cosmetic: `zsh -lc` is a login but non-interactive
 shell that never reads `.zshrc`. launchd agents run that way and have no
 inherited PATH at all. Anything a launchd agent or non-interactive tool needs
 must be resolvable from `.zprofile`.
-
-## Lazygit
-
-- in the `files` panel, `C` generates a commit message with OpenAI, then opens
-  the commit editor
-- requires `OPENAI_API_KEY`, exported from `.zprofile` so lazygit sees it
-- optional overrides:
-  - `OPENAI_MODEL` default: `gpt-6-luna`
-  - `OPENAI_API_BASE` default: `https://api.openai.com/v1`
