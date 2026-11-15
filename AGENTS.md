@@ -81,4 +81,6 @@ capabilities, use the `find-skills` skill to search the open agent skills
 ecosystem via `npx skills find [query]`.
 
 Before following a pstack skill (`how`, `why`, `recall`, `blast-radius`,
-`arena`, `technical-writing`, `unslop`), read `~/.agents/pstack-adapter.md`.
+`arena`, `technical-writing`, `unslop`) or `pr-review-canvas` / `show-me`, read
+`~/.agents/pstack-adapter.md`. For "help me understand this PR", use
+`pr-review-canvas`.

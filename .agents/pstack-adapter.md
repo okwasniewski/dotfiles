@@ -26,6 +26,17 @@ Transcripts, for `recall`:
 - opencode: `opencode session list`, then `opencode session export <id>`.
 - Zed: `~/Library/Application Support/Zed/threads/`, SQLite, skip unless asked.
 
+Also vendored the same way, outside pstack: `pr-review-canvas`
+(`cursor/plugins`, `cursor-team-kit/skills/`) and `show-me`
+(`humanlayer/skills`). Both are marked user-invoked only, so when the user asks
+to understand or explain a PR, read the `SKILL.md` directly and follow it:
+`pr-review-canvas` for a full walkthrough, `show-me` for a quick visual answer
+in chat. Where they serve or `open` an HTML file:
+
+- T3 Code: show the file with `html_preview`, then `html_render`. No server.
+- Terminal: `open /tmp/pr-review-<n>.html`. No server needed, the page is
+  self-contained.
+
 Oskar's overrides:
 
 - Dashes: unslop rule 13 bans hyphen-as-dash. Oskar's rule is softer: no em or
