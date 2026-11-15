@@ -9,7 +9,7 @@
   },
   "permission": {
     "bash": {
-      "git push": "ask"
+      "git push*": "ask"
     },
     "doom_loop": "ask"
   }
