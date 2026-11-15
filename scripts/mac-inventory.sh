@@ -35,7 +35,7 @@ defaults read com.apple.dock persistent-apps 2>/dev/null | sed -n 's/.*"_CFURLSt
 section "dock others"
 defaults read com.apple.dock persistent-others 2>/dev/null | sed -n 's/.*"_CFURLString" = "\(.*\)";/\1/p'
 section "dock prefs"
-for k in tile-size magnification largesize autohide autohide-delay orientation show-recents mru-spaces show-process-indicators minimize-to-application mineffect wvous-tl-corner wvous-tr-corner wvous-bl-corner wvous-br-corner; do
+for k in tilesize magnification largesize autohide autohide-delay orientation show-recents mru-spaces show-process-indicators minimize-to-application mineffect wvous-tl-corner wvous-tr-corner wvous-bl-corner wvous-br-corner; do
   echo "$k=$(defaults read com.apple.dock $k 2>/dev/null)"
 done
 
