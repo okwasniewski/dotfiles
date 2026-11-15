@@ -1,15 +1,22 @@
 #!/usr/bin/env bash
-# Bootstrap a Mac mini as a headless remote workhorse.
+# Bootstrap a fresh Mac from these dotfiles. Host is a flake host: laptop or macmini.
 # Idempotent - safe to re-run. Run interactively (needs sudo and a few prompts).
-# Headless system settings live in .nix/hosts/macmini, this script only covers
-# what nix-darwin cannot: installing nix itself, stow, secrets, FileVault.
+# System settings and apps live in .nix, this script only covers what
+# nix-darwin cannot: Homebrew and nix themselves, stow, machine-local files.
 #
-#   curl -fsSL https://raw.githubusercontent.com/okwasniewski/dotfiles/main/scripts/bootstrap-macmini.sh | bash
-#   or: ~/dotfiles/scripts/bootstrap-macmini.sh
+#   curl -fsSL https://raw.githubusercontent.com/okwasniewski/dotfiles/main/scripts/bootstrap.sh | bash -s laptop
+#   or: ~/dotfiles/scripts/bootstrap.sh laptop
 set -uo pipefail
 
+HOST="${1:-}"
+case "$HOST" in
+laptop | macmini) ;;
+*)
+  echo "usage: bootstrap.sh laptop|macmini" >&2
+  exit 1
+  ;;
+esac
 DOTFILES="$HOME/dotfiles"
-HOST="macmini"
 step() { printf '\n\033[1m==> %s\033[0m\n' "$1"; }
 
 step "Xcode Command Line Tools"
@@ -23,7 +30,7 @@ step "Clone dotfiles"
 [ -d "$DOTFILES/.git" ] || git clone https://github.com/okwasniewski/dotfiles.git "$DOTFILES"
 
 # Piped through curl, stdin is the script itself. Re-run from the clone so prompts can read the terminal.
-[ -t 0 ] || exec bash "$DOTFILES/scripts/bootstrap-macmini.sh" </dev/tty
+[ -t 0 ] || exec bash "$DOTFILES/scripts/bootstrap.sh" "$HOST" </dev/tty
 
 step "Homebrew (nix-darwin manages packages, but needs brew itself)"
 [ -x /opt/homebrew/bin/brew ] || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -35,18 +42,22 @@ fi
 # shellcheck disable=SC1091
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
-step "Machine-local overrides (headless box: local ssh key, no 1Password)"
+step "Machine-local overrides"
+# A real ~/.config keeps tool state out of the repo; stow links each subdir.
 mkdir -p "$HOME/.ssh" "$HOME/.config"
 chmod 700 "$HOME/.ssh"
-[ -f "$HOME/.ssh/local_config" ] || printf 'Host *\n  IdentityAgent none\n' >"$HOME/.ssh/local_config"
-grep -qs '^export DARWIN_HOST=' "$HOME/.zshrc.local" || echo "export DARWIN_HOST=$HOST" >>"$HOME/.zshrc.local"
-[ -f "$DOTFILES/.config/git/local" ] || printf '[core]\n\tpager = cat\n[commit]\n\tgpgsign = false\n' >"$DOTFILES/.config/git/local"
-
-step "SSH key"
-if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
-  ssh-keygen -t ed25519 -N "" -f "$HOME/.ssh/id_ed25519" -C "$(whoami)@$(hostname -s)"
-  echo "ADD THIS KEY TO GITHUB (https://github.com/settings/keys):"
-  cat "$HOME/.ssh/id_ed25519.pub"
+if [ "$HOST" != laptop ]; then
+  grep -qs '^export DARWIN_HOST=' "$HOME/.zshrc.local" || echo "export DARWIN_HOST=$HOST" >>"$HOME/.zshrc.local"
+fi
+if [ "$HOST" = macmini ]; then
+  # Headless box: local ssh key instead of the 1Password agent, no commit signing.
+  [ -f "$HOME/.ssh/local_config" ] || printf 'Host *\n  IdentityAgent none\n' >"$HOME/.ssh/local_config"
+  [ -f "$DOTFILES/.config/git/local" ] || printf '[core]\n\tpager = cat\n[commit]\n\tgpgsign = false\n' >"$DOTFILES/.config/git/local"
+  if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
+    ssh-keygen -t ed25519 -N "" -f "$HOME/.ssh/id_ed25519" -C "$(whoami)@$(hostname -s)"
+    echo "ADD THIS KEY TO GITHUB (https://github.com/settings/keys):"
+    cat "$HOME/.ssh/id_ed25519.pub"
+  fi
 fi
 ssh-keygen -F github.com >/dev/null 2>&1 || ssh-keyscan -t ed25519 github.com >>"$HOME/.ssh/known_hosts" 2>/dev/null
 
@@ -70,19 +81,32 @@ step "CLIs for agents"
 npm ls -g things-cli >/dev/null 2>&1 || GIT_CONFIG_GLOBAL=/dev/null npm install -g github:flaviocopes/things-cli
 mkdir -p "$HOME/.local/bin"
 [ -x /Applications/Bear.app/Contents/MacOS/bearcli ] && ln -sfn /Applications/Bear.app/Contents/MacOS/bearcli "$HOME/.local/bin/bearcli"
+command -v claude >/dev/null 2>&1 || curl -fsSL https://claude.ai/install.sh | bash
 
-step "FileVault off + auto-login (so the box survives reboots unattended)"
-if fdesetup isactive >/dev/null 2>&1; then
-  sudo fdesetup disable
-  echo "Decryption runs in the background. Re-run this script once 'fdesetup status' says Off to enable auto-login."
-elif ! defaults read /Library/Preferences/com.apple.loginwindow autoLoginUser >/dev/null 2>&1; then
-  sudo sysadminctl -autologin set -userName "$(whoami)" -password -
+if [ "$HOST" = macmini ]; then
+  step "FileVault off + auto-login (so the box survives reboots unattended)"
+  if fdesetup isactive >/dev/null 2>&1; then
+    sudo fdesetup disable
+    echo "Decryption runs in the background. Re-run this script once 'fdesetup status' says Off to enable auto-login."
+  elif ! defaults read /Library/Preferences/com.apple.loginwindow autoLoginUser >/dev/null 2>&1; then
+    sudo sysadminctl -autologin set -userName "$(whoami)" -password -
+  fi
 fi
 
 step "Manual steps left"
-cat <<'TODO'
-- Sign in to the App Store, then re-run (masApps: Things, Bear, Slack, DevCleaner)
-- Open Tailscale.app, log in, enable "Run on login"
+echo "- Sign in to the App Store, then re-run (masApps fail until you do)"
+echo "- Open Tailscale.app, log in, enable \"Run on login\""
+if [ "$HOST" = laptop ]; then
+  cat <<'TODO'
+- 1Password: sign in, enable Settings > Developer > SSH agent (git signing and ssh use it)
+- Secrets: recreate ~/dotfiles/.zsh_secrets from 1Password, then `exec zsh`
+- Apps without a cask: Attio, Circleback, Oneleet, ZenNotes, Astro
+- Xcode via Xcodes.app, simulator runtimes, Android SDK via Android Studio
+- Raycast: import the settings export from the old Mac
+- Launch Things, Bear and Fantastical once
+TODO
+else
+  cat <<'TODO'
 - Add the printed SSH key to GitHub if it was just generated
 - Launch Things + Bear once
 - Grant Automation consent: run
@@ -90,3 +114,4 @@ cat <<'TODO'
   over SSH, then approve the prompt on screen (or via Screen Sharing)
 - Reboot once FileVault is off and auto-login is set, confirm SSH comes back
 TODO
+fi

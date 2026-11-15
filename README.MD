@@ -1,37 +1,18 @@
 # Dotfiles
 
-1. Clone this repo to `~/`
+Fresh Mac: run the bootstrap with the flake host (`laptop` or `macmini`).
 
 ```sh
-git clone git@github.com:okwasniewski/dotfiles.git
+curl -fsSL https://raw.githubusercontent.com/okwasniewski/dotfiles/main/scripts/bootstrap.sh | bash -s laptop
 ```
 
-2. Install Nix (Lix)
-
-```sh
-curl -sSf -L https://install.lix.systems/lix | sh -s -- install
-```
-
-3. Build and activate nix-darwin (host: `laptop` or `macmini`)
-
-```sh
-cd ~/dotfiles
-nix build ./.nix#darwinConfigurations.laptop.system --extra-experimental-features "nix-command flakes"
-sudo ./result/sw/bin/darwin-rebuild switch --flake ./.nix#laptop
-```
-
-Mac mini: run `scripts/bootstrap-macmini.sh` instead, see `WORKFLOW.md`.
+It installs the Command Line Tools, Homebrew and Lix, clones this repo to
+`~/dotfiles`, applies the nix-darwin host, stows the dotfiles and prints the
+manual steps left (App Store sign-in, 1Password SSH agent, secrets). Re-run it
+any time, it is idempotent.
 
 Moving from another Mac: run `scripts/mac-inventory.sh > inventory.txt` on the
 old one first and diff its apps, Dock and casks against the nix host.
-
-4. Run `stow .` to symlink dotfiles
-
-5. Fix SSH config permissions
-
-```sh
-chmod 600 ~/.ssh/config
-```
 
 ## Checks
 
