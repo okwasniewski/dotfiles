@@ -14,6 +14,10 @@ Review code to improve overall codebase health while enabling developer progress
 
 Approve changes that **improve code health**, even if imperfect. No "perfect" code exists - seek continuous improvement. Don't block PRs for nitpicks.
 
+Commit format, dashes, branch names, file size past 1000 lines, and new
+TypeScript `any` are enforced by hooks (see `~/AGENTS.md`). Don't spend review
+comments on them.
+
 ## Review Categories
 
 ### 1. Design (Critical)

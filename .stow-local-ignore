@@ -6,3 +6,4 @@ result
 \.editorconfig
 .config/opencode/node_modules
 
+\.gitattributes

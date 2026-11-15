@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Global commit-msg hook: Conventional Commits subject, max 72 chars, no em/en dashes.
+set -euo pipefail
+
+msg_file=$1
+body=$(sed -e '/^# -\{24\} >8 -\{24\}$/,$d' -e '/^#/d' "$msg_file")
+subject=$(printf '%s\n' "$body" | sed -n '/[^[:space:]]/{p;q;}')
+
+fail() {
+  printf 'commit-msg: %s\n  %s\n' "$1" "$subject" >&2
+  exit 1
+}
+
+case "$subject" in
+  "Merge "* | "Revert "* | "fixup! "* | "squash! "* | "amend! "* | "") ;;
+  *)
+    printf '%s' "$subject" | grep -Eq '^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^()]+\))?!?: [^ ]' ||
+      fail 'subject must be "type(scope): description" (feat fix docs style refactor perf test build ci chore revert)'
+    [ "$(printf '%s' "$subject" | wc -m)" -le 72 ] || fail 'subject is longer than 72 characters'
+    ;;
+esac
+
+if printf '%s' "$body" | grep -q -e $'\xe2\x80\x94' -e $'\xe2\x80\x93'; then
+  fail 'message contains an em or en dash, use a hyphen or rewrite'
+fi
+
+local_hook="$(git rev-parse --git-common-dir)/hooks/commit-msg"
+if [ -x "$local_hook" ]; then exec "$local_hook" "$@"; fi

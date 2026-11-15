@@ -8,72 +8,44 @@ description: >
 
 # Conventional Commits
 
-Create atomic, well-formatted commits following the Conventional Commits spec.
+The global `commit-msg` hook enforces the format: `type(scope): description`,
+types `feat fix docs style refactor perf test build ci chore revert`, optional
+`!` for breaking changes, subject up to 72 chars, no em or en dashes. This
+skill covers what the hook can't check.
 
-## Format
+## Subject
 
-```
-type(scope): description
-```
+- Imperative mood: "add feature", not "added feature".
+- Say why when it isn't obvious from the what.
+- Scope is optional. Derive it from the main directory or module changed:
+  `auth`, `api`, `ui`, `deps`.
 
-- **Under 72 characters**
-- **Imperative mood** - "add feature" not "added feature"
-- **Focus on "why"** not "what"
+## Atomic commits
 
-## Types
+Split changes that mix:
 
-| Type | When to use |
-|------|-------------|
-| `feat` | New feature |
-| `fix` | Bug fix |
-| `refactor` | Code change (no new feature/fix) |
-| `docs` | Documentation only |
-| `style` | Formatting, whitespace |
-| `test` | Adding/updating tests |
-| `chore` | Maintenance, dependencies |
-| `perf` | Performance improvement |
-| `ci` | CI/CD changes |
+- unrelated code areas
+- types (a feature plus a fix plus a refactor)
+- source, config, and docs that don't depend on each other
 
-## Scope
-
-Optional. Derive from primary directory/module changed.
-
-Examples: `auth`, `api`, `ui`, `build`, `deps`
-
-## Atomic Commits
-
-Split changes if they touch:
-- Different concerns (unrelated code areas)
-- Different types (feature + fix + refactor mixed)
-- Different file patterns (source vs config vs docs)
-
-Each commit should be independently revertable.
+Each commit should revert cleanly on its own.
 
 ## Examples
 
-**Good:**
+Good:
+
 ```
 feat(auth): add JWT refresh token rotation
 fix(api): handle null response in user endpoint
 refactor: extract validation logic to shared util
-chore: update dependencies
-docs(readme): add setup instructions
 ```
 
-**Bad:**
+Bad:
+
 ```
-updated stuff                              # vague
-Fixed the bug in the authentication        # past tense, too long
-WIP                                        # meaningless
+fix: updated stuff                              # vague, past tense
 feat: add login and fix signup and update deps  # not atomic
 ```
 
-## Breaking Changes
-
-For breaking changes, add `!` after type/scope:
-
-```
-feat(api)!: change response format for user endpoint
-```
-
-Or add `BREAKING CHANGE:` in commit body.
+Breaking changes get `!` (`feat(api)!: change user response format`) or a
+`BREAKING CHANGE:` footer in the body.
