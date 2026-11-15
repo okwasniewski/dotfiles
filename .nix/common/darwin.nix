@@ -36,7 +36,7 @@
       "opencode"
       "stripe-cli"
       "pnpm"
-      "python@3.13"
+      "python@3.15"
       "ruby@3.4"
       "swiftlint"
       "swiftformat"
