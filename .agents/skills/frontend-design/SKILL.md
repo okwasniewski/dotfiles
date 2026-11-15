@@ -1,42 +1,79 @@
 ---
 name: frontend-design
-description: Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.
-license: Complete terms in LICENSE.txt
+description: Build web UI (components, pages, dashboards, landing pages, HTML artifacts, posters) with a deliberate visual direction instead of default AI styling. Use when building, styling, or restyling any web interface.
 ---
 
-This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.
+# Frontend design
 
-The user provides frontend requirements: a component, page, application, or interface to build. They may include context about the purpose, audience, or technical constraints.
+Build working UI with a clear point of view, then look at it before calling it
+done.
 
-## Design Thinking
+## Before coding
 
-Before coding, understand the context and commit to a BOLD aesthetic direction:
-- **Purpose**: What problem does this interface solve? Who uses it?
-- **Tone**: Pick an extreme: brutally minimal, maximalist chaos, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian, etc. There are so many flavors to choose from. Use these for inspiration but design one that is true to the aesthetic direction.
-- **Constraints**: Technical requirements (framework, performance, accessibility).
-- **Differentiation**: What makes this UNFORGETTABLE? What's the one thing someone will remember?
+Write down, in a sentence each:
 
-**CRITICAL**: Choose a clear conceptual direction and execute it with precision. Bold maximalism and refined minimalism both work - the key is intentionality, not intensity.
+- Who uses it and what they do on it.
+- Constraints: framework, design system, accessibility, performance.
+- The visual direction, such as "warm editorial, serif headlines, lots of
+  paper" or "dense dark ops console, monospace numbers". Carry that one
+  direction through every element.
 
-Then implement working code (HTML/CSS/JS, React, Vue, etc.) that is:
-- Production-grade and functional
-- Visually striking and memorable
-- Cohesive with a clear aesthetic point-of-view
-- Meticulously refined in every detail
+If the project has a design system, tokens, a Tailwind theme, or a component
+library, use it and match the neighbouring screens. The house style below is
+for greenfield work and standalone artifacts.
 
-## Frontend Aesthetics Guidelines
+## House style
 
-Focus on:
-- **Typography**: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt instead for distinctive choices that elevate the frontend's aesthetics; unexpected, characterful font choices. Pair a distinctive display font with a refined body font.
-- **Color & Theme**: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes.
-- **Motion**: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Use Motion library for React when available. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (animation-delay) creates more delight than scattered micro-interactions. Use scroll-triggering and hover states that surprise.
-- **Spatial Composition**: Unexpected layouts. Asymmetry. Overlap. Diagonal flow. Grid-breaking elements. Generous negative space OR controlled density.
-- **Backgrounds & Visual Details**: Create atmosphere and depth rather than defaulting to solid colors. Add contextual effects and textures that match the overall aesthetic. Apply creative forms like gradient meshes, noise textures, geometric patterns, layered transparencies, dramatic shadows, decorative borders, custom cursors, and grain overlays.
+Oskar's default is quiet and editorial, the same look as the `html-plans`
+template:
 
-NEVER use generic AI-generated aesthetics like overused font families (Inter, Roboto, Arial, system fonts), cliched color schemes (particularly purple gradients on white backgrounds), predictable layouts and component patterns, and cookie-cutter design that lacks context-specific character.
+- Type: a serif display face for headings (Instrument Serif, Newsreader) and a
+  readable body face. Fira Code for code. One display face, one body face.
+- Color: warm paper and ink. Light `#fbfaf7` background, `#1c1b19` text; dark
+  `#181715` background, `#e6e3dc` text; muted `#7a766e`; rules `#dcd8cf`. At
+  most one accent. Define them as CSS variables and support
+  `prefers-color-scheme`.
+- Layout: 60 to 75 characters per line, generous vertical rhythm, left-aligned
+  body text, hairline rules instead of boxes and shadows.
+- Motion: CSS only for plain HTML, Motion for React. One load reveal at most.
+  Respect `prefers-reduced-motion`.
 
-Interpret creatively and make unexpected choices that feel genuinely designed for the context. No design should be the same. Vary between light and dark themes, different fonts, different aesthetics. NEVER converge on common choices (Space Grotesk, for example) across generations.
+When the brief calls for something else (a game, a brand palette, a dense
+tool), commit to that direction just as fully.
 
-**IMPORTANT**: Match implementation complexity to the aesthetic vision. Maximalist designs need elaborate code with extensive animations and effects. Minimalist or refined designs need restraint, precision, and careful attention to spacing, typography, and subtle details. Elegance comes from executing the vision well.
+## Defaults to avoid
 
-Remember: Claude is capable of extraordinary creative work. Don't hold back, show what can truly be created when thinking outside the box and committing fully to a distinctive vision.
+These read as generated:
+
+- Purple, indigo, or purple-to-blue gradients, especially on white.
+- Inter, Roboto, or the system stack as the only typeface. Space Grotesk as the
+  "distinctive" pick.
+- Centered hero, then three icon feature cards, then a CTA band.
+- Every surface a rounded card with a drop shadow, or blurred glass panels.
+- Emoji as icons or in headings.
+- Filler copy: "Supercharge your workflow", "Seamless", "Unlock".
+
+## Build
+
+Ship working code in whatever the project uses. Match effort to the direction:
+a minimal design needs precise spacing and type, a maximal one needs the detail
+to back it up. Check WCAG AA contrast, visible keyboard focus, and a 390px-wide
+layout.
+
+## Verify with screenshots
+
+1. Capture desktop, mobile, and dark mode. Use the harness's browser or preview
+   tool if it has one. Otherwise headless Chrome works for files and local dev
+   servers:
+
+   ```sh
+   chrome="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+   url=file:///abs/path/index.html   # or http://localhost:3000
+   "$chrome" --headless --hide-scrollbars --window-size=1440,900 --screenshot=/tmp/ui-desktop.png "$url"
+   "$chrome" --headless --hide-scrollbars --window-size=390,844 --screenshot=/tmp/ui-mobile.png "$url"
+   "$chrome" --headless --hide-scrollbars --force-dark-mode --window-size=1440,900 --screenshot=/tmp/ui-dark.png "$url"
+   ```
+
+2. Open each PNG and check it against the stated direction and the avoid list,
+   plus overflow, alignment, contrast, and focus states.
+3. Fix what you find and capture again. Report the screenshot paths.

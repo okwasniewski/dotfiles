@@ -9,7 +9,7 @@ Render a markdown plan from `.agent/plans/` into a self-contained, book-like HTM
 
 ## Rules
 
-- Rendering is automatic: whenever you create or update a plan, re-render its HTML in the same turn. Never wait for an explicit request.
+- Whenever you create or update a plan, re-render its HTML in the same turn.
 - Iterate, do not proliferate: each plan has exactly one HTML file at `.agent/plans/<name>-plan.html`. On update, edit that file in place with targeted edits matching the markdown diff - never write a new file, add a `-v2`/date suffix, or regenerate the whole document from scratch when only a section changed.
 - All plan prose passes through the **unslop** skill before it lands in the markdown or the HTML.
 - Source: `.agent/plans/<name>-plan.md` (see the **planning** skill for the plan format). Output: `.agent/plans/<name>-plan.html` next to it.

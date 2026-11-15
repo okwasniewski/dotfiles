@@ -46,6 +46,6 @@ Follow these steps to create a Pull Request:
 
 ## Principles
 
-- **Compliance**: Never ignore the PR template. It exists for a reason.
+- **Template**: Use the repo's PR template when it has one.
 - **Completeness**: Fill out all relevant sections.
 - **Accuracy**: Don't check boxes for tasks you haven't done.
