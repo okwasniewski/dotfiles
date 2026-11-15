@@ -49,6 +49,16 @@
       "installedAt": "2026-11-15T11:35:14.823Z",
       "updatedAt": "2026-11-15T11:35:14.823Z"
     },
+    "pr-review-canvas": {
+      "source": "cursor/plugins",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/cursor/plugins.git",
+      "ref": "main",
+      "skillPath": "cursor-team-kit/skills/pr-review-canvas/SKILL.md",
+      "skillFolderHash": "44daadad1fe53ccd3a2773e87879965c1640ab71",
+      "installedAt": "2026-11-15T16:58:56.318Z",
+      "updatedAt": "2026-11-15T16:58:56.318Z"
+    },
     "recall": {
       "source": "cursor/plugins",
       "sourceType": "github",
@@ -58,6 +68,16 @@
       "skillFolderHash": "2382051d09970ec14e90dc81da1df8531ca4fdd1",
       "installedAt": "2026-11-15T11:35:14.823Z",
       "updatedAt": "2026-11-15T11:35:14.823Z"
+    },
+    "show-me": {
+      "source": "humanlayer/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/humanlayer/skills.git",
+      "ref": "main",
+      "skillPath": "plugins/show-me/skills/show-me/SKILL.md",
+      "skillFolderHash": "362200ac2fb3c17b765049444e88de73767e6d08",
+      "installedAt": "2026-11-15T16:58:59.453Z",
+      "updatedAt": "2026-11-15T16:58:59.453Z"
     },
     "technical-writing": {
       "source": "cursor/plugins",

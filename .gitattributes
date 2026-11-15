@@ -4,7 +4,9 @@
 .agents/skills/diffs/** linguist-vendored
 .agents/skills/find-skills/** linguist-vendored
 .agents/skills/how/** linguist-vendored
+.agents/skills/pr-review-canvas/** linguist-vendored
 .agents/skills/recall/** linguist-vendored
+.agents/skills/show-me/** linguist-vendored
 .agents/skills/technical-writing/** linguist-vendored
 .agents/skills/unslop/** linguist-vendored
 .agents/skills/why/** linguist-vendored
