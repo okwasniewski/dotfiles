@@ -55,7 +55,6 @@
   prompt = false
 
 [gpg]
-  program = /opt/homebrew/bin/gpg
 	format = ssh
 [rerere]
   enabled = true
