@@ -27,11 +27,8 @@ case ":$PATH:" in
 *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/dotfiles/bin:$PATH"
-export PATH="$HOME/.grok/bin:$PATH"
 
 # Environment
 export LANG=en_US.UTF-8
@@ -45,8 +42,8 @@ fi
 export VISUAL="$EDITOR"
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# Secrets, exported here so non-interactive tools (lazygit's commit message
-# generator, agent panes) can see them too.
+# Secrets, exported here so non-interactive tools (agent panes, launchd jobs)
+# can see them too.
 if [ -f "$HOME/.zsh_secrets" ]; then
   set -a
   . "$HOME/.zsh_secrets"

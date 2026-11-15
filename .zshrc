@@ -7,7 +7,7 @@ alias cat="bat"
 alias lg="lazygit"
 alias :q="exit"
 alias vim="nvim"
-alias oc="OPENCODE_EXPERIMENTAL_PLAN_MODE=1 opencode"
+alias oc="opencode"
 
 # Agents skip permission prompts (interactive shells only, scripts unaffected)
 alias claude="claude --dangerously-skip-permissions"
@@ -24,7 +24,6 @@ function y() {
 
 ## React Native Aliases
 alias pod-install-new="bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install"
-alias pod-install-old="bundle install && bundle exec pod install"
 
 # Setup aliases for nix
 # DARWIN_HOST picks the flake host, set it in ~/.zshrc.local on machines other than the laptop
@@ -52,7 +51,6 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # Load completions, full compinit only when the dump is older than 24h
-fpath=(~/.grok/completions/zsh $fpath)
 autoload -Uz compinit
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
   compinit
@@ -88,7 +86,5 @@ eval "$(starship init zsh)"
 
 # Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-[ -f "$HOME/.daytona.completion_script.zsh" ] && source "$HOME/.daytona.completion_script.zsh"
 
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
