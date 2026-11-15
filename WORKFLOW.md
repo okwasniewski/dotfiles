@@ -15,7 +15,7 @@ when you close the lid.
 ### 1. Bootstrap the mini
 
 ```sh
-~/dotfiles/scripts/bootstrap-macmini.sh
+~/dotfiles/scripts/bootstrap.sh macmini
 ```
 
 Idempotent, re-run any time. It installs Lix, applies the `macmini` flake host,
