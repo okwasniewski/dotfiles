@@ -28,14 +28,42 @@ Transcripts, for `recall`:
 
 Also vendored the same way, outside pstack: `pr-review-canvas`
 (`cursor/plugins`, `cursor-team-kit/skills/`) and `show-me`
-(`humanlayer/skills`). Both are marked user-invoked only, so when the user asks
-to understand or explain a PR, read the `SKILL.md` directly and follow it:
-`pr-review-canvas` for a full walkthrough, `show-me` for a quick visual answer
-in chat. Where they serve or `open` an HTML file:
+(`humanlayer/skills`). Both are marked user-invoked only, so read the
+`SKILL.md` directly and follow it. Pick one:
+
+- `pr-review-canvas`: "help me understand this PR", or any full review.
+- `show-me`: a narrow question about a PR or code ("how does X flow now",
+  "what changed in Y"), including follow-ups after a canvas.
+
+Where either one serves or `open`s an HTML file:
 
 - T3 Code: show the file with `html_preview`, then `html_render`. No server.
 - Terminal: `open /tmp/pr-review-<n>.html`. No server needed, the page is
   self-contained.
+
+`pr-review-canvas` fixes:
+
+- Fetch: also run `gh pr view <n> -R <owner>/<repo> --json
+  commits,reviews,comments,statusCheckRollup`. The skill's calls miss commits,
+  review verdicts, top-level comments and CI.
+- Assembly: in the Python script, read `styles.css`, `renderer.js` and
+  `template.html` from `~/.agents/skills/pr-review-canvas/`, not by relative
+  path.
+- Imports: `renderer.js` hides every import line, added ones too. When a PR
+  adds a dependency or a new module, say so in the file note.
+- Keys: a `data-diff` key missing from the patches JSON renders nothing, with
+  no error. Before showing the page, check every key resolves:
+
+  ```bash
+  comm -23 \
+    <(grep -o 'data-diff="[^"]*"' /tmp/pr-review-<n>-body.html | cut -d'"' -f2 | sort -u) \
+    <(jq -r 'keys[]' /tmp/pr-patches-<n>.json | sort)
+  ```
+
+  Empty output means all keys match.
+
+`show-me` for a PR: read the PR body and full diff first, keep to two or three
+visuals, and end with a short list of what a reviewer should check.
 
 Oskar's overrides:
 
