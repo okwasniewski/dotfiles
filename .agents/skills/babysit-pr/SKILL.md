@@ -38,8 +38,7 @@ gh api repos/{owner}/{repo}/issues/<n>/comments --jq '.[] | select(.created_at >
 
 ## Handle findings
 
-1. Read the source the bot points at before touching anything. Verify the claim,
-   use `code-review` skill for anything non-trivial.
+1. Read the source the bot points at before touching anything. Verify the claim.
 2. Real finding or real CI failure: fix with the smallest correct change. Commit
    via `conventional-commit` skill. Push.
 3. Infra flake (runner lost, network, timeout unrelated to diff): rerun with

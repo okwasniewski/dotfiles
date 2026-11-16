@@ -74,11 +74,7 @@ npm view <package-name> version
 
 - Use the package manager that matches the lockfile.
 
-## Skills Discovery
-
-When user asks "how do I do X", "find a skill for X", or wants to extend
-capabilities, use the `find-skills` skill to search the open agent skills
-ecosystem via `npx skills find [query]`.
+## Skills
 
 Before following a pstack skill (`how`, `why`, `recall`, `blast-radius`,
 `technical-writing`, `unslop`) or `pr-review-canvas` / `show-me`, read

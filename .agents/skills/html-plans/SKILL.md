@@ -1,6 +1,6 @@
 ---
 name: html-plans
-description: "Render implementation plans as elegant editorial HTML documents. Use automatically whenever a plan is created or updated (the user never has to ask), plus for /plan render, 'render this plan', 'pretty plan', or 'plan as html'."
+description: "Render implementation plans as elegant editorial HTML documents. Use automatically whenever a plan is created or updated (the user never has to ask), plus for 'render this plan', 'pretty plan', or 'plan as html'."
 ---
 
 # HTML Plans
@@ -12,7 +12,7 @@ Render a markdown plan from `.agent/plans/` into a self-contained, book-like HTM
 - Whenever you create or update a plan, re-render its HTML in the same turn.
 - Iterate, do not proliferate: each plan has exactly one HTML file at `.agent/plans/<name>-plan.html`. On update, edit that file in place with targeted edits matching the markdown diff - never write a new file, add a `-v2`/date suffix, or regenerate the whole document from scratch when only a section changed.
 - All plan prose passes through the **unslop** skill before it lands in the markdown or the HTML.
-- Source: `.agent/plans/<name>-plan.md` (see the **planning** skill for the plan format). Output: `.agent/plans/<name>-plan.html` next to it.
+- Source: `.agent/plans/<name>-plan.md` (`**Status:**` and `**Created:**` lines, then `##` Goal, Context, Approach, Key Decisions, Tasks). Output: `.agent/plans/<name>-plan.html` next to it.
 - Use `references/template.html`. Copy the `<head>` and CSS verbatim - do not restyle, "improve", or inline-tweak the design. Consistency across plans is the point.
 - Never edit the HTML by hand to change plan content. Edit the markdown, re-render.
 - The document must stay self-contained: one file, CSS inline, fonts via the Google Fonts link already in the template (system serif fallback works offline).

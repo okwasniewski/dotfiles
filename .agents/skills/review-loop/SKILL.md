@@ -61,9 +61,8 @@ Review <scope> in <absolute repo path>. Read-only: do not edit files,
 commit, push, or start subagents.
 Diff: <exact git command from step 1>
 Context: <one or two lines on what the change is for>
-If a `code-review` skill is available, follow it. Focus on bugs,
-regressions, security, data loss, performance and missing tests. Skip
-style, naming and anything a linter or hook enforces.
+Focus on bugs, regressions, security, data loss, performance and missing
+tests. Skip style, naming and anything a linter or hook enforces.
 Already rejected, do not resend unless you have new evidence:
 <list from earlier rounds, or "none">
 Return a list. Per finding: file:line, severity (high/medium/low), the
