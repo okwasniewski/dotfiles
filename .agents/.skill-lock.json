@@ -1,16 +1,6 @@
 {
   "version": 3,
   "skills": {
-    "arena": {
-      "source": "cursor/plugins",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/cursor/plugins.git",
-      "ref": "main",
-      "skillPath": "pstack/skills/arena/SKILL.md",
-      "skillFolderHash": "86fe51c1476d0bce06660a67b05af72fc51455ea",
-      "installedAt": "2026-11-15T11:35:14.821Z",
-      "updatedAt": "2026-11-15T11:35:14.821Z"
-    },
     "blast-radius": {
       "source": "cursor/plugins",
       "sourceType": "github",

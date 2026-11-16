@@ -1,10 +1,10 @@
 # pstack adapter
 
-`arena`, `blast-radius`, `how`, `recall`, `technical-writing`, `unslop` and
-`why` are vendored verbatim from pstack (`cursor/plugins`, `pstack/skills/`)
-through `npx skills`. `.skill-lock.json` records the upstream tree hash. Update
-them with `npx skills update -g` and never edit them in place. Local overrides
-go here.
+`blast-radius`, `how`, `recall`, `technical-writing`, `unslop` and `why` are
+vendored verbatim from pstack (`cursor/plugins`, `pstack/skills/`) through
+`npx skills`. `.skill-lock.json` records the upstream tree hash. Update them
+with `npx skills update -g` and never edit them in place. Local overrides go
+here.
 
 pstack is written for Cursor. Map its names to the tool you run in:
 
@@ -14,7 +14,7 @@ pstack is written for Cursor. Map its names to the tool you run in:
 | `readonly: true` | A read-only explore agent (Claude Code `Explore`). Also tell it not to edit files. |
 | `AskQuestion` | Your ask-the-user tool, or ask in plain text. |
 | Model slugs, `pstack-models.mdc` | Ignore. Use the session model unless the user names one. |
-| Another skill in bold or backticks | Read `~/.agents/skills/<name>/SKILL.md` and follow it. If it is not installed (`poteto-mode`, `session-pickup`, `automate-me`, `principle-*`), skip that step and say so. |
+| Another skill in bold or backticks | Read `~/.agents/skills/<name>/SKILL.md` and follow it. If it is not installed (`arena`, `poteto-mode`, `session-pickup`, `automate-me`, `principle-*`), skip that step and say so. |
 | Cursor Automations, Bugbot, cloud agents | Skip and say so. |
 
 Transcripts, for `recall`:
