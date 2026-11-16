@@ -11,24 +11,6 @@
       "installedAt": "2026-11-15T11:35:14.823Z",
       "updatedAt": "2026-11-15T11:35:14.823Z"
     },
-    "diffs": {
-      "source": "pierrecomputer/pierre",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/pierrecomputer/pierre.git",
-      "skillPath": "skills/diffs/SKILL.md",
-      "skillFolderHash": "5d955c74d22931704ed95c9f88f9f2273ee0080f",
-      "installedAt": "2026-08-26T14:05:59.751Z",
-      "updatedAt": "2026-08-26T14:05:59.751Z"
-    },
-    "find-skills": {
-      "source": "vercel-labs/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/skills.git",
-      "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
-      "installedAt": "2026-11-15T11:35:15.914Z",
-      "updatedAt": "2026-11-15T11:35:15.914Z"
-    },
     "how": {
       "source": "cursor/plugins",
       "sourceType": "github",

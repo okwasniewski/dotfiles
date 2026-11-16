@@ -1,7 +1,5 @@
 # Vendored from upstream via `npx skills`, see .agents/.skill-lock.json.
 .agents/skills/blast-radius/** linguist-vendored
-.agents/skills/diffs/** linguist-vendored
-.agents/skills/find-skills/** linguist-vendored
 .agents/skills/how/** linguist-vendored
 .agents/skills/pr-review-canvas/** linguist-vendored
 .agents/skills/recall/** linguist-vendored
