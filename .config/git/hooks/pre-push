@@ -1,29 +1,7 @@
 #!/usr/bin/env bash
-# Global pre-push hook: pushed branches must be named oskar/*, except main,
-# master and the remote's default branch.
+# core.hooksPath hides .git/hooks, so this only forwards to the repo's own
+# pre-push hook.
 set -euo pipefail
 
-remote=$1
-updates=$(cat)
-default=$(git symbolic-ref --quiet --short "refs/remotes/$remote/HEAD" 2>/dev/null || true)
-default=${default#"$remote/"}
-zero=0000000000000000000000000000000000000000
-
-while read -r _ local_sha remote_ref _; do
-  [ -n "${remote_ref:-}" ] || continue
-  [ "$local_sha" = "$zero" ] && continue
-  case "$remote_ref" in
-    refs/heads/*) branch=${remote_ref#refs/heads/} ;;
-    *) continue ;;
-  esac
-  case "$branch" in
-    oskar/* | main | master | "$default") ;;
-    *)
-      printf 'pre-push: branch "%s" must start with oskar/ (git branch -m oskar/%s)\n' "$branch" "$branch" >&2
-      exit 1
-      ;;
-  esac
-done <<<"$updates"
-
 local_hook="$(git rev-parse --git-common-dir)/hooks/pre-push"
-if [ -x "$local_hook" ]; then printf '%s\n' "$updates" | exec "$local_hook" "$@"; fi
+if [ -x "$local_hook" ]; then exec "$local_hook" "$@"; fi

@@ -26,8 +26,7 @@ afterwards, so per-repo hooks keep working.
   Merge, revert, fixup and squash messages pass.
 - `pre-commit`: no em or en dashes on added lines. Files marked
   `linguist-vendored` or `linguist-generated` in `.gitattributes` are skipped.
-- `pre-push`: branches must be `oskar/*`. `main`, `master` and the remote's
-  default branch are exempt.
+- `pre-push`: no checks, only runs the repo's own hook.
 
 Claude Code `PreToolUse` hooks in `.claude/hooks`, registered in
 `.claude/settings.json`:

@@ -29,8 +29,7 @@ These rules are enforced by hooks. When one fires, fix the cause instead of
 bypassing it with `--no-verify`.
 
 - Git (`~/.config/git/hooks`, every repo): Conventional Commits subject up to
-  72 chars; no em or en dashes in commit messages or added lines; pushed
-  branches must be `oskar/*` (main, master, default branch exempt).
+  72 chars; no em or en dashes in commit messages or added lines.
 - Claude Code (`~/.claude/hooks`): the package manager must match the
   lockfile; source files may not cross 1000 lines; no new TypeScript `any`.
 
