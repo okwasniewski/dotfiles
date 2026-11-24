@@ -33,7 +33,8 @@ fi
 step "Clone dotfiles"
 if [ -d "$DOTFILES/.git" ]; then
   # A re-run should pick up fixes pushed since the first attempt. Best effort: offline or diverged is fine.
-  git -C "$DOTFILES" pull --ff-only || echo "Could not update $DOTFILES, continuing with the local copy."
+  # No global git config: it rewrites GitHub https to ssh, which needs the 1Password agent.
+  GIT_CONFIG_GLOBAL=/dev/null git -C "$DOTFILES" pull --ff-only || echo "Could not update $DOTFILES, continuing with the local copy."
 else
   git clone https://github.com/okwasniewski/dotfiles.git "$DOTFILES"
 fi
