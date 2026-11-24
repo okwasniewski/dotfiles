@@ -30,6 +30,8 @@ esac
 export PATH="$HOME/.npm-global/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.grok/bin:$PATH"
+export PATH="$PATH:$HOME/.docker/bin"
+export PATH="$PATH:$HOME/.maestro/bin"
 
 # Environment
 export LANG=en_US.UTF-8
