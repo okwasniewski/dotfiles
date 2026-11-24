@@ -7,24 +7,27 @@
 - `opencode`, T3 Code: coding agents
 - `nvim`, `lazygit`: editing and git
 
-## Remote dev on the mac mini
+## Remote dev on a runner
 
-Goal: agents run on the mini, you attach from the laptop and they keep working
+Goal: agents run on a runner, you attach from the laptop and they keep working
 when you close the lid.
 
-### 1. Bootstrap the mini
+### 1. Bootstrap the runner
 
 ```sh
-~/dotfiles/scripts/bootstrap.sh macmini
+~/dotfiles/scripts/bootstrap.sh devbox   # or bigmac on the main runner
 ```
 
-Idempotent, re-run any time. It installs Lix, applies the `macmini` flake host,
-stows dotfiles, sets up a local SSH key and turns FileVault off so the box comes
-back unattended after a reboot. It prints the manual steps left at the end.
+Idempotent, re-run any time. It installs Lix, applies the flake host, stows
+dotfiles, sets up a local SSH key and turns FileVault off so the box comes back
+unattended after a reboot. It prints the manual steps left at the end.
 
-The `macmini` host (`.nix/hosts/macmini`) owns the headless bits: never sleep,
-restart after power loss, Remote Login, Screen Sharing, and a launchd agent
-(`dev.oskar.dotfiles-pull`) that runs `git pull --ff-only` daily at 09:00.
+`devbox` is the profile for every runner: CLI base, agent CLIs and the mobile
+toolchain, no desktop apps. `bigmac` is `devbox` plus Docker, Postgres, T3 Code
+and Chrome. Both import `.nix/common/headless.nix`, which owns the headless
+bits: never sleep, restart after power loss, Remote Login, Screen Sharing, and
+a launchd agent (`dev.oskar.dotfiles-pull`) that runs `git pull --ff-only`
+daily at 09:00.
 
 Reach it over Tailscale rather than port forwarding.
 
@@ -37,27 +40,19 @@ nix-rebuild
 ```
 
 `nix-rebuild` targets `$DARWIN_HOST` (default `laptop`). The bootstrap script
-sets `DARWIN_HOST=macmini` in the mini's `~/.zshrc.local`.
+writes the runner's host into its `~/.zshrc.local`.
 
-### 3. SSH config on the laptop
+### 3. Attach
 
-```
-Host mini
-  HostName oskars-mac-mini
-  User bigmac
-  ServerAliveInterval 30
-  ServerAliveCountMax 6
-```
-
-### 4. Attach
+`.ssh/config` has the `bigmac` alias (user `bigmac`, over Tailscale MagicDNS).
 
 ```sh
-ssh mini -t tmux new -A -s main
+ssh bigmac -t tmux new -A -s main
 ```
 
 The tmux session outlives the connection, so agents keep running when you
-disconnect. For bad links use `mosh mini` instead, then `tmux attach`. `mosh` is
-installed via nix on both machines.
+disconnect. For bad links use `mosh bigmac` instead, then `tmux attach`. `mosh`
+is installed via nix on every machine.
 
 ## Setup / reload
 

@@ -1,6 +1,12 @@
 # Dotfiles
 
-Fresh Mac: run the bootstrap with the flake host (`laptop` or `macmini`).
+Fresh Mac: run the bootstrap with the flake host.
+
+| Host | For | Gets |
+| --- | --- | --- |
+| `laptop` | the main machine | everything: desktop apps, App Store apps, Dock |
+| `devbox` | any runner | CLI base, agent CLIs, mobile toolchain, headless settings. No desktop apps |
+| `bigmac` | the main runner | `devbox` plus Docker, Postgres, T3 Code and Chrome |
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/okwasniewski/dotfiles/main/scripts/bootstrap.sh | bash -s laptop
@@ -11,12 +17,19 @@ It installs the Command Line Tools, Lix and Homebrew, clones this repo to
 manual steps left (1Password SSH agent, secrets, apps without a cask). Re-run
 it any time, it is idempotent.
 
+What a host gets is composed from `.nix/common`: `darwin.nix` and
+`packages.nix` go to every Mac, a host adds `mobile.nix` (iOS, Android, React
+Native), `backend.nix` (Docker, Postgres) or `headless.nix` (never sleep, SSH,
+Screen Sharing, daily dotfiles pull). Put a new tool in the smallest module
+that needs it.
+
 Before running it:
 
 - The macOS account name must match the host's user in `.nix/flake.nix`
-  (`okwasniewski` for `laptop`). The script checks and stops early if not.
-- Have the Apple ID at hand: on the first run the script opens the App Store
-  and waits for the sign-in, because `mas` cannot sign in by itself.
+  (`okwasniewski` for `laptop` and `devbox`, `bigmac` for `bigmac`). The
+  script checks and stops early if not.
+- On `laptop`, have the Apple ID at hand: on the first run the script opens the
+  App Store and waits for the sign-in, because `mas` cannot sign in by itself.
 
 Moving from another Mac: run `scripts/mac-inventory.sh > inventory.txt` on the
 old one first and diff its apps, Dock and casks against the nix host.
