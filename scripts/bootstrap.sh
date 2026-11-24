@@ -48,8 +48,11 @@ step "Lix"
 if [ ! -e /nix/var/nix/profiles/default/bin/nix ]; then
   curl -sSf -L https://install.lix.systems/lix | sh -s -- install --no-confirm
 fi
+# The profile script reads unset variables (ZSH_VERSION), which aborts under `set -u`.
+set +u
 # shellcheck disable=SC1091
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+set -u
 
 step "Check macOS user"
 # A host hardcodes its user: a mismatch only surfaces as a failed activation half an hour in.
