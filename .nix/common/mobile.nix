@@ -7,6 +7,8 @@
     cmake
     ninja
     scrcpy
+    # From nix, not Homebrew: the brew formula refuses to install before Xcode.app exists.
+    swiftlint
     watchman
     xcbeautify
     yarn
@@ -18,7 +20,6 @@
       "cocoapods"
       "ruby@3.4"
       "swiftformat"
-      "swiftlint"
       "xcode-build-server"
     ];
     casks = [
