@@ -23,6 +23,13 @@
             ./hosts/${host}/configuration.nix
           ];
         };
+
+      # Every runner is a devbox and differs only by its macOS account. Listing an
+      # account here creates the `devbox-<account>` host that bootstrap.sh picks.
+      devboxUsers = [
+        "bigmac"
+        "okwasniewski"
+      ];
     in
     {
       darwinConfigurations = {
@@ -30,11 +37,13 @@
           host = "laptop";
           user = "okwasniewski";
         };
-        # Every runner shares this one profile, so the account name is the same on all of them.
-        devbox = mkDarwin {
+      }
+      // nixpkgs.lib.genAttrs' devboxUsers (user: {
+        name = "devbox-${user}";
+        value = mkDarwin {
           host = "devbox";
-          user = "bigmac";
+          inherit user;
         };
-      };
+      });
     };
 }

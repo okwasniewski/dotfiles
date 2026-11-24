@@ -1,6 +1,6 @@
 # Dotfiles
 
-Fresh Mac: run the bootstrap with the flake host.
+Fresh Mac: run the bootstrap with `laptop` or `devbox`.
 
 | Host | For | Gets |
 | --- | --- | --- |
@@ -24,9 +24,10 @@ that needs it.
 
 Before running it:
 
-- The macOS account name must match the host's user in `.nix/flake.nix`
-  (`okwasniewski` for `laptop`, `bigmac` for `devbox`). The script checks and
-  stops early if not.
+- `laptop` expects the macOS account `okwasniewski`. A `devbox` can run under
+  any account listed in `devboxUsers` in `.nix/flake.nix`, each one becomes the
+  flake host `devbox-<account>`. The script checks and stops early if the
+  account is not there.
 - On `laptop`, have the Apple ID at hand: on the first run the script opens the
   App Store and waits for the sign-in, because `mas` cannot sign in by itself.
 

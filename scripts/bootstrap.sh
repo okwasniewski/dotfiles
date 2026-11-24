@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Bootstrap a fresh Mac from these dotfiles. Host is a flake host: laptop (main
-# machine) or devbox (any runner).
+# Bootstrap a fresh Mac from these dotfiles: laptop (main machine) or devbox
+# (any runner, under whatever account it has).
 # Idempotent - safe to re-run. Run interactively (needs sudo and a few prompts).
 # System settings and apps live in .nix, this script only covers what
 # nix-darwin cannot: Homebrew and nix themselves, stow, machine-local files.
@@ -18,6 +18,9 @@ laptop | devbox) ;;
   ;;
 esac
 DOTFILES="$HOME/dotfiles"
+# One devbox profile, one flake host per account name.
+FLAKE_HOST="$HOST"
+[ "$HOST" = devbox ] && FLAKE_HOST="devbox-$(whoami)"
 step() { printf '\n\033[1m==> %s\033[0m\n' "$1"; }
 
 step "Xcode Command Line Tools"
@@ -49,11 +52,16 @@ fi
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
 step "Check macOS user"
-# The host hardcodes its user: a mismatch only surfaces as a failed activation half an hour in.
-want_user=$(nix eval --raw "$DOTFILES/.nix#darwinConfigurations.$HOST.config.system.primaryUser") || exit 1
+# A host hardcodes its user: a mismatch only surfaces as a failed activation half an hour in.
+want_user=$(nix eval --raw "$DOTFILES/.nix#darwinConfigurations.$FLAKE_HOST.config.system.primaryUser")
 if [ "$want_user" != "$(whoami)" ]; then
-  echo "Host '$HOST' is set up for user '$want_user', but this account is '$(whoami)'." >&2
-  echo "Change the user in $DOTFILES/.nix/flake.nix or recreate the macOS account, then re-run." >&2
+  if [ "$HOST" = devbox ]; then
+    echo "No devbox host for the account '$(whoami)' yet." >&2
+    echo "Add \"$(whoami)\" to devboxUsers in .nix/flake.nix, push, pull here and re-run." >&2
+  else
+    echo "Host '$HOST' is set up for user '$want_user', but this account is '$(whoami)'." >&2
+    echo "Change the user in $DOTFILES/.nix/flake.nix or recreate the macOS account, then re-run." >&2
+  fi
   exit 1
 fi
 
@@ -70,7 +78,7 @@ if [ "$HOST" != laptop ]; then
   # nix-rebuild reads the host from here. Rewritten, so a renamed host heals on the next run.
   touch "$HOME/.zshrc.local"
   grep -v '^export DARWIN_HOST=' "$HOME/.zshrc.local" >"$HOME/.zshrc.local.tmp"
-  echo "export DARWIN_HOST=$HOST" >>"$HOME/.zshrc.local.tmp"
+  echo "export DARWIN_HOST=$FLAKE_HOST" >>"$HOME/.zshrc.local.tmp"
   mv "$HOME/.zshrc.local.tmp" "$HOME/.zshrc.local"
   # Runner: local ssh key instead of the 1Password agent, no commit signing.
   [ -f "$HOME/.ssh/local_config" ] || printf 'Host *\n  IdentityAgent none\n' >"$HOME/.ssh/local_config"
@@ -83,7 +91,7 @@ if [ "$HOST" != laptop ]; then
 fi
 ssh-keygen -F github.com >/dev/null 2>&1 || ssh-keyscan -t ed25519 github.com >>"$HOME/.ssh/known_hosts" 2>/dev/null
 
-step "nix-darwin ($HOST)"
+step "nix-darwin ($FLAKE_HOST)"
 if [ ! -e /run/current-system ]; then
   for f in /etc/zshrc /etc/zprofile /etc/bashrc; do
     [ -f "$f" ] && [ ! -L "$f" ] && sudo mv "$f" "$f.before-nix-darwin"
@@ -95,8 +103,8 @@ if [ ! -e /run/current-system ]; then
   fi
 fi
 rebuild_ok=1
-nix build "$DOTFILES/.nix#darwinConfigurations.$HOST.system" -o "$DOTFILES/result" &&
-  sudo "$DOTFILES/result/sw/bin/darwin-rebuild" switch --flake "$DOTFILES/.nix#$HOST" || rebuild_ok=0
+nix build "$DOTFILES/.nix#darwinConfigurations.$FLAKE_HOST.system" -o "$DOTFILES/result" &&
+  sudo "$DOTFILES/result/sw/bin/darwin-rebuild" switch --flake "$DOTFILES/.nix#$FLAKE_HOST" || rebuild_ok=0
 # result/sw/bin: activation links /run/current-system last, so after a failed
 # Homebrew step stow and npm are only reachable through the build output.
 export PATH="/run/current-system/sw/bin:$DOTFILES/result/sw/bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH"

@@ -12,7 +12,7 @@ passwords needed, just `ssh <host> '<cmd>'`.
 ## Devices
 
 - `oskars-mac-mini` - dev box (Mac mini, macOS, Apple Silicon, user `bigmac`,
-  nix host `devbox`). Agents run here, see `WORKFLOW.md` in the dotfiles.
+  nix host `devbox-bigmac`). Agents run here, see `WORKFLOW.md` in the dotfiles.
 - `oskars-macmini` - previous Mac mini (user `okwasniewski`), still on the
   tailnet.
 - `zima` - selfhosting box (ZimaBoard, Ubuntu). Everything runs in Docker.

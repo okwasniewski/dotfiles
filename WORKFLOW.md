@@ -40,7 +40,7 @@ nix-rebuild
 ```
 
 `nix-rebuild` targets `$DARWIN_HOST` (default `laptop`). The bootstrap script
-writes the runner's host into its `~/.zshrc.local`.
+writes the runner's host (`devbox-<account>`) into its `~/.zshrc.local`.
 
 ### 3. Attach
 
