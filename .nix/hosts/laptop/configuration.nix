@@ -15,6 +15,7 @@
       "switchaudio-osx"
     ];
     casks = [
+      "aside"
       "chatgpt"
       "cleanshot"
       "cotypist"
@@ -40,6 +41,7 @@
       "plaud"
       "protonvpn"
       "rode-central"
+      "screen-studio"
       "spotify"
       "superhuman"
       "telegram"
@@ -64,7 +66,7 @@
   system.defaults.dock = {
     persistent-apps = [
       { app = "/Applications/Spark.app"; }
-      { app = "/Applications/Google Chrome.app"; }
+      { app = "/Applications/Aside.app"; }
       { app = "/Applications/Bear.app"; }
       { app = "/Applications/Things3.app"; }
       { app = "/Applications/Ghostty.app"; }

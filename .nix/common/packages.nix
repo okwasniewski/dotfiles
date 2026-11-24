@@ -30,6 +30,7 @@
     starship
     stow
     tree
+    uv
     watchman
     yarn
     zoxide
