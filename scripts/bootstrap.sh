@@ -31,7 +31,12 @@ if ! xcode-select -p >/dev/null 2>&1; then
 fi
 
 step "Clone dotfiles"
-[ -d "$DOTFILES/.git" ] || git clone https://github.com/okwasniewski/dotfiles.git "$DOTFILES"
+if [ -d "$DOTFILES/.git" ]; then
+  # A re-run should pick up fixes pushed since the first attempt. Best effort: offline or diverged is fine.
+  git -C "$DOTFILES" pull --ff-only || echo "Could not update $DOTFILES, continuing with the local copy."
+else
+  git clone https://github.com/okwasniewski/dotfiles.git "$DOTFILES"
+fi
 
 # Piped through curl, stdin is the script itself. Re-run from the clone so prompts can read the terminal.
 [ -t 0 ] || exec bash "$DOTFILES/scripts/bootstrap.sh" "$HOST" </dev/tty
