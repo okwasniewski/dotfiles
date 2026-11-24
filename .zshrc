@@ -35,20 +35,26 @@ command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
+# Zinit and its plugins are public repos. The global git config rewrites GitHub
+# https to ssh, so without this the shell is broken until the SSH agent works.
+() {
+  local -x GIT_CONFIG_GLOBAL=/dev/null
 
-# Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
+  # Download Zinit, if it's not there yet
+  if [ ! -d "$ZINIT_HOME" ]; then
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+  fi
 
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+  # Source/Load zinit
+  source "${ZINIT_HOME}/zinit.zsh"
+
+  # Add in zsh plugins
+  zinit light zsh-users/zsh-syntax-highlighting
+  zinit light zsh-users/zsh-completions
+  zinit light zsh-users/zsh-autosuggestions
+  zinit light Aloxaf/fzf-tab
+}
 
 # Load completions, full compinit only when the dump is older than 24h
 fpath=(~/.grok/completions/zsh $fpath)
