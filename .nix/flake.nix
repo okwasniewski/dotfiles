@@ -30,13 +30,9 @@
           host = "laptop";
           user = "okwasniewski";
         };
-        # Any small runner. They share this one profile, so they share the account name too.
+        # Every runner shares this one profile, so the account name is the same on all of them.
         devbox = mkDarwin {
           host = "devbox";
-          user = "okwasniewski";
-        };
-        bigmac = mkDarwin {
-          host = "bigmac";
           user = "bigmac";
         };
       };

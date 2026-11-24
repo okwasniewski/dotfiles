@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Bootstrap a fresh Mac from these dotfiles. Host is a flake host: laptop (main
-# machine), devbox (any runner) or bigmac (the main runner).
+# machine) or devbox (any runner).
 # Idempotent - safe to re-run. Run interactively (needs sudo and a few prompts).
 # System settings and apps live in .nix, this script only covers what
 # nix-darwin cannot: Homebrew and nix themselves, stow, machine-local files.
@@ -11,9 +11,9 @@ set -uo pipefail
 
 HOST="${1:-}"
 case "$HOST" in
-laptop | devbox | bigmac) ;;
+laptop | devbox) ;;
 *)
-  echo "usage: bootstrap.sh laptop|devbox|bigmac" >&2
+  echo "usage: bootstrap.sh laptop|devbox" >&2
   exit 1
   ;;
 esac

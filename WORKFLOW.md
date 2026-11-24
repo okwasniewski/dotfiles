@@ -15,19 +15,19 @@ when you close the lid.
 ### 1. Bootstrap the runner
 
 ```sh
-~/dotfiles/scripts/bootstrap.sh devbox   # or bigmac on the main runner
+~/dotfiles/scripts/bootstrap.sh devbox
 ```
 
 Idempotent, re-run any time. It installs Lix, applies the flake host, stows
 dotfiles, sets up a local SSH key and turns FileVault off so the box comes back
 unattended after a reboot. It prints the manual steps left at the end.
 
-`devbox` is the profile for every runner: CLI base, agent CLIs and the mobile
-toolchain, no desktop apps. `bigmac` is `devbox` plus Docker, Postgres, T3 Code
-and Chrome. Both import `.nix/common/headless.nix`, which owns the headless
-bits: never sleep, restart after power loss, Remote Login, Screen Sharing, and
-a launchd agent (`dev.oskar.dotfiles-pull`) that runs `git pull --ff-only`
-daily at 09:00.
+`devbox` is the one profile for every runner, Big Mac included: CLI base, agent
+CLIs, the mobile toolchain, Docker, Postgres, T3 Code and Chrome, no desktop
+apps. It imports `.nix/common/headless.nix`, which owns the headless bits:
+never sleep, restart after power loss, Remote Login, Screen Sharing, and a
+launchd agent (`dev.oskar.dotfiles-pull`) that runs `git pull --ff-only` daily
+at 09:00.
 
 Reach it over Tailscale rather than port forwarding.
 
