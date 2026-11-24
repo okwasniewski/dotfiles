@@ -1,5 +1,19 @@
 {
-  "theme": "Catppuccin Mocha",
+  "cli_default_open_behavior": "existing_window",
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha"
+  },
   "icon_theme": "Colored Zed Icons Theme Dark",
   "auto_install_extensions": {
     "catppuccin": true,
@@ -68,6 +82,7 @@
   "terminal": { "option_as_meta": true, "copy_on_select": true },
 
   "agent": {
+    "dock": "right",
     "default_width": 760,
     "enable_feedback": false,
     "tool_permissions": {
@@ -102,11 +117,30 @@
   "ssh_connections": [
     {
       "host": "macmini.oskar.homes",
-      "projects": [{ "paths": ["/Users/okwasniewski/workspace/tester-army"] }]
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/Users/okwasniewski/workspace/tester-army"
+          ]
+        }
+      ]
     },
     {
       "host": "bigmac",
-      "projects": [{ "paths": ["/Users/bigmac/.t3/worktrees/e2e/t3code-ac782615"] }]
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/Users/bigmac/.t3/worktrees/e2e/t3-73e0bca0/apps/web-benchmark"
+          ]
+        },
+        {
+          "paths": [
+            "/Users/bigmac/.t3/worktrees/e2e/t3code-ac782615"
+          ]
+        }
+      ]
     }
   ]
 }
