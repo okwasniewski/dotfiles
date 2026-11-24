@@ -55,10 +55,10 @@ printf 'bad %s dash\nnew line\n' "$em" >bad.md && printf '' >.gitattributes && g
 check pass 'existing dash untouched' "$git_hooks/pre-commit"
 
 echo '== pre-push'
-check pass 'oskar/ branch' push oskar/feature
-check pass 'main' push main
-check fail 'unprefixed branch' push feature
-check pass 'branch delete' bash -c "printf '(delete) 0000000000000000000000000000000000000000 refs/heads/x abc\n' | '$git_hooks/pre-push' origin url"
+check pass 'no repo hook' push feature
+printf '#!/bin/sh\nexit 1\n' >.git/hooks/pre-push && chmod +x .git/hooks/pre-push
+check fail 'repo hook decides' push feature
+rm .git/hooks/pre-push
 
 echo '== claude package-manager'
 mkdir -p pnpm-app/sub && touch pnpm-app/pnpm-lock.yaml
