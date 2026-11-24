@@ -125,4 +125,5 @@ section "fonts (user)"
 ls ~/Library/Fonts 2>/dev/null | sed 's/\.[^.]*$//' | sort -u | tr '\n' ' '; echo
 
 section "top shell commands (first word only)"
-LC_ALL=C sed 's/^: [0-9]*:[0-9]*;//' ~/.zsh_history 2>/dev/null | awk '{print $1}' | sort | uniq -c | sort -rn | head -60 | awk '{printf "%s:%s ", $2, $1}'; echo
+# Inline assignments (KEY=value cmd) carry secrets, so only plain command names are counted.
+LC_ALL=C sed 's/^: [0-9]*:[0-9]*;//' ~/.zsh_history 2>/dev/null | LC_ALL=C awk '$1 ~ /^[A-Za-z0-9_.\/-]+$/ {print $1}' | LC_ALL=C sort | uniq -c | LC_ALL=C sort -rn | head -60 | awk '{printf "%s:%s ", $2, $1}'; echo
