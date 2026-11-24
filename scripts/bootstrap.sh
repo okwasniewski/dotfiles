@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Bootstrap a fresh Mac from these dotfiles. Host is a flake host: laptop or macmini.
+# Bootstrap a fresh Mac from these dotfiles. Host is a flake host: laptop (main
+# machine), devbox (any runner) or bigmac (the main runner).
 # Idempotent - safe to re-run. Run interactively (needs sudo and a few prompts).
 # System settings and apps live in .nix, this script only covers what
 # nix-darwin cannot: Homebrew and nix themselves, stow, machine-local files.
@@ -10,9 +11,9 @@ set -uo pipefail
 
 HOST="${1:-}"
 case "$HOST" in
-laptop | macmini) ;;
+laptop | devbox | bigmac) ;;
 *)
-  echo "usage: bootstrap.sh laptop|macmini" >&2
+  echo "usage: bootstrap.sh laptop|devbox|bigmac" >&2
   exit 1
   ;;
 esac
@@ -66,10 +67,12 @@ step "Machine-local overrides"
 mkdir -p "$HOME/.ssh" "$HOME/.config" "$HOME/.claude" "$HOME/.cloudflared"
 chmod 700 "$HOME/.ssh" "$HOME/.cloudflared"
 if [ "$HOST" != laptop ]; then
-  grep -qs '^export DARWIN_HOST=' "$HOME/.zshrc.local" || echo "export DARWIN_HOST=$HOST" >>"$HOME/.zshrc.local"
-fi
-if [ "$HOST" = macmini ]; then
-  # Headless box: local ssh key instead of the 1Password agent, no commit signing.
+  # nix-rebuild reads the host from here. Rewritten, so a renamed host heals on the next run.
+  touch "$HOME/.zshrc.local"
+  grep -v '^export DARWIN_HOST=' "$HOME/.zshrc.local" >"$HOME/.zshrc.local.tmp"
+  echo "export DARWIN_HOST=$HOST" >>"$HOME/.zshrc.local.tmp"
+  mv "$HOME/.zshrc.local.tmp" "$HOME/.zshrc.local"
+  # Runner: local ssh key instead of the 1Password agent, no commit signing.
   [ -f "$HOME/.ssh/local_config" ] || printf 'Host *\n  IdentityAgent none\n' >"$HOME/.ssh/local_config"
   [ -f "$DOTFILES/.config/git/local" ] || printf '[core]\n\tpager = cat\n[commit]\n\tgpgsign = false\n' >"$DOTFILES/.config/git/local"
   if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
@@ -85,9 +88,11 @@ if [ ! -e /run/current-system ]; then
   for f in /etc/zshrc /etc/zprofile /etc/bashrc; do
     [ -f "$f" ] && [ ! -L "$f" ] && sudo mv "$f" "$f.before-nix-darwin"
   done
-  # mas cannot sign in by itself, and one failed App Store install aborts the whole activation.
-  open -a "App Store"
-  read -r -p "Sign in to the App Store (just opened), then press Enter to continue. " _
+  if [ "$HOST" = laptop ]; then
+    # mas cannot sign in by itself, and one failed App Store install aborts the whole activation.
+    open -a "App Store"
+    read -r -p "Sign in to the App Store (just opened), then press Enter to continue. " _
+  fi
 fi
 rebuild_ok=1
 nix build "$DOTFILES/.nix#darwinConfigurations.$HOST.system" -o "$DOTFILES/result" &&
@@ -103,7 +108,9 @@ chmod 600 "$DOTFILES/.ssh/config"
 
 step "CLIs for agents"
 [ "$(npm config get prefix)" = "$HOME/.npm-global" ] || npm config set prefix "$HOME/.npm-global"
-npm ls -g things-cli >/dev/null 2>&1 || GIT_CONFIG_GLOBAL=/dev/null npm install -g github:flaviocopes/things-cli
+if [ "$HOST" = laptop ]; then
+  npm ls -g things-cli >/dev/null 2>&1 || GIT_CONFIG_GLOBAL=/dev/null npm install -g github:flaviocopes/things-cli
+fi
 for pkg in @openai/codex unbox-ai; do
   npm ls -g "$pkg" >/dev/null 2>&1 || npm install -g "$pkg"
 done
@@ -111,7 +118,7 @@ mkdir -p "$HOME/.local/bin"
 [ -x /Applications/Bear.app/Contents/MacOS/bearcli ] && ln -sfn /Applications/Bear.app/Contents/MacOS/bearcli "$HOME/.local/bin/bearcli"
 command -v claude >/dev/null 2>&1 || curl -fsSL https://claude.ai/install.sh | bash
 
-if [ "$HOST" = macmini ]; then
+if [ "$HOST" != laptop ]; then
   step "FileVault off + auto-login (so the box survives reboots unattended)"
   if fdesetup isactive >/dev/null 2>&1; then
     sudo fdesetup disable
@@ -123,11 +130,12 @@ fi
 
 if [ "$rebuild_ok" = 0 ]; then
   printf '\n\033[1;31mdarwin-rebuild did not finish. Fix the error above and re-run this script.\033[0m\n'
-  echo "App Store installs fail until you are signed in to the App Store."
+  [ "$HOST" = laptop ] && echo "App Store installs fail until you are signed in to the App Store."
 fi
 
 step "Manual steps left"
 echo "- Open Tailscale.app, log in, enable \"Run on login\""
+echo "- Xcode via Xcodes.app, simulator runtimes, Android SDK via Android Studio"
 if [ "$HOST" = laptop ]; then
   cat <<'TODO'
 - 1Password: sign in, enable Settings > Developer > SSH agent (git signing and ssh use it)
@@ -135,17 +143,12 @@ if [ "$HOST" = laptop ]; then
 - Apps without a cask: Attio, Circleback, Oneleet, Rex, ZenNotes, Astro
 - Claude Code MCP servers live in ~/.claude.json: re-add them with `claude mcp add --scope user`
 - CLIs with their own installers (they bring their skills): yc, aside, terminal-browser
-- Xcode via Xcodes.app, simulator runtimes, Android SDK via Android Studio
 - Raycast: import the settings export from the old Mac
 - Launch Things, Bear and Fantastical once
 TODO
 else
   cat <<'TODO'
 - Add the printed SSH key to GitHub if it was just generated
-- Launch Things + Bear once
-- Grant Automation consent: run
-    osascript -e 'tell application "Things3" to get count of to dos of list "Inbox"'
-  over SSH, then approve the prompt on screen (or via Screen Sharing)
 - Reboot once FileVault is off and auto-login is set, confirm SSH comes back
 TODO
 fi
