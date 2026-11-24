@@ -30,8 +30,13 @@
           host = "laptop";
           user = "okwasniewski";
         };
-        macmini = mkDarwin {
-          host = "macmini";
+        # Any small runner. They share this one profile, so they share the account name too.
+        devbox = mkDarwin {
+          host = "devbox";
+          user = "okwasniewski";
+        };
+        bigmac = mkDarwin {
+          host = "bigmac";
           user = "bigmac";
         };
       };

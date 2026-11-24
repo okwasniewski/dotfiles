@@ -1,3 +1,4 @@
+# A box that runs unattended and is reached over SSH or Screen Sharing.
 { ... }:
 
 {

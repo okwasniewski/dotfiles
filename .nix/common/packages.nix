@@ -4,7 +4,6 @@
   environment.systemPackages = with pkgs; [
     bat
     btop
-    cmake
     coreutils
     curl
     delta
@@ -16,23 +15,17 @@
     gh
     git
     jq
-    lazydocker
     lazygit
     mosh
     neovim
-    ninja
-    nixd
-    nmap
     nodejs
+    pam-reattach
     ripgrep
-    scrcpy
     sesh
     starship
     stow
     tree
     uv
-    watchman
-    yarn
     zoxide
     yazi
   ];

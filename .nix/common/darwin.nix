@@ -1,3 +1,5 @@
+# Every Mac: nix, shell, the CLI base and macOS defaults. Apps and toolchains
+# live in the modules a host picks (mobile.nix, backend.nix, headless.nix).
 {
   self,
   pkgs,
@@ -9,11 +11,6 @@
   imports = [
     ./nix.nix
     ./packages.nix
-  ];
-
-  environment.systemPackages = with pkgs; [
-    pam-reattach
-    xcbeautify
   ];
 
   system.primaryUser = user;
@@ -28,42 +25,17 @@
       "oven-sh/bun"
     ];
     brews = [
-      "ccache"
       "cloudflared"
-      "cocoapods"
+      "mole"
       "opencode"
-      "stripe-cli"
+      "oven-sh/bun/bun"
       "pnpm"
       "python@3.15"
-      "ruby@3.4"
-      "swiftlint"
-      "swiftformat"
-      "mole"
       "tmux"
-      "oven-sh/bun/bun"
-      "xcode-build-server"
-      "postgresql@16"
     ];
     casks = [
-      "1password"
-      "android-platform-tools"
-      "android-studio"
-      "docker-desktop"
-      "font-fira-code-nerd-font"
-      "ghostty"
-      "google-chrome"
-      "raycast"
-      "t3-code@nightly"
       "tailscale-app"
-      "xcodes-app"
-      "zulu"
     ];
-    masApps = {
-      "Bear" = 1091189122;
-      "DevCleaner" = 1388020431;
-      "Slack" = 803453959;
-      "Things" = 904280696;
-    };
   };
 
   programs.zsh = {
@@ -104,34 +76,6 @@
     NSGlobalDomain.AppleShowAllFiles = true;
 
     WindowManager.EnableStandardClickToShowDesktop = false;
-
-    CustomUserPreferences = {
-      "com.apple.symbolichotkeys" = {
-        AppleSymbolicHotKeys = {
-          # Disable 'Cmd + Space' for Spotlight Search
-          "64" = {
-            enabled = false;
-          };
-          # Disable 'Cmd + Alt + Space' for Finder search window
-          "65" = {
-            # Set to false to disable
-            enabled = true;
-          };
-          # Disable 'Cmd + Shift + 3' for screenshots
-          "28" = {
-            enabled = false;
-          };
-          # Disable 'Cmd + Shift + 4' for screenshot selection
-          "30" = {
-            enabled = false;
-          };
-          # Disable 'Cmd + Shift + 5' for screenshots
-          "184" = {
-            enabled = false;
-          };
-        };
-      };
-    };
   };
 
   system.activationScripts.postActivation.text = ''
