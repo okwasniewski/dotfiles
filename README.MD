@@ -6,10 +6,17 @@ Fresh Mac: run the bootstrap with the flake host (`laptop` or `macmini`).
 curl -fsSL https://raw.githubusercontent.com/okwasniewski/dotfiles/main/scripts/bootstrap.sh | bash -s laptop
 ```
 
-It installs the Command Line Tools, Homebrew and Lix, clones this repo to
+It installs the Command Line Tools, Lix and Homebrew, clones this repo to
 `~/dotfiles`, applies the nix-darwin host, stows the dotfiles and prints the
-manual steps left (App Store sign-in, 1Password SSH agent, secrets). Re-run it
-any time, it is idempotent.
+manual steps left (1Password SSH agent, secrets, apps without a cask). Re-run
+it any time, it is idempotent.
+
+Before running it:
+
+- The macOS account name must match the host's user in `.nix/flake.nix`
+  (`okwasniewski` for `laptop`). The script checks and stops early if not.
+- Have the Apple ID at hand: on the first run the script opens the App Store
+  and waits for the sign-in, because `mas` cannot sign in by itself.
 
 Moving from another Mac: run `scripts/mac-inventory.sh > inventory.txt` on the
 old one first and diff its apps, Dock and casks against the nix host.
