@@ -125,9 +125,6 @@ chmod 600 "$DOTFILES/.ssh/config"
 
 step "CLIs for agents"
 [ "$(npm config get prefix)" = "$HOME/.npm-global" ] || npm config set prefix "$HOME/.npm-global"
-if [ "$HOST" = laptop ]; then
-  npm ls -g things-cli >/dev/null 2>&1 || GIT_CONFIG_GLOBAL=/dev/null npm install -g github:flaviocopes/things-cli
-fi
 for pkg in @openai/codex unbox-ai; do
   npm ls -g "$pkg" >/dev/null 2>&1 || npm install -g "$pkg"
 done

@@ -9,7 +9,7 @@ Distribute Things tasks across the coming days using real calendar constraints. 
 
 ## Gather (all before deciding)
 
-1. Things: `things list today --json`, `things list upcoming --json`, `things list anytime --json`, `things list inbox --json`. Group by `activationDate`. Items with no activation date and repeating templates (Owsianka, Sport, Weekly Review) are off limits.
+1. Things, via the `things` MCP server (`things_mcp` in Executor): `things_overview` with `lookahead_days` covering the horizon, plus `things_find_tasks` with `schedule` `today`, `upcoming`, `anytime` and `inbox`. Group by `scheduledDate`. Items with no scheduled date and repeating tasks (`isRecurring: true`, such as Owsianka, Sport, Weekly Review) are off limits.
 2. Personal calendar: Fastmail MCP `search_events({ after, before })` for the horizon (today through Sunday next week).
 3. Work calendar: Superhuman MCP `query_email_and_calendar` / `get_availability` for the same horizon.
 4. Linear: issues assigned to Oskar in started/unstarted states, for context in notes only.
@@ -21,18 +21,17 @@ Distribute Things tasks across the coming days using real calendar constraints. 
 - Overdue tasks and client-facing items (a client is waiting) go to the earliest workday.
 - Phone-call tasks (doctors, offices, insurance) go Mon-Fri, morning slots.
 - Personal errands prefer Saturday; nothing on `[No Work Time]` days.
-- Respect existing deadlines. Known bug: `things add --deadline` lands one day early; setting `due date` via AppleScript is exact.
+- Respect existing deadlines.
 - Tasks that pair with an event (like "Przełożyć ortodontę" before the wizyta) must land before that event.
 - Backlog with no week slot goes to Someday, never deleted.
 - Do not touch tasks completed or in progress, and do not reorder within a day.
 
 ## Mechanics
 
-- Reschedule via AppleScript, flat statements only (handlers break `schedule`):
-  `tell application "Things3" to schedule (item 1 of (to dos of list "Upcoming" whose name is "X")) for ((current date) + N * days)`
-- Move to Someday: `move (item 1 of (...)) to list "Someday"`.
-- Duplicate names exist (Fryzjer): scope the query to the list you mean and iterate matches by index.
-- Verify after applying: `things list upcoming --json` grouped by date.
+- Reschedule: `things_edit_item` with `uuid` and `schedule: "YYYY-MM-DD"` (or `"today"`).
+- Move to Someday: `things_edit_item` with `schedule: "someday"`.
+- Always act by `uuid`, never by name: duplicate names exist (Fryzjer).
+- Verify after applying: `things_find_tasks` with `schedule: "upcoming"`, grouped by `scheduledDate`.
 
 ## Report
 

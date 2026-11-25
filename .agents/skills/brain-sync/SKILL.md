@@ -94,12 +94,14 @@ Read the whole item. One item can hit several targets.
 
 ## Routing
 
-### Things (`things` CLI)
+### Things (Things MCP)
+
+Use the `things` MCP server (`things_mcp` in Executor).
 
 - Verb-first Polish title. Notes carry a source line ("Z nagrania Plaud <date>: <name>", "Ze Slacka: <permalink>", "Z maila: <subject>").
-- `--when today` for today, a concrete date when known, `someday` otherwise. `--deadline` only when a date is given; it lands one day early, verify with `things list` and mention it.
+- `things_create_task` with `schedule: "today"` for today, a concrete `YYYY-MM-DD` when known, `"someday"` otherwise. `deadline` only when a date is given.
 - Client-facing items get the earliest sensible date.
-- `things search "<keyword>"` first. Existing match: `things note --append` instead of a duplicate.
+- `things_find_tasks` with `contains_text: "<keyword>"` first. Existing match: `things_edit_item` with `note` set to the old note plus the new line (it replaces the whole note) instead of a duplicate.
 
 ### Bear (`bearcli` skill)
 
