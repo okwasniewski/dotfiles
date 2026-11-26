@@ -129,7 +129,6 @@ for pkg in @openai/codex unbox-ai; do
   npm ls -g "$pkg" >/dev/null 2>&1 || npm install -g "$pkg"
 done
 mkdir -p "$HOME/.local/bin"
-[ -x /Applications/Bear.app/Contents/MacOS/bearcli ] && ln -sfn /Applications/Bear.app/Contents/MacOS/bearcli "$HOME/.local/bin/bearcli"
 command -v claude >/dev/null 2>&1 || curl -fsSL https://claude.ai/install.sh | bash
 
 if [ "$HOST" != laptop ]; then
@@ -158,7 +157,7 @@ if [ "$HOST" = laptop ]; then
 - Claude Code MCP servers live in ~/.claude.json: re-add them with `claude mcp add --scope user`
 - CLIs with their own installers (they bring their skills): yc, aside, terminal-browser
 - Raycast: import the settings export from the old Mac
-- Launch Things, Bear and Fantastical once
+- Launch Things, Craft and Fantastical once
 TODO
 else
   cat <<'TODO'

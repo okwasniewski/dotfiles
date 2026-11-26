@@ -67,7 +67,7 @@
     ];
     masApps = {
       "1Password for Safari" = 1569813296;
-      "Bear" = 1091189122;
+      "Craft" = 1487937127;
       "DevCleaner" = 1388020431;
       "Fantastical" = 975937182;
       "Numbers" = 361304891;
@@ -85,7 +85,7 @@
     persistent-apps = [
       { app = "/Applications/Spark.app"; }
       { app = "/Applications/Aside.app"; }
-      { app = "/Applications/Bear.app"; }
+      { app = "/Applications/Craft.app"; }
       { app = "/Applications/Things3.app"; }
       { app = "/Applications/Ghostty.app"; }
       { app = "/Applications/Spotify.app"; }

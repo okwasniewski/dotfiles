@@ -1,17 +1,17 @@
 ---
 name: brain-sync
-description: Sync inputs (Plaud recordings, fresh Slack saved messages, flagged mail, Bear inbox) into the second brain - Things tasks and Bear notes. Use for /brain-sync or when the user asks to process, triage, or route notes, voice memos, or saved items.
+description: Sync inputs (Plaud recordings, fresh Slack saved messages, flagged mail, Craft Unsorted) into the second brain - Things tasks and Craft notes. Use for /brain-sync or when the user asks to process, triage, or route notes, voice memos, or saved items.
 ---
 
 # Brain sync
 
-Gather read-only, propose a routing table, apply only approved rows. Never create or modify anything before approval, even when everything looks obvious. The only writes ever: Things add/append, Bear create/append/retag, Slack reaction on done items, the state file.
+Gather read-only, propose a routing table, apply only approved rows. Never create or modify anything before approval, even when everything looks obvious. The only writes ever: Things add/append, Craft create/append/move, Slack reaction on done items, the state file.
 
 ## Flow
 
 1. Gather and classify (read-only).
 2. Table: # | source | item | destination. Only rows that create or change something. Skips: one closing line with counts per source. No digests, no commentary. Nothing to route: one line, stop.
-3. Wait. The user approves all, vetoes rows ("bez 3 i 5"), or reclassifies ("2 do Bear, nie Things").
+3. Wait. The user approves all, vetoes rows ("bez 3 i 5"), or reclassifies ("2 do Crafta, nie Things").
 4. Apply approved rows. Update state for every row, vetoed included.
 5. Report: one line per row: source, item, destination or vetoed/failed.
 
@@ -19,7 +19,7 @@ Gather read-only, propose a routing table, apply only approved rows. Never creat
 
 ```
 things: create directly
-bear:   create directly
+craft:  create directly
 linear: propose only. Proposal = English title, one-line body, team (default Engineering, project by topic)
 notion: propose only. Proposal = page title, one-paragraph body, location
 ```
@@ -31,16 +31,16 @@ notion: propose only. Proposal = page title, one-paragraph body, location
 ```json
 {
   "last_sync": "<iso>",
-  "processed": { "<source>:<id>": { "name": "...", "at": "<iso>", "routed": ["things", "bear:<note title>"] } },
+  "processed": { "<source>:<id>": { "name": "...", "at": "<iso>", "routed": ["things", "craft:<note title>"] } },
   "failed": { "<source>:<id>": { "attempts": 1, "last_error": "..." } }
 }
 ```
 
-`source` is plaud, slack, fastmail, superhuman, or bear. `routed` values: `things`, `bear:<title>`, `linear:<id>`, `skipped`, `vetoed`.
+`source` is plaud, slack, fastmail, superhuman, or craft. `routed` values: `things`, `craft:<title>`, `linear:<id>`, `skipped`, `vetoed`.
 
 ## Inputs
 
-Resolve executor connections at runtime with `tools.executor.coreTools.connections.list({})`. Namespaces: plaud_mcp, slack_com, fastmail_mcp, superhuman_mail, linear_app_graphql, notion_com_openapi. Cheap listing first, details only for new items. Skip ids already in `processed`, and `failed` entries with attempts >= 3.
+Resolve executor connections at runtime with `tools.executor.coreTools.connections.list({})`. Namespaces: plaud_mcp, slack_com, fastmail_mcp, superhuman_mail, craft, linear_app_graphql, notion_com_openapi. Cheap listing first, details only for new items. Skip ids already in `processed`, and `failed` entries with attempts >= 3.
 
 ### Plaud
 
@@ -66,10 +66,10 @@ Resolve executor connections at runtime with `tools.executor.coreTools.connectio
 - Route to Things with subject, sender, thread link in notes. Dedup by thread id.
 - Never send, draft, trash, or unsubscribe.
 
-### Bear inbox
+### Craft Unsorted
 
-- Load the `bearcli` skill. `bearcli search '#status/to-process' --format json`.
-- Extract action items into Things, then retag: remove `status/to-process`, add a topic tag, or `status/to-review` when unsure.
+- `craft_read` with `documents list --location unsorted`, then `blocks get <rootBlockId> --format markdown` per new document.
+- Extract action items into Things, then file the document: `craft_write` with `documents move --document <rootBlockId> --folder <folderId>` into the matching folder (Projects, Areas/*, Resources/*, Archive; resolve ids with `folders list`). Unsure: leave it in Unsorted and flag it in the table.
 
 ### Linear
 
@@ -83,14 +83,14 @@ Resolve executor connections at runtime with `tools.executor.coreTools.connectio
 
 Read the whole item. One item can hit several targets.
 
-- Explicit markers win: `[Book]` name prefix routes to that book's Bear note, "zapisz task" to Things, "do Lineara" to a Linear proposal, "do Notion" to a Notion proposal.
+- Explicit markers win: `[Book]` name prefix routes to that book's Craft note, "zapisz task" to Things, "do Lineara" to a Linear proposal, "do Notion" to a Notion proposal.
 - Tasks ("zapisz", "muszę", "przypomnij", "kup", day plans, someone waiting on Oskar): Things.
-- Book notes: Bear book note.
+- Book notes: Craft book note.
 - Work items (bugs, features, team work): Linear proposal.
 - Company docs (meeting notes, decisions, processes): Notion proposal.
-- Other real content: Bear inbox note tagged `status/to-process`, title from content.
+- Other real content: new Craft document in Unsorted, title from content.
 - Garbage (test recordings, under 10 meaningful words, stale or bot items): `routed: ["skipped"]`, no row.
-- Unsure if noise: skip. Unsure where to route: Bear note tagged `status/to-review`, flagged in the table.
+- Unsure if noise: skip. Unsure where to route: Craft document in Unsorted, flagged in the table.
 
 ## Routing
 
@@ -103,7 +103,10 @@ Use the `things` MCP server (`things_mcp` in Executor).
 - Client-facing items get the earliest sensible date.
 - `things_find_tasks` with `contains_text: "<keyword>"` first. Existing match: `things_edit_item` with `note` set to the old note plus the new line (it replaces the whole note) instead of a duplicate.
 
-### Bear (`bearcli` skill)
+### Craft (Craft MCP)
 
-- Book note title `<Book> - notatki z ksiazki`, tag `books/notes`. Search first; exists: append a `## <topic>` section; missing: create.
+Use the `craft` integration in Executor: `craft_read` and `craft_write`, each taking one `command` string (`<entity> <action> --help` for syntax).
+
+- New note: `documents create --title <title> --destination unsorted`, then `blocks add --id <rootBlockId> --markdown <body>`.
+- Book notes live in Resources/Books, title `<Book> - notatki z książki`. `search "<Book> - notatki z książki"` first; exists: `blocks add --id <rootBlockId> --markdown "## <topic>..."`; missing: `documents create --title ... --folder <Books folderId>`.
 - Polish, plain, short sentences. Fix obvious ASR errors in names and terms, drop garbled segments.
