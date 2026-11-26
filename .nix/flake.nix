@@ -14,36 +14,49 @@
     }:
     let
       mkDarwin =
-        { host, user }:
+        {
+          host,
+          user,
+          machineName,
+        }:
         nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = { inherit inputs self user; };
+          specialArgs = {
+            inherit
+              inputs
+              self
+              user
+              machineName
+              ;
+          };
           modules = [
             ./common/darwin.nix
             ./hosts/${host}/configuration.nix
           ];
         };
 
-      # Every runner is a devbox and differs only by its macOS account. Listing an
-      # account here creates the `devbox-<account>` host that bootstrap.sh picks.
-      devboxUsers = [
-        "bigmac"
-        "okwasniewski"
-      ];
+      # Every runner is a devbox and differs only by its macOS account and name.
+      # Listing an account here creates the `devbox-<account>` host that
+      # bootstrap.sh picks; the value names the machine.
+      devboxUsers = {
+        bigmac = "BigMac";
+        okwasniewski = "DevMac";
+      };
     in
     {
       darwinConfigurations = {
         laptop = mkDarwin {
           host = "laptop";
           user = "okwasniewski";
+          machineName = "MacBook";
         };
       }
-      // nixpkgs.lib.genAttrs' devboxUsers (user: {
+      // nixpkgs.lib.mapAttrs' (user: machineName: {
         name = "devbox-${user}";
         value = mkDarwin {
           host = "devbox";
-          inherit user;
+          inherit user machineName;
         };
-      });
+      }) devboxUsers;
     };
 }

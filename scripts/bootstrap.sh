@@ -66,7 +66,7 @@ want_user=$(nix eval --raw "$DOTFILES/.nix#darwinConfigurations.$FLAKE_HOST.conf
 if [ "$want_user" != "$(whoami)" ]; then
   if [ "$HOST" = devbox ]; then
     echo "No devbox host for the account '$(whoami)' yet." >&2
-    echo "Add \"$(whoami)\" to devboxUsers in .nix/flake.nix, push, pull here and re-run." >&2
+    echo "Add $(whoami) = \"<MachineName>\"; to devboxUsers in .nix/flake.nix, push, pull here and re-run." >&2
   else
     echo "Host '$HOST' is set up for user '$want_user', but this account is '$(whoami)'." >&2
     echo "Change the user in $DOTFILES/.nix/flake.nix or recreate the macOS account, then re-run." >&2

@@ -116,7 +116,7 @@
   },
   "ssh_connections": [
     {
-      "host": "macmini.oskar.homes",
+      "host": "devmac",
       "args": [],
       "projects": [
         {

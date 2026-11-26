@@ -2,8 +2,10 @@
 # live in the modules a host picks (mobile.nix, backend.nix, headless.nix).
 {
   self,
+  lib,
   pkgs,
   user,
+  machineName,
   ...
 }:
 
@@ -14,6 +16,14 @@
   ];
 
   system.primaryUser = user;
+
+  # Shown in Finder, T3 Code and AirDrop; the lowercase form is the network and
+  # Tailscale name (`ssh devmac`).
+  networking = {
+    computerName = machineName;
+    hostName = lib.toLower machineName;
+    localHostName = lib.toLower machineName;
+  };
 
   homebrew = {
     enable = true;

@@ -1,6 +1,6 @@
 ---
 name: homelab
-description: Inventory and SSH access for Oskar's tailnet devices (dev box Mac mini, previous Mac mini, zima selfhost box, nas). Use when asked to jump on a box, update, check, or manage anything on the homelab / tailnet / dev box / nas / zima.
+description: Inventory and SSH access for Oskar's tailnet devices (bigmac and devmac Mac minis, zima selfhost box, nas). Use when asked to jump on a box, update, check, or manage anything on the homelab / tailnet / bigmac / devmac / nas / zima.
 ---
 
 # Homelab
@@ -11,15 +11,16 @@ passwords needed, just `ssh <host> '<cmd>'`.
 
 ## Devices
 
-- `oskars-mac-mini` - dev box (Mac mini, macOS, Apple Silicon, user `bigmac`,
-  nix host `devbox-bigmac`). Agents run here, see `WORKFLOW.md` in the dotfiles.
-- `oskars-macmini` - previous Mac mini (user `okwasniewski`), still on the
-  tailnet.
+- `bigmac` - BigMac, the main dev box (Mac mini, user `bigmac`, nix host
+  `devbox-bigmac`). Agents run here, see `WORKFLOW.md` in the dotfiles.
+- `devmac` - DevMac, second dev box (Mac mini, user `okwasniewski`, nix host
+  `devbox-okwasniewski`). T3 Code Nightly runs as a background service, on
+  T3 Connect.
 - `zima` - selfhosting box (ZimaBoard, Ubuntu). Everything runs in Docker.
 - `nas` - backups, photos, self-hosted cloud (Ubuntu, RAID1 storage on
   `/mnt/storage`). Services run in Docker.
 
-Other tailnet devices (phones, laptops, TV) have no SSH - list with
+Other tailnet devices (`macbook`, phones, TV) have no SSH - list with
 `tailscale status`.
 
 ## Conventions
