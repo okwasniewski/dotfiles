@@ -41,5 +41,6 @@
   "autoUpdatesChannel": "latest",
   "plansDirectory": ".agent/plans",
   "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto"
 }
