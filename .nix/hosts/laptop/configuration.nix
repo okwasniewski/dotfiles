@@ -69,7 +69,6 @@
       "Craft" = 1487937127;
       "DevCleaner" = 1388020431;
       "Fantastical" = 975937182;
-      "Numbers" = 361304891;
       "Parcel" = 375589283;
       "Pure Paste" = 1611378436;
       "reMarkable" = 1276493162;
