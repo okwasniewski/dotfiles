@@ -40,7 +40,6 @@
       "google-chrome"
       "grammarly-desktop"
       "grok-bot"
-      "hermes-desktop"
       "insta360-link-controller"
       "karabiner-elements"
       "linear"
